@@ -1,0 +1,754 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7A6669B928356561007EA254 /* TuningPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6669B828356561007EA254 /* TuningPickerView.swift */; };
+		7A6CF9562834637200128175 /* ChordGroupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6CF9552834637200128175 /* ChordGroupPickerView.swift */; };
+		7A6EC63828329D1F00A24222 /* Ijam_2022Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A6EC63628329D1F00A24222 /* Ijam_2022Model.xcdatamodeld */; };
+		7A6EC6492832A0AE00A24222 /* OpenDTuningChordGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A6EC63D2832A0AE00A24222 /* OpenDTuningChordGroups.plist */; };
+		7A6EC64A2832A0AE00A24222 /* DropDTuningChordGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A6EC63E2832A0AE00A24222 /* DropDTuningChordGroups.plist */; };
+		7A6EC64C2832A0AE00A24222 /* OpenGTuningChordGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A6EC6402832A0AE00A24222 /* OpenGTuningChordGroups.plist */; };
+		7A6EC64D2832A0AE00A24222 /* StandardTuning_ChordLibrary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A6EC6412832A0AE00A24222 /* StandardTuning_ChordLibrary.plist */; };
+		7A6EC64F2832A0AE00A24222 /* DropD_ChordLibrary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A6EC6432832A0AE00A24222 /* DropD_ChordLibrary.plist */; };
+		7A6EC6502832A0AE00A24222 /* OpenG_ChordLibrary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A6EC6442832A0AE00A24222 /* OpenG_ChordLibrary.plist */; };
+		7A6EC6512832A0AE00A24222 /* OpenD_ChordLibrary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A6EC6452832A0AE00A24222 /* OpenD_ChordLibrary.plist */; };
+		7A6EC6522832A0AE00A24222 /* StandardTuningChordGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A6EC6462832A0AE00A24222 /* StandardTuningChordGroups.plist */; };
+		7A7B72FF283195AD00760207 /* IJAM_2022App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B72FE283195AD00760207 /* IJAM_2022App.swift */; };
+		7A7B7303283195AE00760207 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B7302283195AE00760207 /* Assets.xcassets */; };
+		7A7B7306283195AE00760207 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B7305283195AE00760207 /* Preview Assets.xcassets */; };
+		7A7B7315283195AE00760207 /* IJAM_2022Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7314283195AE00760207 /* IJAM_2022Tests.swift */; };
+		7A7B731F283195AE00760207 /* IJAM_2022UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B731E283195AE00760207 /* IJAM_2022UITests.swift */; };
+		7A7B7321283195AE00760207 /* IJAM_2022UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7320283195AE00760207 /* IJAM_2022UITestsLaunchTests.swift */; };
+		7A7B734128319B8600760207 /* StringsAndFretsAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B732F28319B8600760207 /* StringsAndFretsAreaView.swift */; };
+		7A7B734428319B8600760207 /* ChordButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B733228319B8600760207 /* ChordButtonsView.swift */; };
+		7A7B734528319B8600760207 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B733328319B8600760207 /* VolumeView.swift */; };
+		7A7B734628319B8600760207 /* FretNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B733428319B8600760207 /* FretNumbersView.swift */; };
+		7A7B734728319B8600760207 /* StringsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B733528319B8600760207 /* StringsView.swift */; };
+		7A7B734828319B8600760207 /* StringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B733628319B8600760207 /* StringView.swift */; };
+		7A7B734928319B8600760207 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B733728319B8600760207 /* HeaderView.swift */; };
+		7A7B734B28319B8600760207 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B733928319B8600760207 /* BottomView.swift */; };
+		7A7B734E28319B8600760207 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B733C28319B8600760207 /* ContentView.swift */; };
+		7A7B735028319B8600760207 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B733E28319B8600760207 /* TopView.swift */; };
+		7A7B735128319B8600760207 /* FretBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B733F28319B8600760207 /* FretBoardView.swift */; };
+		7A7B736128319DC700760207 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B736028319DC700760207 /* Persistence.swift */; };
+		7A7B736328319F2400760207 /* IjamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B736228319F2400760207 /* IjamModel.swift */; };
+		7A7B736528319F4900760207 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B736428319F4900760207 /* CoreDataManager.swift */; };
+		7A7B736728319F8800760207 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B736628319F8800760207 /* Extensions.swift */; };
+		7A7B736B2831A20300760207 /* IjamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B736A2831A20300760207 /* IjamViewModel.swift */; };
+		7ABC310A283420E7000ECF87 /* CapoPositionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC3109283420E7000ECF87 /* CapoPositionPickerView.swift */; };
+		7AE8155E283FF274007CD93E /* StringsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8155D283FF274007CD93E /* StringsViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7A7B7311283195AE00760207 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A7B72F3283195AD00760207 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A7B72FA283195AD00760207;
+			remoteInfo = IJAM_2022;
+		};
+		7A7B731B283195AE00760207 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A7B72F3283195AD00760207 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A7B72FA283195AD00760207;
+			remoteInfo = IJAM_2022;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7A6669B828356561007EA254 /* TuningPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuningPickerView.swift; sourceTree = "<group>"; };
+		7A6CF9552834637200128175 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroupPickerView.swift; sourceTree = "<group>"; };
+		7A6EC63728329D1F00A24222 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		7A6EC63D2832A0AE00A24222 /* OpenDTuningChordGroups.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OpenDTuningChordGroups.plist; sourceTree = "<group>"; };
+		7A6EC63E2832A0AE00A24222 /* DropDTuningChordGroups.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DropDTuningChordGroups.plist; sourceTree = "<group>"; };
+		7A6EC6402832A0AE00A24222 /* OpenGTuningChordGroups.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OpenGTuningChordGroups.plist; sourceTree = "<group>"; };
+		7A6EC6412832A0AE00A24222 /* StandardTuning_ChordLibrary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StandardTuning_ChordLibrary.plist; sourceTree = "<group>"; };
+		7A6EC6432832A0AE00A24222 /* DropD_ChordLibrary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DropD_ChordLibrary.plist; sourceTree = "<group>"; };
+		7A6EC6442832A0AE00A24222 /* OpenG_ChordLibrary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OpenG_ChordLibrary.plist; sourceTree = "<group>"; };
+		7A6EC6452832A0AE00A24222 /* OpenD_ChordLibrary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OpenD_ChordLibrary.plist; sourceTree = "<group>"; };
+		7A6EC6462832A0AE00A24222 /* StandardTuningChordGroups.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StandardTuningChordGroups.plist; sourceTree = "<group>"; };
+		7A7B72FB283195AD00760207 /* IJAM_2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IJAM_2022.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A7B72FE283195AD00760207 /* IJAM_2022App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IJAM_2022App.swift; sourceTree = "<group>"; };
+		7A7B7302283195AE00760207 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7A7B7305283195AE00760207 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7A7B7310283195AE00760207 /* IJAM_2022Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IJAM_2022Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A7B7314283195AE00760207 /* IJAM_2022Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IJAM_2022Tests.swift; sourceTree = "<group>"; };
+		7A7B731A283195AE00760207 /* IJAM_2022UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IJAM_2022UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A7B731E283195AE00760207 /* IJAM_2022UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IJAM_2022UITests.swift; sourceTree = "<group>"; };
+		7A7B7320283195AE00760207 /* IJAM_2022UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IJAM_2022UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7A7B732F28319B8600760207 /* StringsAndFretsAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsAndFretsAreaView.swift; sourceTree = "<group>"; };
+		7A7B733228319B8600760207 /* ChordButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordButtonsView.swift; sourceTree = "<group>"; };
+		7A7B733328319B8600760207 /* VolumeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
+		7A7B733428319B8600760207 /* FretNumbersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretNumbersView.swift; sourceTree = "<group>"; };
+		7A7B733528319B8600760207 /* StringsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsView.swift; sourceTree = "<group>"; };
+		7A7B733628319B8600760207 /* StringView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringView.swift; sourceTree = "<group>"; };
+		7A7B733728319B8600760207 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		7A7B733928319B8600760207 /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		7A7B733C28319B8600760207 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7A7B733E28319B8600760207 /* TopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		7A7B733F28319B8600760207 /* FretBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretBoardView.swift; sourceTree = "<group>"; };
+		7A7B736028319DC700760207 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Persistence.swift; path = Data/Persistence.swift; sourceTree = "<group>"; };
+		7A7B736228319F2400760207 /* IjamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IjamModel.swift; sourceTree = "<group>"; };
+		7A7B736428319F4900760207 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		7A7B736628319F8800760207 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7A7B736A2831A20300760207 /* IjamViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IjamViewModel.swift; sourceTree = "<group>"; };
+		7ABC3109283420E7000ECF87 /* CapoPositionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapoPositionPickerView.swift; sourceTree = "<group>"; };
+		7AE8155D283FF274007CD93E /* StringsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7A7B72F8283195AD00760207 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A7B730D283195AE00760207 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A7B7317283195AE00760207 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7A6EC63928329FDE00A24222 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7A7B736228319F2400760207 /* IjamModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7A6EC63A2832A0AE00A24222 /* Plists */ = {
+			isa = PBXGroup;
+			children = (
+				7A6EC6462832A0AE00A24222 /* StandardTuningChordGroups.plist */,
+				7A6EC6412832A0AE00A24222 /* StandardTuning_ChordLibrary.plist */,
+				7A6EC63D2832A0AE00A24222 /* OpenDTuningChordGroups.plist */,
+				7A6EC6452832A0AE00A24222 /* OpenD_ChordLibrary.plist */,
+				7A6EC63E2832A0AE00A24222 /* DropDTuningChordGroups.plist */,
+				7A6EC6432832A0AE00A24222 /* DropD_ChordLibrary.plist */,
+				7A6EC6402832A0AE00A24222 /* OpenGTuningChordGroups.plist */,
+				7A6EC6442832A0AE00A24222 /* OpenG_ChordLibrary.plist */,
+			);
+			path = Plists;
+			sourceTree = "<group>";
+		};
+		7A7B72F2283195AD00760207 = {
+			isa = PBXGroup;
+			children = (
+				7A7B72FD283195AD00760207 /* IJAM_2022 */,
+				7A7B7313283195AE00760207 /* IJAM_2022Tests */,
+				7A7B731D283195AE00760207 /* IJAM_2022UITests */,
+				7A7B72FC283195AD00760207 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7A7B72FC283195AD00760207 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A7B72FB283195AD00760207 /* IJAM_2022.app */,
+				7A7B7310283195AE00760207 /* IJAM_2022Tests.xctest */,
+				7A7B731A283195AE00760207 /* IJAM_2022UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7A7B72FD283195AD00760207 /* IJAM_2022 */ = {
+			isa = PBXGroup;
+			children = (
+				7A6EC63A2832A0AE00A24222 /* Plists */,
+				7A6EC63628329D1F00A24222 /* Ijam_2022Model.xcdatamodeld */,
+				7A7B72FE283195AD00760207 /* IJAM_2022App.swift */,
+				7A7B736028319DC700760207 /* Persistence.swift */,
+				7A7B736628319F8800760207 /* Extensions.swift */,
+				7A7B736428319F4900760207 /* CoreDataManager.swift */,
+				7A6EC63928329FDE00A24222 /* Model */,
+				7A7B73692831A20300760207 /* ViewModels */,
+				7AF2B7852835B41600A2894C /* ViewModifiers */,
+				7A7B732D28319B8600760207 /* Views */,
+				7A7B7302283195AE00760207 /* Assets.xcassets */,
+				7A7B7304283195AE00760207 /* Preview Content */,
+			);
+			path = IJAM_2022;
+			sourceTree = "<group>";
+		};
+		7A7B7304283195AE00760207 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				7A7B7305283195AE00760207 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7A7B7313283195AE00760207 /* IJAM_2022Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7A7B7314283195AE00760207 /* IJAM_2022Tests.swift */,
+			);
+			path = IJAM_2022Tests;
+			sourceTree = "<group>";
+		};
+		7A7B731D283195AE00760207 /* IJAM_2022UITests */ = {
+			isa = PBXGroup;
+			children = (
+				7A7B731E283195AE00760207 /* IJAM_2022UITests.swift */,
+				7A7B7320283195AE00760207 /* IJAM_2022UITestsLaunchTests.swift */,
+			);
+			path = IJAM_2022UITests;
+			sourceTree = "<group>";
+		};
+		7A7B732D28319B8600760207 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7A7B733C28319B8600760207 /* ContentView.swift */,
+				7A7B733728319B8600760207 /* HeaderView.swift */,
+				7ABC3109283420E7000ECF87 /* CapoPositionPickerView.swift */,
+				7A6CF9552834637200128175 /* ChordGroupPickerView.swift */,
+				7A6669B828356561007EA254 /* TuningPickerView.swift */,
+				7A7B733E28319B8600760207 /* TopView.swift */,
+				7A7B733228319B8600760207 /* ChordButtonsView.swift */,
+				7A7B732F28319B8600760207 /* StringsAndFretsAreaView.swift */,
+				7A7B733F28319B8600760207 /* FretBoardView.swift */,
+				7A7B733428319B8600760207 /* FretNumbersView.swift */,
+				7A7B733528319B8600760207 /* StringsView.swift */,
+				7A7B733628319B8600760207 /* StringView.swift */,
+				7A7B733928319B8600760207 /* BottomView.swift */,
+				7A7B733328319B8600760207 /* VolumeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7A7B73692831A20300760207 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7A7B736A2831A20300760207 /* IjamViewModel.swift */,
+				7AE8155D283FF274007CD93E /* StringsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7AF2B7852835B41600A2894C /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7A7B72FA283195AD00760207 /* IJAM_2022 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A7B7324283195AE00760207 /* Build configuration list for PBXNativeTarget "IJAM_2022" */;
+			buildPhases = (
+				7A7B72F7283195AD00760207 /* Sources */,
+				7A7B72F8283195AD00760207 /* Frameworks */,
+				7A7B72F9283195AD00760207 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IJAM_2022;
+			productName = IJAM_2022;
+			productReference = 7A7B72FB283195AD00760207 /* IJAM_2022.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7A7B730F283195AE00760207 /* IJAM_2022Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A7B7327283195AE00760207 /* Build configuration list for PBXNativeTarget "IJAM_2022Tests" */;
+			buildPhases = (
+				7A7B730C283195AE00760207 /* Sources */,
+				7A7B730D283195AE00760207 /* Frameworks */,
+				7A7B730E283195AE00760207 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A7B7312283195AE00760207 /* PBXTargetDependency */,
+			);
+			name = IJAM_2022Tests;
+			productName = IJAM_2022Tests;
+			productReference = 7A7B7310283195AE00760207 /* IJAM_2022Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7A7B7319283195AE00760207 /* IJAM_2022UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A7B732A283195AE00760207 /* Build configuration list for PBXNativeTarget "IJAM_2022UITests" */;
+			buildPhases = (
+				7A7B7316283195AE00760207 /* Sources */,
+				7A7B7317283195AE00760207 /* Frameworks */,
+				7A7B7318283195AE00760207 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A7B731C283195AE00760207 /* PBXTargetDependency */,
+			);
+			name = IJAM_2022UITests;
+			productName = IJAM_2022UITests;
+			productReference = 7A7B731A283195AE00760207 /* IJAM_2022UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7A7B72F3283195AD00760207 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					7A7B72FA283195AD00760207 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					7A7B730F283195AE00760207 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 7A7B72FA283195AD00760207;
+					};
+					7A7B7319283195AE00760207 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 7A7B72FA283195AD00760207;
+					};
+				};
+			};
+			buildConfigurationList = 7A7B72F6283195AD00760207 /* Build configuration list for PBXProject "IJAM_2022" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7A7B72F2283195AD00760207;
+			productRefGroup = 7A7B72FC283195AD00760207 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7A7B72FA283195AD00760207 /* IJAM_2022 */,
+				7A7B730F283195AE00760207 /* IJAM_2022Tests */,
+				7A7B7319283195AE00760207 /* IJAM_2022UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7A7B72F9283195AD00760207 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A6EC64F2832A0AE00A24222 /* DropD_ChordLibrary.plist in Resources */,
+				7A6EC6492832A0AE00A24222 /* OpenDTuningChordGroups.plist in Resources */,
+				7A7B7306283195AE00760207 /* Preview Assets.xcassets in Resources */,
+				7A6EC64D2832A0AE00A24222 /* StandardTuning_ChordLibrary.plist in Resources */,
+				7A6EC6522832A0AE00A24222 /* StandardTuningChordGroups.plist in Resources */,
+				7A6EC64C2832A0AE00A24222 /* OpenGTuningChordGroups.plist in Resources */,
+				7A6EC64A2832A0AE00A24222 /* DropDTuningChordGroups.plist in Resources */,
+				7A6EC6512832A0AE00A24222 /* OpenD_ChordLibrary.plist in Resources */,
+				7A7B7303283195AE00760207 /* Assets.xcassets in Resources */,
+				7A6EC6502832A0AE00A24222 /* OpenG_ChordLibrary.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A7B730E283195AE00760207 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A7B7318283195AE00760207 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7A7B72F7283195AD00760207 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A7B736B2831A20300760207 /* IjamViewModel.swift in Sources */,
+				7A6669B928356561007EA254 /* TuningPickerView.swift in Sources */,
+				7A7B735128319B8600760207 /* FretBoardView.swift in Sources */,
+				7A7B736728319F8800760207 /* Extensions.swift in Sources */,
+				7A6CF9562834637200128175 /* ChordGroupPickerView.swift in Sources */,
+				7A7B734428319B8600760207 /* ChordButtonsView.swift in Sources */,
+				7A7B734628319B8600760207 /* FretNumbersView.swift in Sources */,
+				7ABC310A283420E7000ECF87 /* CapoPositionPickerView.swift in Sources */,
+				7A7B736528319F4900760207 /* CoreDataManager.swift in Sources */,
+				7AE8155E283FF274007CD93E /* StringsViewModel.swift in Sources */,
+				7A7B735028319B8600760207 /* TopView.swift in Sources */,
+				7A7B734828319B8600760207 /* StringView.swift in Sources */,
+				7A7B734728319B8600760207 /* StringsView.swift in Sources */,
+				7A7B734528319B8600760207 /* VolumeView.swift in Sources */,
+				7A7B734B28319B8600760207 /* BottomView.swift in Sources */,
+				7A7B736128319DC700760207 /* Persistence.swift in Sources */,
+				7A7B72FF283195AD00760207 /* IJAM_2022App.swift in Sources */,
+				7A7B736328319F2400760207 /* IjamModel.swift in Sources */,
+				7A6EC63828329D1F00A24222 /* Ijam_2022Model.xcdatamodeld in Sources */,
+				7A7B734128319B8600760207 /* StringsAndFretsAreaView.swift in Sources */,
+				7A7B734E28319B8600760207 /* ContentView.swift in Sources */,
+				7A7B734928319B8600760207 /* HeaderView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A7B730C283195AE00760207 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A7B7315283195AE00760207 /* IJAM_2022Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A7B7316283195AE00760207 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A7B731F283195AE00760207 /* IJAM_2022UITests.swift in Sources */,
+				7A7B7321283195AE00760207 /* IJAM_2022UITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7A7B7312283195AE00760207 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A7B72FA283195AD00760207 /* IJAM_2022 */;
+			targetProxy = 7A7B7311283195AE00760207 /* PBXContainerItemProxy */;
+		};
+		7A7B731C283195AE00760207 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A7B72FA283195AD00760207 /* IJAM_2022 */;
+			targetProxy = 7A7B731B283195AE00760207 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		7A7B7322283195AE00760207 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7A7B7323283195AE00760207 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7A7B7325283195AE00760207 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"IJAM_2022/Preview Content\"";
+				DEVELOPMENT_TEAM = J5T6Z5N38H;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PixleyConsulting.IJAM-2022";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7A7B7326283195AE00760207 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"IJAM_2022/Preview Content\"";
+				DEVELOPMENT_TEAM = J5T6Z5N38H;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PixleyConsulting.IJAM-2022";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7A7B7328283195AE00760207 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J5T6Z5N38H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PixleyConsulting.IJAM-2022Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IJAM_2022.app/IJAM_2022";
+			};
+			name = Debug;
+		};
+		7A7B7329283195AE00760207 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J5T6Z5N38H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PixleyConsulting.IJAM-2022Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IJAM_2022.app/IJAM_2022";
+			};
+			name = Release;
+		};
+		7A7B732B283195AE00760207 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J5T6Z5N38H;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PixleyConsulting.IJAM-2022UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = IJAM_2022;
+			};
+			name = Debug;
+		};
+		7A7B732C283195AE00760207 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J5T6Z5N38H;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PixleyConsulting.IJAM-2022UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = IJAM_2022;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7A7B72F6283195AD00760207 /* Build configuration list for PBXProject "IJAM_2022" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A7B7322283195AE00760207 /* Debug */,
+				7A7B7323283195AE00760207 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A7B7324283195AE00760207 /* Build configuration list for PBXNativeTarget "IJAM_2022" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A7B7325283195AE00760207 /* Debug */,
+				7A7B7326283195AE00760207 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A7B7327283195AE00760207 /* Build configuration list for PBXNativeTarget "IJAM_2022Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A7B7328283195AE00760207 /* Debug */,
+				7A7B7329283195AE00760207 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A7B732A283195AE00760207 /* Build configuration list for PBXNativeTarget "IJAM_2022UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A7B732B283195AE00760207 /* Debug */,
+				7A7B732C283195AE00760207 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7A6EC63628329D1F00A24222 /* Ijam_2022Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7A6EC63728329D1F00A24222 /* Model.xcdatamodel */,
+			);
+			currentVersion = 7A6EC63728329D1F00A24222 /* Model.xcdatamodel */;
+			name = Ijam_2022Model.xcdatamodeld;
+			path = Data/Ijam_2022Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 7A7B72F3283195AD00760207 /* Project object */;
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AppState" representedClassName="AppState" syncable="YES" codeGenerationType="class">
+        <attribute name="capoPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="freeVersion" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isMuted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="volumeLevel" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <relationship name="tunings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tuning" inverseName="appState" inverseEntity="Tuning"/>
+    </entity>
+    <entity name="Chord" representedClassName="Chord" syncable="YES" codeGenerationType="class">
+        <attribute name="fretMap" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="tuning" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tuning" inverseName="chords" inverseEntity="Tuning"/>
+        <relationship name="tuning2" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tuning" inverseName="activeChord" inverseEntity="Tuning"/>
+    </entity>
+    <entity name="ChordGroup" representedClassName="ChordGroup" syncable="YES" codeGenerationType="class">
+        <attribute name="availableChordNames" optional="YES" attributeType="String"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="tuning" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tuning" inverseName="chordGroups" inverseEntity="Tuning"/>
+    </entity>
+    <entity name="Tuning" representedClassName="Tuning" syncable="YES" codeGenerationType="class">
+        <attribute name="activeChordName" optional="YES" attributeType="String"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="openNoteIndices" optional="YES" attributeType="String" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
+        <attribute name="openNoteNames" optional="YES" attributeType="String"/>
+        <relationship name="activeChord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chord" inverseName="tuning2" inverseEntity="Chord"/>
+        <relationship name="appState" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppState" inverseName="tunings" inverseEntity="AppState"/>
+        <relationship name="chordGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChordGroup" inverseName="tuning" inverseEntity="ChordGroup"/>
+        <relationship name="chords" toMany="YES" deletionRule="Nullify" destinationEntity="Chord" inverseName="tuning" inverseEntity="Chord"/>
+    </entity>
+    <elements>
+        <element name="AppState" positionX="-99.9296875" positionY="99.99609375" width="128" height="118"/>
+        <element name="Chord" positionX="-318.5234375" positionY="283.96484375" width="128" height="103"/>
+        <element name="ChordGroup" positionX="-515.5859375" positionY="20.7890625" width="128" height="103"/>
+        <element name="Tuning" positionX="-305.1875" positionY="-26.22265625" width="128" height="178"/>
+    </elements>
+</model>
