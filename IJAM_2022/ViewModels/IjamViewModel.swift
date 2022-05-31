@@ -41,12 +41,12 @@ class IjamViewModel: ObservableObject {
             saveContext()
         }
     }
-    @Published var volumeLevel:Double = 50.0 {
+    @Published var volumeLevel:Double = 20.0 {
         didSet {
             saveContext()
         }
     }
-    @Published var savedVolumeLevel = 50.0{
+    @Published var savedVolumeLevel = 20.0{
         didSet {
             saveContext()
         }

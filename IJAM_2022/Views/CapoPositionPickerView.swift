@@ -26,9 +26,7 @@ struct CapoPositionPickerView: View {
                Text("\(iJamVM.capoPosition)")
                    .fontWeight(.bold)
                    .font(.title3)
-                   .foregroundColor(Color.white)
-        
-                   
+                   .foregroundColor(Color.yellow)
            }
        }
    }

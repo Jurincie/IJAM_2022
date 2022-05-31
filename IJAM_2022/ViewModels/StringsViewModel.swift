@@ -41,6 +41,8 @@ class StringsViewModel: ObservableObject {
         let newLength   = noteName.count - 4 // trims ".wav" from end
         let prefix      = String(noteName.prefix(newLength))
         
+        print("==> playing String: \(stringNumber)   note: \(noteName)")
+        
         if let asset = NSDataAsset(name:prefix) {
             do {
                 let thisAudioPlayer                 = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
@@ -131,7 +133,7 @@ class StringsViewModel: ObservableObject {
             zone = 12
         }
         
-        print ("----> zone: \(zone)")
+//        print ("----> zone: \(zone)")
         
         return zone
     }

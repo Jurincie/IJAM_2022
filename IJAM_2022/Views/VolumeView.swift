@@ -21,9 +21,15 @@ struct VolumeView: View {
                 // FIX: set button size and slider size dynamically
                 Button(action: {
                     self.iJamVM.isMuted.toggle()
+                   
                     if (self.iJamVM.isMuted) {
-                        self.iJamVM.savedVolumeLevel = self.iJamVM.volumeLevel
-                        self.iJamVM.volumeLevel = 0.0
+                        // save volume level and set to zero
+                        self.iJamVM.savedVolumeLevel    = self.iJamVM.volumeLevel
+                        self.iJamVM.volumeLevel         = 0.0
+                    }
+                    else {
+                        // restore volume level
+                        self.iJamVM.volumeLevel = self.iJamVM.savedVolumeLevel
                     }
                 }) {
                     Image(systemName: self.iJamVM.isMuted ? "speaker.slash.fill" : "speaker.wave.1")

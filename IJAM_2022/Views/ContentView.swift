@@ -39,7 +39,7 @@ struct ContentView: View {
             .frame(width:width, height:height)
             .position(centered)
         }
-        .environmentObject(iJamVM)
+        .environmentObject(iJamVM)  // inject viewManager into environment
         .background(Color.black)
         .overlay(
                 RoundedRectangle(cornerRadius: 16)
