@@ -20,7 +20,7 @@ struct ChordGroupPickerView: View {
                ForEach(iJamVM.getChordGroupNames(), id: \.self) {
                    Text($0).swipeActions {
                        Button {
-                          print("Delete")
+                           debugPrint("Delete")
                        } label: {
                           Label("Delete", systemImage: "trash")
                        }

@@ -62,7 +62,7 @@ class StringsViewModel: ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error {
-           print (error)
+            debugPrint (error)
         }
     }
     

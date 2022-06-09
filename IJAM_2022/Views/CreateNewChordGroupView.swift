@@ -162,7 +162,7 @@ struct CreateNewChordGroupView: View {
                         showingDuplicateChordsAlert = true
                     } else {
                         saveChordGroup()
-                        print("All conditions met")
+                        debugPrint("All conditions met")
                         dismiss()
                     }
                 }
@@ -203,7 +203,7 @@ struct CreateNewChordGroupView: View {
             try viewContext.save()
         } catch {
             viewContext.rollback()
-            print( "Data not saved")
+            debugPrint( "Data not saved")
         }
     }
     
