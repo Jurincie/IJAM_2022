@@ -111,11 +111,11 @@ struct StringView: View {
                     } else {
                         Image("Redball")
                             .resizable()
-                            .opacity(self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id + minFret ? 1.0 : 0.0)
+                            .opacity(self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id ? 1.0 : 0.0)
                     }
                 }
                 // show fretZero note names AND a possibly fretted fretBox
-                self.fretBox.id + minFret == self.iJamVM.fretIndexMap[6 - stringNumber] || self.fretBox.id == 0 ? Text(self.fretBox.title).foregroundColor(Color.white) : Text("")
+                self.fretBox.id == self.iJamVM.fretIndexMap[6 - stringNumber] || self.fretBox.id == 0 ? Text(self.fretBox.title).foregroundColor(Color.white) : Text("")
                     .foregroundColor(Color.white)
                     .font(.custom("Futura Bold", size: 18.0))
             }

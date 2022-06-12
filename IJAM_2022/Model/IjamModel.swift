@@ -112,9 +112,8 @@ class IjamModel {
 
             if let path = Bundle.main.path(forResource: "OpenGTuningChordGroups", ofType: "plist"),
                let openGChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String] {
-                let chordGroupSet:NSSet = convertToSetOfChordGroups(dict: openGChordGroupsDict, parentTuning: openGTuning)
-
-                openGTuning.addToChordGroups(chordGroupSet)
+                    let chordGroupSet:NSSet = convertToSetOfChordGroups(dict: openGChordGroupsDict, parentTuning: openGTuning)
+                    openGTuning.addToChordGroups(chordGroupSet)
             }
         }
 
