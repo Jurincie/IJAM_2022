@@ -352,6 +352,7 @@ extension IjamViewModel
         
         return appState!
     }
+
     
     func getActiveChordGroupName(tuning:Tuning) -> String {
         // return the first group we find

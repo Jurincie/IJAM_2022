@@ -103,14 +103,13 @@ struct StringView: View {
                     }
                 }){
                     // show a white peg on zeroFret and redBall on freted fretBox
-
                     if(self.fretBox.id == 0)
                     {
                         Image("Peg")
                             .resizable()
                             .colorInvert()
-                    } else {
-                        Image(self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id + minFret ? "Redball" : "")
+                    } else if self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id + minFret {
+                        Image("Redball")
                             .resizable()
                     }
                 }
