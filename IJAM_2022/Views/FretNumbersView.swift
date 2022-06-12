@@ -17,7 +17,7 @@ struct FretNumbersView: View {
             
             CapoPositionPickerView()
                 .frame(width: width, height: height / 6, alignment: .center)
-                .background(Color.gray)
+                .background(RadialGradient(gradient: Gradient(colors: [.black, .blue]), center: .center, startRadius: 2, endRadius: 50))
                 .cornerRadius(5)
             
             // next 5 span the chord

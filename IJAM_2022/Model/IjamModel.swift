@@ -92,15 +92,36 @@ class IjamModel {
             
             if let path = Bundle.main.path(forResource: "OpenDTuningChordGroups", ofType: "plist"),
                 let openDChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String] {
-                let chordGroupSet:NSSet = convertToSetOfChordGroups(dict: openDChordGroupsDict, parentTuning: openDTuning)
-                
-                openDTuning.addToChordGroups(chordGroupSet)
+                    let chordGroupSet:NSSet = convertToSetOfChordGroups(dict: openDChordGroupsDict, parentTuning: openDTuning)
+                    openDTuning.addToChordGroups(chordGroupSet)
+                }
+            }
+
+                            // Open G //
+        let openGTuning             = Tuning(context: context)
+        openGTuning.name            = "Open G"
+        openGTuning.openNoteIndices = "2-7-14-19-23-26"  // D A D F# A D
+        openGTuning.openNoteNames   = "D-G-D-G-B-D"
+        openGTuning.isActive        = false
+        openGTuning.appState        = appState
+
+        if let path = Bundle.main.path(forResource: "OpenG_ChordLibrary", ofType: "plist"),
+        let openGChordDict = NSDictionary(contentsOfFile: path) as? [String: String] {
+            let chordSet:NSSet = convertToSetOfChords(dict: openGChordDict, parentTuning: openGTuning)
+            openGTuning.addToChords(chordSet)
+
+            if let path = Bundle.main.path(forResource: "OpenGTuningChordGroups", ofType: "plist"),
+               let openGChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String] {
+                let chordGroupSet:NSSet = convertToSetOfChordGroups(dict: openGChordGroupsDict, parentTuning: openGTuning)
+
+                openGTuning.addToChordGroups(chordGroupSet)
             }
         }
 
         appState.addToTunings(openDTuning)
         appState.addToTunings(dropDTuning)
         appState.addToTunings(standardTuning)
+        appState.addToTunings(openGTuning)
         
         saveContext()
     }

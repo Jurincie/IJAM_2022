@@ -108,9 +108,10 @@ struct StringView: View {
                         Image("Peg")
                             .resizable()
                             .colorInvert()
-                    } else if self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id + minFret {
+                    } else {
                         Image("Redball")
                             .resizable()
+                            .opacity(self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id + minFret ? 1.0 : 0.0)
                     }
                 }
                 // show fretZero note names AND a possibly fretted fretBox
