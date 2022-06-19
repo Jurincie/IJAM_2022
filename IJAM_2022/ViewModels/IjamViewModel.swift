@@ -26,6 +26,11 @@ class IjamViewModel: ObservableObject {
             saveContext()
         }
     }
+    @Published var tuningJustChanged:Bool = false {
+        didSet {
+            saveContext()
+        }
+    }
     @Published var activeChord:Chord?{
         didSet {
             saveContext()
@@ -70,10 +75,12 @@ class IjamViewModel: ObservableObject {
             // set the activeChordGroup based on name
             // then set: tuning.activeChord, fretMapIndex, selectedButton so chordButttons and Strings display properly]
             
-            if activeChordGroupName != "CREATE NEW GROUP" {
+            if activeChordGroupName != kCreateNewGroup {
                 if activeChordGroupName != self.activeChordGroup?.name {
-                    // set FORMER chordGroup.isActive to false
-                    self.activeChordGroup?.isActive = false
+                    // only set old chordGroup's isActive to false if it this is the same tuning
+                    if self.tuningJustChanged == false {
+                        self.activeChordGroup?.isActive = false
+                    }
                     
                     self.activeChordGroup           = getActiveChordGroupFromName(name: activeChordGroupName)
                     self.activeChordGroup?.isActive = true
@@ -87,7 +94,7 @@ class IjamViewModel: ObservableObject {
     
     @Published var activeTuningName = "" {
         didSet {
-            
+            // ignore touches on existing tuning
             if activeTuningName != self.activeTuning!.name {
                 // set old tuning to inactive and this tuning to active
                 self.activeTuning!.isActive = false
@@ -95,26 +102,37 @@ class IjamViewModel: ObservableObject {
                 // set NEW activeTuning
                 self.activeTuning           = getActiveTuningFromName(name: self.activeTuningName)
                 self.activeTuning?.isActive = true
-
+                
                 // setting activeChordGroupName sets activeChord, fretIndexMap, selectedChordBtn, in it's didSet function
-                self.activeChordGroupName = getActiveChordGroupName(tuning: activeTuning!)
+                self.tuningJustChanged      = true
+                self.activeChordGroupName   = getActiveChordGroupName(tuning: activeTuning!)
+                self.tuningJustChanged      = false
             }
         }
     }
        
     init(context:NSManagedObjectContext) {
-        self.context                = context
-        self.appState               = getAppState()
-        self.capoPosition           = Int(self.appState!.capoPosition)
-        self.isMuted                = self.appState!.isMuted
-        self.volumeLevel            = self.appState!.volumeLevel
-        self.savedVolumeLevel       = self.appState!.savedVolumeLevel
-        self.activeTuning           = getActiveTuning()
-        self.activeTuningName       = self.activeTuning!.name!
+        self.context    = context
+        self.appState   = getAppState()
+        precondition(self.appState!.tunings!.count > 0, "There must be at least one tuning.")
         
-        // getting activeChordGroupName causes didSet to initiate self.activeChordGroup
+        self.capoPosition = Int(self.appState!.capoPosition)
+        precondition(self.appState!.capoPosition > -3 && self.appState!.capoPosition < 6, "capo range: -2...5.")
+
+        self.isMuted            = self.appState!.isMuted
+        self.volumeLevel        = self.appState!.volumeLevel
+        self.savedVolumeLevel   = self.appState!.savedVolumeLevel
+        self.activeTuning       = getActiveTuning()
+        precondition(self.activeTuning!.chords!.count > 0, "There must be at least one chord.")
+        precondition(self.activeTuning!.chordGroups!.count > 0, "There must be at least one ChordGroup.")
+
+        self.activeTuningName   = self.activeTuning!.name!
+        self.tuningJustChanged  = false
+        
+        // setting activeChordGroupName's' didSet sets self.activeChordGroup
         self.activeChordGroupName = getActiveChordGroupName(tuning: self.activeTuning!)
-        
+        precondition(self.activeChordGroupName.count > 0, "There must be at least one chord.")
+
         saveContext()
     }
 }

@@ -16,16 +16,17 @@ struct ChordGroupPickerView: View {
     
    var body: some View {
        Menu {
-           Picker("Chord Groups", selection: $iJamVM.activeChordGroupName) {
+           Picker(kChordGroups, selection: $iJamVM.activeChordGroupName) {
                ForEach(iJamVM.getChordGroupNames(), id: \.self) {
-                   Text($0).swipeActions {
-                       Button {
-                          print("Delete")
-                       } label: {
-                          Label("Delete", systemImage: "trash")
-                       }
-                       .tint(.red)
-                  }
+                   Text($0)
+//                       .swipeActions {
+//                       Button {
+//                           debugPrint("Delete")
+//                       } label: {
+//                          Label("Delete", systemImage: "trash")
+//                       }
+//                       .tint(.red)
+//                  }
                }
            }
            
@@ -34,7 +35,7 @@ struct ChordGroupPickerView: View {
        } label: {
            Text("\(iJamVM.activeChordGroup!.name!)")
                .onChange(of: iJamVM.activeChordGroupName) { newValue in
-                   if iJamVM.activeChordGroupName == "CREATE NEW GROUP" {
+                   if iJamVM.activeChordGroupName == kCreateNewGroup {
                        // set this to launch NewChordGroupView
                        showingNewGroupSheet = true
                     }

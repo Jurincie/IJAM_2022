@@ -21,7 +21,6 @@ struct StringsView: View {
     @State var dragLocation: CGPoint?
     @StateObject private var stringsVM  = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
     @State private var showingAlert     = false
-    let kReduceVolumePct                = 0.50
     var dragOffset:CGFloat              = 0.0
     var height:CGFloat                  = 0.0
     
@@ -56,7 +55,7 @@ struct StringsView: View {
                         let index                   = thisStringsFretPosition + thisStringsOpenIndex! + self.iJamVM.capoPosition
                         let noteToPlayName          = stringsVM.noteNamesArray[index]
                                                 
-                        stringsVM.playWaveFile(noteName:noteToPlayName, stringNumber: stringToPlay, volume: iJamVM.volumeLevel * kReduceVolumePct)
+                        stringsVM.playWaveFile(noteName:noteToPlayName, stringNumber: stringToPlay, volume: iJamVM.volumeLevel * kDefaultVolumeMagnification)
                     }
                 }
             

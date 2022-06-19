@@ -21,18 +21,6 @@ struct FramePreferenceKey: PreferenceKey {
     static func reduce(value: inout CGRect, nextValue: () -> CGRect) {}
 }
 
-extension View {
-  func readFrame(onChange: @escaping (CGRect) -> Void) -> some View {
-    background(
-      GeometryReader { geometryProxy in
-        Color.clear
-              .preference(key: FramePreferenceKey.self, value: geometryProxy.frame(in: .global))
-      }
-    )
-    .onPreferenceChange(FramePreferenceKey.self, perform: onChange)
-  }
-}
-
 class StringsViewModel: ObservableObject {
     private (set) var context:NSManagedObjectContext
     @Published var audioPlayerArray = [AVAudioPlayer?]()     // contains 1 audioPlayer for each guitar string  6-1
@@ -62,12 +50,12 @@ class StringsViewModel: ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error {
-           print (error)
+            debugPrint (error)
         }
     }
     
     func prepareAudioPlayer(stringNumber:Int) {
-        if let asset = NSDataAsset(name:"NoNote"){
+        if let asset = NSDataAsset(name:kNoNoteWaveFile){
             do {
                 let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
                 audioPlayerArray.append(thisAudioPlayer)
@@ -83,7 +71,7 @@ class StringsViewModel: ObservableObject {
         }
     }
    
-    @Published var noteNamesArray = ["DoubleLow_C.wav", "DoubleLow_C#.wav", "DoubleLow_D.wav", "DoubleLow_D#.wav", "Low_E.wav", "Low_F.wav", "Low_F#.wav", "Low_G.wav", "Low_G#.wav", "Low_A.wav", "Low_A#.wav", "Low_B.wav", "Low_C.wav", "Low_C#.wav", "Low_D.wav", "Low_D#.wav", "E.wav", "F.wav", "F#.wav", "G.wav", "G#.wav", "A.wav", "A#.wav", "B.wav", "C.wav", "C#.wav", "D.wav", "D#.wav", "High_E.wav", "High_F.wav", "High_F#.wav", "High_G.wav", "High_G#.wav", "High_A.wav", "High_A#.wav", "High_B.wav", "High_C.wav", "High_C#.wav", "High_D.wav", "High_D#.wav", "DoubleHigh_E.wav"]
+    @Published var noteNamesArray = ["DoubleLow_C.wav", "DoubleLow_C#.wav", "DoubleLow_D.wav", "DoubleLow_D#.wav", "Low_E.wav", "Low_F.wav", "Low_F#.wav", "Low_G.wav", "Low_G#.wav", "Low_A.wav", "Low_A#.wav", "Low_B.wav", "Low_C.wav", "Low_C#.wav", "Low_D.wav", "Low_D#.wav", "E.wav", "F.wav", "F#.wav", "G.wav", "G#.wav", "A.wav", "A#.wav", "B.wav", "C.wav", "C#.wav", "D.wav", "D#.wav", "High_E.wav", "High_F.wav", "High_F#.wav", "High_G.wav", "High_G#.wav", "High_A.wav", "High_A#.wav", "High_B.wav", "High_C.wav", "High_C#.wav", "High_D.wav", "High_D#.wav", "DoubleHigh_E.wav", "DoubleHigh_F.wav", "DoubleHigh_F#.wav"]
     
     @Published var stringNumber:Int     = 0
     @Published var xPosition:Double     = 0.0

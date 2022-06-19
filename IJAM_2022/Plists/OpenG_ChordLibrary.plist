@@ -7,38 +7,48 @@
 	<key>A</key>
 	<string>x22222</string>
 	<key>Am</key>
-	<string>x2221x</string>
+	<string>x22212</string>
+	<key>Am/E</key>
+	<string>22221x</string>
 	<key>A7</key>
 	<string>x22225</string>
 	<key>Bm</key>
-	<string>x44404</string>
+	<string>x44434</string>
 	<key>C</key>
 	<string>x55555</string>
+	<key>C7</key>
+	<string>x55558</string>
 	<key>Cm</key>
 	<string>x55545</string>
 	<key>C/G</key>
 	<string>555555</string>
 	<key>D</key>
-	<string>024230</string>
-	<key>Dm</key>
-	<string>023230</string>
+	<string>xx0234</string>
+	<key>Dm/F</key>
+	<string>xx3233</string>
+	<key>Dm/G</key>
+	<string>x03230</string>
 	<key>D7</key>
-	<string>024210</string>
+	<string>x7777A</string>
 	<key>E</key>
-	<string>212102</string>
+	<string>xx2102</string>
 	<key>Em</key>
 	<string>202002</string>
+	<key>Em/B</key>
+	<string>99998x</string>
 	<key>F</key>
-	<string>323213</string>
+	<string>xx3213</string>
 	<key>Fm</key>
 	<string>313113</string>
+	<key>F#m</key>
+	<string>xx4224</string>
 	<key>G</key>
 	<string>545435</string>
 	<key>Gm</key>
 	<string>535335</string>
 	<key>G7</key>
-	<string>545434</string>
-	<key>Gmaj7</key>
-	<string>545433</string>
+	<string>x00003</string>
+	<key>Gmaj9</key>
+	<string>x0020x</string>
 </dict>
 </plist>

@@ -41,16 +41,16 @@ struct ChordButtonsView: View {
     var body: some View {
         let chordNames:[String] = self.iJamVM.getAvailableChordNames()
         
-        let boxes = [Box(id: 0, title: chordNames[0], image:Image("BlankPick")),
-                      Box(id: 1, title: chordNames[1], image:Image("BlankPick")),
-                      Box(id: 2, title: chordNames[2], image:Image("BlankPick")),
-                      Box(id: 3, title: chordNames.count < 4 ? "" :chordNames[3], image:Image("BlankPick")),
-                      Box(id: 4, title: chordNames.count < 5 ? "" :chordNames[4], image:Image("BlankPick")),
-                      Box(id: 5, title: chordNames.count < 6 ? "" :chordNames[5], image:Image("BlankPick")),
-                      Box(id: 6, title: chordNames.count < 7 ? "" :chordNames[6], image:Image("BlankPick")),
-                      Box(id: 7, title: chordNames.count < 8 ? "" :chordNames[7], image:Image("BlankPick")),
-                      Box(id: 8, title: chordNames.count < 9 ? "" :chordNames[8], image:Image("BlankPick")),
-                      Box(id: 9, title: chordNames.count < 10 ? "" :chordNames[9], image:Image("BlankPick"))]
+        let boxes = [Box(id: 0, title: chordNames[0], image:Image(kBlankPick)),
+                      Box(id: 1, title: chordNames[1], image:Image(kBlankPick)),
+                      Box(id: 2, title: chordNames[2], image:Image(kBlankPick)),
+                      Box(id: 3, title: chordNames.count < 4 ? "" :chordNames[3], image:Image(kBlankPick)),
+                      Box(id: 4, title: chordNames.count < 5 ? "" :chordNames[4], image:Image(kBlankPick)),
+                      Box(id: 5, title: chordNames.count < 6 ? "" :chordNames[5], image:Image(kBlankPick)),
+                      Box(id: 6, title: chordNames.count < 7 ? "" :chordNames[6], image:Image(kBlankPick)),
+                      Box(id: 7, title: chordNames.count < 8 ? "" :chordNames[7], image:Image(kBlankPick)),
+                      Box(id: 8, title: chordNames.count < 9 ? "" :chordNames[8], image:Image(kBlankPick)),
+                      Box(id: 9, title: chordNames.count < 10 ? "" :chordNames[9], image:Image(kBlankPick))]
                 
         LazyVGrid(columns: columns, spacing:mySpacing) {
                 ForEach(boxes, id: \.id) { box in
@@ -74,11 +74,11 @@ struct ChordButtonsView: View {
             ZStack() {
                 Button(action: {
                     // automatically reload picks in ChordButtonsView updating the one selected
-                    if self.box.title != "No Chord" && self.box.title != "" {
+                    if self.box.title != kNoChord && self.box.title != "" {
                         self.iJamVM.selectedChordBtn = self.box.id
                         
                         // set activeTuning.activeChord and fretMapIndex
-                        let chordNames = self.iJamVM.activeChordGroup?.availableChordNames!.components(separatedBy: ["-"])
+                        let chordNames = self.iJamVM.activeChordGroup?.availableChordNames?.components(separatedBy: ["-"])
                         let newActiveChordName = chordNames![self.box.id]
                         let newActiveChord = self.iJamVM.getChordWithName(name: newActiveChordName, tuning: self.iJamVM.activeTuning!)
                         self.iJamVM.activeChord! = newActiveChord
@@ -88,12 +88,12 @@ struct ChordButtonsView: View {
                             try viewContext.save()
                         } catch {
                             viewContext.rollback()
-                            print( "Data not saved")
+                            debugPrint("Data not saved")
                         }
                         
                     }
                 }){
-                    Image(iJamVM.selectedChordBtn == self.box.id ? "ActivePick" : self.box.title == "No Chord" || self.box.title == "" ? "UndefinedPick" : "BlankPick")
+                    Image(iJamVM.selectedChordBtn == self.box.id ? kActivePick : self.box.title == kNoChord || self.box.title == "" ? kUndefinedPick : kBlankPick)
                         .resizable()
                         .shadow(radius: 10)
                         .padding(10)
@@ -101,7 +101,7 @@ struct ChordButtonsView: View {
                 
                 let fontSize = getFontSize(targetString: self.box.title)
                 
-                Text(self.box.title == "No Chord" || self.box.title == "" ? "" : self.box.title)
+                Text(self.box.title == kNoChord || self.box.title == "" ? "" : self.box.title)
                     .foregroundColor(Color.white)
                     .font(.custom("Arial Rounded MT Bold", size: fontSize))
             }

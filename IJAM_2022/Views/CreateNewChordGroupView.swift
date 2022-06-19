@@ -61,24 +61,24 @@ struct CreateNewChordGroupView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var iJamVM:IjamViewModel
     @Environment(\.managedObjectContext) private var viewContext
-    @State private var showingDuplicateChordsAlert = false
+    
+    @State private var showingDuplicateChordsAlert  = false
     @State private var showingNotEnoughChordsAlert  = false
-    @State private var showingUniqueGroupNameAlert = false
+    @State private var showingUniqueGroupNameAlert  = false
     @State private var newChordGroupName:String     = ""
-    @State private var tempChordName:String         = "No Chord"
+    @State private var tempChordName:String         = kNoChord
     @State private var selectedChordButtonIndex:Int = 0
     
     // Behavior:
     //      the Picker's selected chordName appears in seleted PickButton's Label
     //      tempChordName replaces element at pick.id of newChordNames Array
     //      changing buttons, keeps chordName in old button label
-    
-    @State private var newChordNames = ["No Chord","No Chord","No Chord","No Chord","No Chord","No Chord","No Chord","No Chord","No Chord","No Chord"]
+    @State private var newChordNames = [kNoChord,kNoChord,kNoChord,kNoChord,kNoChord,kNoChord,kNoChord,kNoChord,kNoChord,kNoChord]
     
     func duplicateChordsExist() -> Bool {
         var answer = false
         
-        let actualChordsNameArray = newChordNames.filter { $0 != "No Chord" }
+        let actualChordsNameArray = newChordNames.filter { $0 != kNoChord }
         let dups = Dictionary(grouping: actualChordsNameArray, by: {$0}).filter { $1.count > 1 }.keys
         
         if dups.count > 0 {
@@ -97,20 +97,20 @@ struct CreateNewChordGroupView: View {
     
     var body: some View {
         
-        let picks = [Pick(id: 0, title: newChordNames[0], image:Image("ActivePick")),
-                     Pick(id: 1, title: newChordNames[1], image:Image("BlankPick")),
-                     Pick(id: 2, title: newChordNames[2], image:Image("BlankPick")),
-                     Pick(id: 3, title: newChordNames[3], image:Image("BlankPick")),
-                     Pick(id: 4, title: newChordNames[4], image:Image("BlankPick")),
-                     Pick(id: 5, title: newChordNames[5], image:Image("BlankPick")),
-                     Pick(id: 6, title: newChordNames[6], image:Image("BlankPick")),
-                     Pick(id: 7, title: newChordNames[7], image:Image("BlankPick")),
-                     Pick(id: 8, title: newChordNames[8], image:Image("BlankPick")),
-                     Pick(id: 9, title: newChordNames[9], image:Image("BlankPick"))]
+        let picks = [Pick(id: 0, title: newChordNames[0], image:Image(kActivePick)),
+                     Pick(id: 1, title: newChordNames[1], image:Image(kBlankPick)),
+                     Pick(id: 2, title: newChordNames[2], image:Image(kBlankPick)),
+                     Pick(id: 3, title: newChordNames[3], image:Image(kBlankPick)),
+                     Pick(id: 4, title: newChordNames[4], image:Image(kBlankPick)),
+                     Pick(id: 5, title: newChordNames[5], image:Image(kBlankPick)),
+                     Pick(id: 6, title: newChordNames[6], image:Image(kBlankPick)),
+                     Pick(id: 7, title: newChordNames[7], image:Image(kBlankPick)),
+                     Pick(id: 8, title: newChordNames[8], image:Image(kBlankPick)),
+                     Pick(id: 9, title: newChordNames[9], image:Image(kBlankPick))]
                 
        
         VStack() {
-            Text("NEW CHORD GROUP").foregroundColor(Color.white)
+            Text(kCreateNewGroup).foregroundColor(Color.white)
                 .font(.custom("Arial Rounded MT Bold", size: 20.0))
             Spacer()
             HStack() {
@@ -162,7 +162,7 @@ struct CreateNewChordGroupView: View {
                         showingDuplicateChordsAlert = true
                     } else {
                         saveChordGroup()
-                        print("All conditions met")
+                        debugPrint("All conditions met")
                         dismiss()
                     }
                 }
@@ -191,8 +191,7 @@ struct CreateNewChordGroupView: View {
         group.availableChordNames   = chordNamesAsDashDelimitedString(chords: newChordNames)
         
         // mark former activeGroup as INACTIVE
-        iJamVM.activeChordGroup?.isActive   = false
-//        iJamVM.activeChordGroup             = group
+        iJamVM.activeChordGroup?.isActive = false
         
         iJamVM.activeTuning!.addToChordGroups(group)
         group.tuning = iJamVM.activeTuning
@@ -203,7 +202,7 @@ struct CreateNewChordGroupView: View {
             try viewContext.save()
         } catch {
             viewContext.rollback()
-            print( "Data not saved")
+            debugPrint( "Data not saved")
         }
     }
     
@@ -236,7 +235,7 @@ struct CreateNewChordGroupView: View {
         var numberChords = 0
         
         for name in newChordNames {
-            if name != "No Chord" && name.count > 0 {
+            if name != kNoChord && name.count > 0 {
                 numberChords += 1
             }
         }

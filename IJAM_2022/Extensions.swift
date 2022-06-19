@@ -352,6 +352,7 @@ extension IjamViewModel
         
         return appState!
     }
+
     
     func getActiveChordGroupName(tuning:Tuning) -> String {
         // return the first group we find
@@ -423,3 +424,16 @@ extension NSManagedObjectContext
         }
     }
 }
+
+extension View {
+  func readFrame(onChange: @escaping (CGRect) -> Void) -> some View {
+    background(
+      GeometryReader { geometryProxy in
+        Color.clear
+              .preference(key: FramePreferenceKey.self, value: geometryProxy.frame(in: .global))
+      }
+    )
+    .onPreferenceChange(FramePreferenceKey.self, perform: onChange)
+  }
+}
+

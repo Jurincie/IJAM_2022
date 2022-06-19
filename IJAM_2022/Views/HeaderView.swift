@@ -21,10 +21,10 @@ struct HeaderView: View {
                 Spacer()
             
                 TuningPickerView()
-                    .frame(width: width / 3, height: 40, alignment: .center)
+                    .frame(minWidth: width / 4, idealWidth: width / 3, maxWidth: width / 2.5, minHeight: 40.0, idealHeight: 45.0, maxHeight: 50.0, alignment: .topLeading)
                 
                 ChordGroupPickerView()
-                    .frame(width: width / 3, height: 40, alignment: .center)
+                    .frame(minWidth: width / 4, idealWidth: width / 3, maxWidth: width / 2.5, minHeight: 40.0, idealHeight: 45.0, maxHeight: 50.0, alignment: .topLeading)
                
                 Spacer()
             }

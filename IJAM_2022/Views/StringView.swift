@@ -14,24 +14,23 @@ import SwiftUI
 
 struct StringView: View {
     @EnvironmentObject var iJamVM:IjamViewModel
-        var height:CGFloat
-        var stringImageName:String
-        var stringNumber:Int
+    var height:CGFloat
+    var stringImageName:String
+    var stringNumber:Int
+    
+    init(height: CGFloat, stringNumber:Int, fretNumber:Int) {
+        self.height             = height
+        self.stringNumber       = stringNumber
+        self.stringImageName    = "String"
         
-        init(height: CGFloat, stringNumber:Int, fretNumber:Int) {
-            self.height             = height
-            self.stringNumber       = stringNumber
-            self.stringImageName    = "String"
-            stringImageName.append("\(stringNumber)")
-        }
+        stringImageName.append("\(stringNumber)")
+    }
         
     var body: some View {
-        let openNotesString = (iJamVM.activeTuning?.openNoteNames!)!
-        let openNotes:[String] = openNotesString.components(separatedBy: ["-"])
-        
-        let openStringNote = openNotes[6 - stringNumber]
-        
-        let minFret = iJamVM.getMinDisplayedFret(fretString: iJamVM.activeChord!.fretMap!)
+        let openNotesString     = (iJamVM.activeTuning?.openNoteNames!)!
+        let openNotes:[String]  = openNotesString.components(separatedBy: ["-"])
+        let openStringNote      = openNotes[6 - stringNumber]
+        let minFret             = iJamVM.getMinDisplayedFret(fretString: iJamVM.activeChord!.fretMap!)
         
         let fretBoxes:[FretBox] = [
             FretBox(id: 0, title: self.iJamVM.fretIndexMap[6 - stringNumber] == -1 ? "X" : getFretNoteTitle(openNote: openStringNote, offset: 0)),
@@ -40,7 +39,6 @@ struct StringView: View {
             FretBox(id: minFret + 3, title: getFretNoteTitle(openNote: openStringNote, offset: 3 + minFret)),
             FretBox(id: minFret + 4, title: getFretNoteTitle(openNote: openStringNote, offset: 4 + minFret)),
             FretBox(id: minFret + 5, title: getFretNoteTitle(openNote: openStringNote, offset: 5 + minFret))]
-        
         
         ZStack() {
             
@@ -99,24 +97,23 @@ struct StringView: View {
                         try viewContext.save()
                     } catch {
                         viewContext.rollback()
-                        print( "Data not saved")
+                        debugPrint( "Data not saved")
                     }
                 }){
                     // show a white peg on zeroFret and redBall on freted fretBox
-
                     if(self.fretBox.id == 0)
                     {
                         Image("Peg")
                             .resizable()
                             .colorInvert()
                     } else {
-                        Image(self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id + minFret ? "Redball" : "")
+                        Image("Redball")
                             .resizable()
+                            .opacity(self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id ? 1.0 : 0.0)
                     }
                 }
                 // show fretZero note names AND a possibly fretted fretBox
-                self.fretBox.id + minFret == self.iJamVM.fretIndexMap[6 - stringNumber] || self.fretBox.id == 0 ? Text(self.fretBox.title).foregroundColor(Color.white) : Text("")
-                    .foregroundColor(Color.white)
+                self.fretBox.id == self.iJamVM.fretIndexMap[6 - stringNumber] || self.fretBox.id == 0 ? Text(self.fretBox.title).foregroundColor(Color.white)  : Text("").foregroundColor(Color.white) 
                     .font(.custom("Futura Bold", size: 18.0))
             }
         }
