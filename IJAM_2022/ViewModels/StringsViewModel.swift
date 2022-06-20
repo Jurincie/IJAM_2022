@@ -35,7 +35,6 @@ class StringsViewModel: ObservableObject {
                 audioPlayerArray[6 - stringNumber]  = thisAudioPlayer
                 thisAudioPlayer.volume              = Float(volume)
                 
-                thisAudioPlayer.prepareToPlay()
                 thisAudioPlayer.play()
             } catch InitializeErrors.AVAudioSessionError{
                 exit(1)
@@ -84,39 +83,27 @@ class StringsViewModel: ObservableObject {
         loadWaveFilesIntoAudioPlayers()
     }
     
-    
-    func getZone(loc:CGPoint) -> Int{
-        // assign zone
-        // 90 160 230 290 350 420
+    func getZone(loc:CGPoint) -> Int
+    {
+        // returns current position
+        // zone breaks derived from GeometryReader
         
         var zone = -1
         
         if loc.x <= zoneBreaks[0] {
-            zone = 0
-        } else if loc.x > zoneBreaks[0]  && loc.x <= zoneBreaks[0] + 10 {
-            zone = 1 // string 6
-        } else if loc.x <= zoneBreaks[1] {
-            zone = 2
-        } else if loc.x > zoneBreaks[1] && loc.x <= zoneBreaks[1] + 10 {
-            zone = 3 // string 5
-        } else if loc.x <= zoneBreaks[2] {
-            zone = 4
-        } else if loc.x > zoneBreaks[2] && loc.x <= zoneBreaks[2] + 10 {
-            zone = 5 // string 4
-        } else if loc.x <= zoneBreaks[3] {
-            zone = 6
-        } else if loc.x > zoneBreaks[3] && loc.x <= zoneBreaks[3] + 10 {
-            zone = 7 // string 3
-        } else if loc.x <= zoneBreaks[4] {
-            zone = 8
-        } else if loc.x > zoneBreaks[4] && loc.x <= zoneBreaks[4] + 10 {
-            zone = 9 // string 2
-        } else if loc.x <= zoneBreaks[5] {
-            zone = 10
-        } else if loc.x > zoneBreaks[5] && loc.x <= zoneBreaks[5] + 10 {
-            zone = 11 // string 1
+            zone = 7  // left of 6th string
+        } else if loc.x > zoneBreaks[0]  && loc.x <= zoneBreaks[1] {
+            zone = 6 // between 6th and 5th strings
+        } else if loc.x > zoneBreaks[1]  && loc.x <= zoneBreaks[2] {
+            zone = 5 // between 5th and 4th strings
+        } else if loc.x > zoneBreaks[2]  && loc.x <= zoneBreaks[3] {
+            zone = 4 // between 4th and 3rd strings
+        } else if loc.x > zoneBreaks[3]  && loc.x <= zoneBreaks[4] {
+            zone = 3 // between 3rd and 2nd strings
+        } else if loc.x > zoneBreaks[4]  && loc.x <= zoneBreaks[5] {
+            zone = 2 // between 2nd and 1st strings
         } else {
-            zone = 12
+            zone = 1 // right of 1st string
         }
             
         return zone

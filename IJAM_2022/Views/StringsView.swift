@@ -36,9 +36,9 @@ struct StringsView: View {
         
             // assign zone to location
             let zone = stringsVM.getZone(loc: dragLocation!)
-
-            if zone != stringsVM.formerZone {
-                if stringsVM.formerZone % 2  > 0  && iJamVM.isMuted == false {
+            
+            if (stringsVM.formerZone != -1) {
+                if zone != stringsVM.formerZone && iJamVM.isMuted == false {
                     
                     if(AVAudioSession.sharedInstance().outputVolume == 0.0) {
                         // Alert user that their volume is off
@@ -46,7 +46,7 @@ struct StringsView: View {
                     }
                     
                     // play correct note for this string
-                    let stringToPlay            = 6 - (stringsVM.formerZone / 2) // algebra is cool
+                    let stringToPlay            = (stringsVM.formerZone + zone) / 2
                     let thisStringsFretPosition = self.iJamVM.fretIndexMap[6 - stringToPlay]
                     
                     if thisStringsFretPosition > -1 {
@@ -58,10 +58,13 @@ struct StringsView: View {
                         stringsVM.playWaveFile(noteName:noteToPlayName, stringNumber: stringToPlay, volume: iJamVM.volumeLevel * kDefaultVolumeMagnification)
                     }
                 }
-            
-                stringsVM.formerZone = zone
             }
+            
+            stringsVM.formerZone = zone
         }.sequenced(before: tap)
+            .onEnded { _ in self.stringsVM.formerZone = -1
+                print("---> Drag Ended formerZone reset to -1")
+            }
         
         HStack(spacing:0) {
             HStack(spacing:0) {

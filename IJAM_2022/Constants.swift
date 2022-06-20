@@ -45,5 +45,5 @@ let kOpenGTuningChordGroups = "OpenGTuningChordGroups"
 
 // numbers
 let kDefaultVolumeLevel = 0.24
-let kDefaultVolumeMagnification = 0.05
+let kDefaultVolumeMagnification = 0.025
 
