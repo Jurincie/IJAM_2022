@@ -21,5 +21,12 @@ class Ijam2022Tests: XCTestCase {
         XCTAssertNotNil(view)
     }
     
+    func testCapoPositionPickerView() {
+        let view = CapoPositionPickerView()
+        
+        XCTAssertNotNil(view)
+        XCTAssertEqual(view.frets.count, 8)
+    }
+    
     
 }
