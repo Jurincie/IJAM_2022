@@ -31,10 +31,12 @@ class StringsViewModel: ObservableObject {
         
         if let asset = NSDataAsset(name:prefix) {
             do {
-                let thisAudioPlayer                 = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
+                let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
+                
+                // load a NEW audio player every time string is picked
                 audioPlayerArray[6 - stringNumber]  = thisAudioPlayer
                 thisAudioPlayer.volume              = Float(volume)
-                
+
                 thisAudioPlayer.play()
             } catch InitializeErrors.AVAudioSessionError{
                 exit(1)
@@ -49,7 +51,9 @@ class StringsViewModel: ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error {
+            #if DEBUG
             debugPrint (error)
+            #endif
         }
     }
     

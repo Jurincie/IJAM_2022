@@ -12,8 +12,10 @@ import SwiftUI
 //  bottom layer: appropriate string image
 //  top layer:  VStack() of 6 possibly-RedBall images evenly spaced over top half of the stringsView
 
+
 struct StringView: View {
     @EnvironmentObject var iJamVM:IjamViewModel
+    @State private var stringVibrating = false
     var height:CGFloat
     var stringImageName:String
     var stringNumber:Int
@@ -41,14 +43,22 @@ struct StringView: View {
             FretBox(id: minFret + 5, title: getFretNoteTitle(openNote: openStringNote, offset: 5 + minFret))]
         
         ZStack() {
+                
+            // BOTTOM layer //
+            if stringVibrating {
+                // start timer
+//                let imageSwitchTimer = Timer.scheduledTimer(timeInterval: 3.0, invocation: i, repeats: false)
+    //            imageSwitchTimer.
+            }
+           
+            let imageName = stringVibrating ? stringImageName + "Active" : stringImageName
             
-                                    // BOTTOM layer //
-            Image(stringImageName)
+            Image(imageName)
                 .resizable()
                 .frame(width:20, height:height, alignment:.topLeading)
                 .opacity(self.iJamVM.fretIndexMap[6 - stringNumber] == -1 ? 0.3 : 1.0)
-            
-                                    // 2ND layer //
+                                
+            // 2ND layer //
             // 1x6 grid of Buttons with noteName in text on top of the possible image
             // zero or one of the buttons may show the redBall image indicating string if fretted there
             VStack(spacing:0) {
@@ -97,7 +107,10 @@ struct StringView: View {
                         try viewContext.save()
                     } catch {
                         viewContext.rollback()
+                        
+                        #if DEBUG
                         debugPrint( "Data not saved")
+                        #endif
                     }
                 }){
                     // show a white peg on zeroFret and redBall on freted fretBox

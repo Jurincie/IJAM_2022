@@ -19,14 +19,6 @@ struct ChordGroupPickerView: View {
            Picker(kChordGroups, selection: $iJamVM.activeChordGroupName) {
                ForEach(iJamVM.getChordGroupNames(), id: \.self) {
                    Text($0)
-//                       .swipeActions {
-//                       Button {
-//                           debugPrint("Delete")
-//                       } label: {
-//                          Label("Delete", systemImage: "trash")
-//                       }
-//                       .tint(.red)
-//                  }
                }
            }
            

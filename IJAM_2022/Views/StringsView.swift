@@ -63,7 +63,10 @@ struct StringsView: View {
             stringsVM.formerZone = zone
         }.sequenced(before: tap)
             .onEnded { _ in self.stringsVM.formerZone = -1
+                
+                #if DEBUG
                 print("---> Drag Ended formerZone reset to -1")
+                #endif
             }
         
         HStack(spacing:0) {

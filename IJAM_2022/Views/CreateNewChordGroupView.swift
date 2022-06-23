@@ -68,13 +68,13 @@ struct CreateNewChordGroupView: View {
     @State private var newChordGroupName:String     = ""
     @State private var tempChordName:String         = kNoChord
     @State private var selectedChordButtonIndex:Int = 0
+    @State private var newChordNames                = Array(repeating: kNoChord, count: 10)
     
     // Behavior:
     //      the Picker's selected chordName appears in seleted PickButton's Label
     //      tempChordName replaces element at pick.id of newChordNames Array
     //      changing buttons, keeps chordName in old button label
-    @State private var newChordNames = [kNoChord,kNoChord,kNoChord,kNoChord,kNoChord,kNoChord,kNoChord,kNoChord,kNoChord,kNoChord]
-    
+  
     func duplicateChordsExist() -> Bool {
         var answer = false
         
@@ -162,7 +162,11 @@ struct CreateNewChordGroupView: View {
                         showingDuplicateChordsAlert = true
                     } else {
                         saveChordGroup()
+                        
+                        #if DEBUG
                         debugPrint("All conditions met")
+                        #endif
+                        
                         dismiss()
                     }
                 }
@@ -202,7 +206,10 @@ struct CreateNewChordGroupView: View {
             try viewContext.save()
         } catch {
             viewContext.rollback()
+            
+            #if DEBUG
             debugPrint( "Data not saved")
+            #endif
         }
     }
     

@@ -9,6 +9,10 @@ import XCTest
 import ViewInspector
 @testable import Ijam2022
 
+extension ContentView: Inspectable { }
+extension StringsView: Inspectable { }
+extension StringView: Inspectable { }
+
 class Ijam2022Tests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -17,7 +21,6 @@ class Ijam2022Tests: XCTestCase {
     
     func testContentViewExists() {
         let view = ContentView()
-        
         XCTAssertNotNil(view)
     }
     
@@ -26,6 +29,10 @@ class Ijam2022Tests: XCTestCase {
         
         XCTAssertNotNil(view)
         XCTAssertEqual(view.frets.count, 8)
+    }
+    
+    func testStringsView() {
+        
     }
     
     

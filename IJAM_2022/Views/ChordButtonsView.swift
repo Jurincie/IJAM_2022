@@ -88,7 +88,10 @@ struct ChordButtonsView: View {
                             try viewContext.save()
                         } catch {
                             viewContext.rollback()
+                            
+                            #if DEBUG
                             debugPrint("Data not saved")
+                            #endif
                         }
                         
                     }

@@ -18,7 +18,9 @@ class coreDataManager {
         PersistentStoreController = NSPersistentContainer(name:"Ijam_2022Model")
         PersistentStoreController.loadPersistentStores { description, error in
             if let error = error {
+                #if DEBUG
                 debugPrint("Fatal Error: Unable to initialize CoreData \(error)")
+                #endif
             }
         }
     }
