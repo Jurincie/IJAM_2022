@@ -16,6 +16,7 @@ extension String {
 }
 
 extension NSDictionary {
+    // creates a swiftDictionary from contents of Objective-C Dictionary
     var swiftDictionary: Dictionary<String, Any> {
         var swiftDictionary = Dictionary<String, Any>()
 
@@ -77,7 +78,7 @@ extension IjamModel {
     func getFirstRealChordName(chordNames:[String]) ->String {
         var firstRealChordName = ""
         for chordName in chordNames {
-            if chordName != "No Chord" {
+            if chordName != kNoChord {
                 firstRealChordName = chordName
                 break
             }
@@ -129,7 +130,7 @@ extension IjamViewModel
         
         // get first real chordName
         for name in chordNames! {
-            if name != "No Chord" {
+            if name != kNoChord {
                 newActiveChordName = name
                 break
             }
@@ -147,7 +148,7 @@ extension IjamViewModel
         return newActiveChord!
     }
     
-    func getChordWithName(name:String, tuning: Tuning) -> Chord {
+    func getChordWithName( _ name:String, tuning: Tuning) -> Chord {
         var thisChord:Chord?
         
         for chord in tuning.chords! {
@@ -165,7 +166,7 @@ extension IjamViewModel
         return self.activeChordGroup!.availableChordNames!.components(separatedBy: ["-"])
     }
     
-    func getActiveTuningFromName(name: String) ->Tuning {
+    func getActiveTuningFromName(_ name: String) ->Tuning {
         var activeTuning:Tuning?
         
         for tuning in self.appState!.tunings! {
@@ -180,7 +181,7 @@ extension IjamViewModel
         return activeTuning!
     }
     
-    func getActiveChordGroupFromName(name: String) ->ChordGroup {
+    func getActiveChordGroupFromName(_ name: String) ->ChordGroup {
         var thisChordGroup:ChordGroup?
         
         for chordGroup in self.activeTuning!.chordGroups! {
@@ -233,7 +234,7 @@ extension IjamViewModel
         return namesArray
     }
     
-    func getMinDisplayedFret(fretString:String) -> Int {
+    func getMinDisplayedFret(From fretString:String) -> Int {
         var lowest      = 0
         var highest     = 0
         var thisFretVal = 0
@@ -291,7 +292,7 @@ extension IjamViewModel
     }
     
     // Must acccept both: "xx0212" "9ABCAA" and "320003"
-    func getFretFromString(string:String) -> Int {
+    func getFretFromString(_ string:String) -> Int {
         var returnInt = -1
         
         if string == "x" {
@@ -314,7 +315,7 @@ extension IjamViewModel
                 
         for index in 0...5 {
             let fretSymbol:String = self.activeChord!.fretMap![index]
-            let index = getFretFromString(string: fretSymbol)
+            let index = getFretFromString(fretSymbol)
             
             fretIndexMap.append(index)
         }

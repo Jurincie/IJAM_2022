@@ -32,7 +32,7 @@ struct StringView: View {
         let openNotesString     = (iJamVM.activeTuning?.openNoteNames!)!
         let openNotes:[String]  = openNotesString.components(separatedBy: ["-"])
         let openStringNote      = openNotes[6 - stringNumber]
-        let minFret             = iJamVM.getMinDisplayedFret(fretString: iJamVM.activeChord!.fretMap!)
+        let minFret             = iJamVM.getMinDisplayedFret(From: iJamVM.activeChord!.fretMap!)
         
         let fretBoxes:[FretBox] = [
             FretBox(id: 0, title: self.iJamVM.fretIndexMap[6 - stringNumber] == -1 ? "X" : getFretNoteTitle(openNote: openStringNote, offset: 0)),
@@ -45,12 +45,7 @@ struct StringView: View {
         ZStack() {
                 
             // BOTTOM layer //
-            if stringVibrating {
-                // start timer
-//                let imageSwitchTimer = Timer.scheduledTimer(timeInterval: 3.0, invocation: i, repeats: false)
-    //            imageSwitchTimer.
-            }
-           
+    
             let imageName = stringVibrating ? stringImageName + "Active" : stringImageName
             
             Image(imageName)

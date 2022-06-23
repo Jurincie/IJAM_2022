@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class IjamViewModel: ObservableObject {
+final class IjamViewModel: ObservableObject {
     private (set) var context:NSManagedObjectContext
     
     @Published var appState:AppState?{
@@ -82,7 +82,7 @@ class IjamViewModel: ObservableObject {
                         self.activeChordGroup?.isActive = false
                     }
                     
-                    self.activeChordGroup           = getActiveChordGroupFromName(name: activeChordGroupName)
+                    self.activeChordGroup           = getActiveChordGroupFromName(activeChordGroupName)
                     self.activeChordGroup?.isActive = true
                     self.activeChord                = getNewActiveChordFrom(group:activeChordGroup!, tuning:activeTuning!)
                     self.fretIndexMap               = getFretIndexMap()
@@ -100,7 +100,7 @@ class IjamViewModel: ObservableObject {
                 self.activeTuning!.isActive = false
                 
                 // set NEW activeTuning
-                self.activeTuning           = getActiveTuningFromName(name: self.activeTuningName)
+                self.activeTuning           = getActiveTuningFromName(self.activeTuningName)
                 self.activeTuning?.isActive = true
                 
                 // setting activeChordGroupName sets activeChord, fretIndexMap, selectedChordBtn, in it's didSet function

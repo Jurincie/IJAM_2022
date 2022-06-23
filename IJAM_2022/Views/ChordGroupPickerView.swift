@@ -9,11 +9,9 @@ import SwiftUI
 
 struct ChordGroupPickerView: View {
     @EnvironmentObject var iJamVM:IjamViewModel
-    
     @State private var showingNewGroupSheet = false
     @State private var newChordGroupName:String?
 
-    
    var body: some View {
        Menu {
            Picker(kChordGroups, selection: $iJamVM.activeChordGroupName) {

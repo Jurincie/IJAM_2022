@@ -2,7 +2,7 @@
 //  FretNumbersView.swift
 //  iJam 2022
 //
-//  Created by Ron Jurincie on 5/4/22.
+//  Created by Ron :: on 5/4/22.
 //
 
 import SwiftUI
@@ -22,7 +22,7 @@ struct FretNumbersView: View {
             
             // next 5 span the chord
             // from minfret to minFret + 4)
-            let minFret = iJamVM.getMinDisplayedFret(fretString:self.iJamVM.activeChord!.fretMap!)
+            let minFret = iJamVM.getMinDisplayedFret(From: self.iJamVM.activeChord!.fretMap!)
             
             Text(String(iJamVM.capoPosition + minFret + 1))
                 .frame(width: width, height: height / 6, alignment: .center)

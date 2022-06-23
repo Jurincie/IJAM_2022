@@ -80,7 +80,7 @@ struct ChordButtonsView: View {
                         // set activeTuning.activeChord and fretMapIndex
                         let chordNames = self.iJamVM.activeChordGroup?.availableChordNames?.components(separatedBy: ["-"])
                         let newActiveChordName = chordNames![self.box.id]
-                        let newActiveChord = self.iJamVM.getChordWithName(name: newActiveChordName, tuning: self.iJamVM.activeTuning!)
+                        let newActiveChord = self.iJamVM.getChordWithName(newActiveChordName, tuning: self.iJamVM.activeTuning!)
                         self.iJamVM.activeChord! = newActiveChord
                         self.iJamVM.fretIndexMap = self.iJamVM.getFretIndexMap()
                       

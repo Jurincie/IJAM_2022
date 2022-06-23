@@ -28,7 +28,7 @@ struct PickView: View {
                 selectedChordButtonIndex    = self.pick.id
                 newChordNames[self.pick.id] = tempChordName
             }){
-                Image(selectedChordButtonIndex == self.pick.id ? "ActivePick" : newChordNames[self.pick.id] == "No Chord" ? "UndefinedPick" : "BlankPick")
+                Image(selectedChordButtonIndex == self.pick.id ? kActivePick : newChordNames[self.pick.id] == kNoChord ? kUndefinedPick : kBlankPick)
                     .resizable()
                     .shadow(radius: 10)
                     .padding(10)
@@ -37,7 +37,7 @@ struct PickView: View {
             let fontSize = getFontSize(targetString: self.pick.title)
             
             Text(self.pick.id == selectedChordButtonIndex ? tempChordName :
-                    newChordNames[self.pick.id] == "No Chord" ? "" : newChordNames[self.pick.id])
+                    newChordNames[self.pick.id] == kNoChord ? "" : newChordNames[self.pick.id])
                 .foregroundColor(Color.white)
                 .font(.custom("Arial Rounded MT Bold", size: fontSize))
                 .onChange(of: tempChordName) { newValue in
@@ -59,8 +59,8 @@ struct PickView: View {
 
 struct CreateNewChordGroupView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var iJamVM:IjamViewModel
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var iJamVM:IjamViewModel
     
     @State private var showingDuplicateChordsAlert  = false
     @State private var showingNotEnoughChordsAlert  = false
@@ -69,13 +69,21 @@ struct CreateNewChordGroupView: View {
     @State private var tempChordName:String         = kNoChord
     @State private var selectedChordButtonIndex:Int = 0
     @State private var newChordNames                = Array(repeating: kNoChord, count: 10)
+    private var picks:[Pick] = []
+    
+    init() {
+        for i in 0...9 {
+            picks.append(Pick(id:i, title:newChordNames[0], image: Image(kBlankPick)))
+            
+        }
+    }
     
     // Behavior:
     //      the Picker's selected chordName appears in seleted PickButton's Label
     //      tempChordName replaces element at pick.id of newChordNames Array
     //      changing buttons, keeps chordName in old button label
   
-    func duplicateChordsExist() -> Bool {
+    func duplicateChordsFound() -> Bool {
         var answer = false
         
         let actualChordsNameArray = newChordNames.filter { $0 != kNoChord }
@@ -89,6 +97,7 @@ struct CreateNewChordGroupView: View {
     }
     
     let mySpacing:CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 36.0 : 12.0
+    
     private let columns = [GridItem(.flexible()),
                            GridItem(.flexible()),
                            GridItem(.flexible()),
@@ -96,19 +105,6 @@ struct CreateNewChordGroupView: View {
                            GridItem(.flexible())]
     
     var body: some View {
-        
-        let picks = [Pick(id: 0, title: newChordNames[0], image:Image(kActivePick)),
-                     Pick(id: 1, title: newChordNames[1], image:Image(kBlankPick)),
-                     Pick(id: 2, title: newChordNames[2], image:Image(kBlankPick)),
-                     Pick(id: 3, title: newChordNames[3], image:Image(kBlankPick)),
-                     Pick(id: 4, title: newChordNames[4], image:Image(kBlankPick)),
-                     Pick(id: 5, title: newChordNames[5], image:Image(kBlankPick)),
-                     Pick(id: 6, title: newChordNames[6], image:Image(kBlankPick)),
-                     Pick(id: 7, title: newChordNames[7], image:Image(kBlankPick)),
-                     Pick(id: 8, title: newChordNames[8], image:Image(kBlankPick)),
-                     Pick(id: 9, title: newChordNames[9], image:Image(kBlankPick))]
-                
-       
         VStack() {
             Text(kCreateNewGroup).foregroundColor(Color.white)
                 .font(.custom("Arial Rounded MT Bold", size: 20.0))
@@ -158,7 +154,7 @@ struct CreateNewChordGroupView: View {
                         showingNotEnoughChordsAlert = true
                     } else if newChordGroupName.count < 1 || groupNameAlreadyExists(name: newChordGroupName) {
                         showingUniqueGroupNameAlert = true
-                    } else if duplicateChordsExist() {
+                    } else if duplicateChordsFound() {
                         showingDuplicateChordsAlert = true
                     } else {
                         saveChordGroup()
