@@ -19,108 +19,43 @@ class IjamModel {
 
         if defaults.bool(forKey: notFirstLaunchKey) == false {
             // ONLY BUILD the dataModel once, on intial launch
-            loadDataModelViaPListsIntoPersistentStore()
+            loadDataModel()
             defaults.set(true, forKey: notFirstLaunchKey)
         }
     }
     
-    func loadDataModelViaPListsIntoPersistentStore() {
-       
+    func loadDataModel() {
+        // loads data from property lists and loads them into persistant storage
         let appState = AppState(context:context)
+        
         appState.capoPosition   = 0
         appState.volumeLevel    = kDefaultVolumeLevel
         appState.isMuted        = false
         appState.freeVersion    = true
         
-        // Standard Tuning //
-        let standardTuning              = Tuning(context: context)
-        standardTuning.name             = kStandard
-        standardTuning.openNoteIndices  = kStandardTuningIndices
-        standardTuning.openNoteNames    = kStandardTuningNotes // E A D G B E
-        standardTuning.isActive         = true
-        standardTuning.appState         = appState
-
-        if let path = Bundle.main.path(forResource: kStandardTuningChordLibrary, ofType: kPlist),
-           let dict = NSDictionary(contentsOfFile: path) as? [String: String] {
-            
-            let chordSet:NSSet = convertToSetOfChords(dict: dict, parentTuning: standardTuning)
-            standardTuning.addToChords(chordSet)
-            
-            if let path = Bundle.main.path(forResource: kStandardTuningChordGroups, ofType: kPlist),
-                let StdTuningChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String] {
-                let chordGroupSet:NSSet      = convertToSetOfChordGroups(dict: StdTuningChordGroupsDict, parentTuning: standardTuning)
-               
-                standardTuning.addToChordGroups(chordGroupSet)
-            }
-        }
+        let standardTuning = buildTuning(appState:appState, name:kStandard, openNoteIndices:kStandardTuningIndices,
+                                         openNotes:kStandardTuningNotes, chordLibrary:kStandardTuningChordLibrary,
+                                         chordGroups:kStandardTuningChordGroups)
         
-        // Drop-D Tuning //
-        let dropDTuning             = Tuning(context: context)
-        dropDTuning.name            = kDropD
-        dropDTuning.openNoteIndices = kDropDTuningIndices // D A D G B E
-        dropDTuning.openNoteNames   = kDropDTuningNotes
-        dropDTuning.isActive        = false
-        dropDTuning.appState        = appState
+        let dropDTuning = buildTuning(appState: appState, name:kDropD, openNoteIndices:kDropDTuningIndices,
+                                      openNotes: kDropDTuningNotes, chordLibrary:kDropDChordLibrary,
+                                      chordGroups: kDropDTuningChordGroups)
         
-        if let path = Bundle.main.path(forResource: kDropDChordLibrary, ofType: kPlist),
-           let dropDChordDict   = NSDictionary(contentsOfFile: path) as? [String: String] {
-            let chordSet:NSSet  = convertToSetOfChords(dict: dropDChordDict, parentTuning: dropDTuning)
-           
-            dropDTuning.addToChords(chordSet)
-                                                    
-            if let path = Bundle.main.path(forResource: kDropDTuningChordGroups, ofType: kPlist),
-                let dropDChordGroupsDict    = NSDictionary(contentsOfFile: path) as? [String: String] {
-                let chordGroupSet:NSSet     = convertToSetOfChordGroups(dict: dropDChordGroupsDict, parentTuning: standardTuning)
-               
-                dropDTuning.addToChordGroups(chordGroupSet)
-            }
-        }
+        let openDTuning = buildTuning(appState:appState, name:kOpenD, openNoteIndices:kOpenDTuningIndices,
+                                      openNotes:kOpenDTuningNotes, chordLibrary:kOpenDChordLibrary,
+                                      chordGroups:kOpenDTuningChordGroups)
         
-        // Open D //
-        let openDTuning             = Tuning(context: context)
-        openDTuning.name            = kOpenD
-        openDTuning.openNoteIndices = kOpenDTuningIndices  // D A D F# A D
-        openDTuning.openNoteNames   = kOpenDTuningNotes
-        openDTuning.isActive        = false
-        openDTuning.appState        = appState
-
-        if let path = Bundle.main.path(forResource: kOpenDChordLibrary, ofType: kPlist),
-            let openDChordDict = NSDictionary(contentsOfFile: path) as? [String: String] {
-            let chordSet:NSSet = convertToSetOfChords(dict: openDChordDict, parentTuning: openDTuning)
-           
-            openDTuning.addToChords(chordSet)
-            
-            if let path = Bundle.main.path(forResource: kOpenDTuningChordGroups, ofType: kPlist),
-                let openDChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String] {
-                    let chordGroupSet:NSSet = convertToSetOfChordGroups(dict: openDChordGroupsDict, parentTuning: openDTuning)
-                    openDTuning.addToChordGroups(chordGroupSet)
-                }
-            }
-
-        // Open G //
-        let openGTuning             = Tuning(context: context)
-        openGTuning.name            = "Open G"
-        openGTuning.openNoteIndices = kOpenGTuningIndices  // D A D F# A D
-        openGTuning.openNoteNames   = kOpenGTuningNotes
-        openGTuning.isActive        = false
-        openGTuning.appState        = appState
-
-        if let path = Bundle.main.path(forResource: kOpenGChordLibrary, ofType: kPlist),
-        let openGChordDict = NSDictionary(contentsOfFile: path) as? [String: String] {
-            let chordSet:NSSet = convertToSetOfChords(dict: openGChordDict, parentTuning: openGTuning)
-            openGTuning.addToChords(chordSet)
-
-            if let path = Bundle.main.path(forResource: kOpenGTuningChordGroups, ofType: kPlist),
-               let openGChordGroupsDict = NSDictionary(contentsOfFile: path) as? [String: String] {
-                    let chordGroupSet:NSSet = convertToSetOfChordGroups(dict: openGChordGroupsDict, parentTuning: openGTuning)
-                    openGTuning.addToChordGroups(chordGroupSet)
-            }
-        }
+        let openGTuning = buildTuning(appState:appState, name:kOpenG, openNoteIndices:kOpenGTuningIndices,
+                                      openNotes:kOpenGTuningNotes, chordLibrary:kOpenGChordLibrary,
+                                      chordGroups:kOpenGTuningChordGroups)
 
         appState.addToTunings(openDTuning)
         appState.addToTunings(dropDTuning)
         appState.addToTunings(standardTuning)
         appState.addToTunings(openGTuning)
+        
+        // make just one of the tunings active
+        standardTuning.isActive = true
         
         saveContext()
     }

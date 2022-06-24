@@ -87,7 +87,7 @@ class StringsViewModel: ObservableObject {
         loadWaveFilesIntoAudioPlayers()
     }
     
-    func getZone(loc:CGPoint) -> Int
+    func zone(loc:CGPoint) -> Int
     {
         // returns current position
         // zone breaks derived from GeometryReader

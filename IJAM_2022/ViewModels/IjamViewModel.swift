@@ -123,7 +123,8 @@ final class IjamViewModel: ObservableObject {
         self.volumeLevel        = self.appState!.volumeLevel
         self.savedVolumeLevel   = self.appState!.savedVolumeLevel
         self.activeTuning       = getActiveTuning()
-        precondition(self.activeTuning!.chords!.count > 0, "There must be at least one chord.")
+        
+        precondition(self.activeTuning!.chords!.count > 0, "There must be at least one chord for this tuning.")
         precondition(self.activeTuning!.chordGroups!.count > 0, "There must be at least one ChordGroup.")
 
         self.activeTuningName   = self.activeTuning!.name!
@@ -131,7 +132,8 @@ final class IjamViewModel: ObservableObject {
         
         // setting activeChordGroupName's' didSet sets self.activeChordGroup
         self.activeChordGroupName = getActiveChordGroupName(tuning: self.activeTuning!)
-        precondition(self.activeChordGroupName.count > 0, "There must be at least one chord.")
+        
+        precondition(self.activeChordGroupName.count > 0, "There must be a avtiveChordGroupView.")
 
         saveContext()
     }

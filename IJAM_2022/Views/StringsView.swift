@@ -35,7 +35,7 @@ struct StringsView: View {
             dragLocation = value.location
         
             // assign zone to location
-            let zone = stringsVM.getZone(loc: dragLocation!)
+            let zone = stringsVM.zone(loc: dragLocation!)
             
             if (stringsVM.formerZone != -1) {
                 if zone != stringsVM.formerZone && iJamVM.isMuted == false {

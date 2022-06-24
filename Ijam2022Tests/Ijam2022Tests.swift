@@ -6,12 +6,12 @@
 //
 
 import XCTest
-import ViewInspector
+//import ViewInspector
 @testable import Ijam2022
 
-extension ContentView: Inspectable { }
-extension StringsView: Inspectable { }
-extension StringView: Inspectable { }
+//extension ContentView: Inspectable { }
+//extension StringsView: Inspectable { }
+//extension StringView: Inspectable { }
 
 class Ijam2022Tests: XCTestCase {
 

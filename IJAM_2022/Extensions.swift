@@ -33,6 +33,32 @@ extension NSDictionary {
 
 extension IjamModel {
     
+    func buildTuning(appState:AppState, name:String, openNoteIndices:String, openNotes:String,
+                     chordLibrary:String, chordGroups:String) -> Tuning {
+        let newTuning               = Tuning(context: context)
+        newTuning.name              = name
+        newTuning.openNoteIndices   = openNoteIndices
+        newTuning.openNoteNames     = openNotes 
+        newTuning.isActive          = false
+        newTuning.appState          = appState
+        
+        if let path = Bundle.main.path(forResource: chordLibrary, ofType: kPlist),
+           let dict = NSDictionary(contentsOfFile: path) as? [String: String] {
+            
+            let chordSet:NSSet = convertToSetOfChords(dict: dict, parentTuning: newTuning)
+            newTuning.addToChords(chordSet)
+            
+            if let path = Bundle.main.path(forResource: chordGroups, ofType: kPlist),
+                let newChordGroupsDict  = NSDictionary(contentsOfFile: path) as? [String: String] {
+                let chordGroupSet:NSSet = convertToSetOfChordGroups(dict: newChordGroupsDict, parentTuning: newTuning)
+               
+                newTuning.addToChordGroups(chordGroupSet)
+            }
+        }
+        
+        return newTuning
+    }
+    
     func convertToSetOfChords(dict: Dictionary<String,String>, parentTuning: Tuning) ->NSSet {
         // create a NSMutableSet of Chord managed Objects
         let context = coreDataManager.shared.PersistentStoreController.viewContext
@@ -234,7 +260,7 @@ extension IjamViewModel
         return namesArray
     }
     
-    func getMinDisplayedFret(From fretString:String) -> Int {
+    func getMinDisplayedFret(from fretString:String) -> Int {
         var lowest      = 0
         var highest     = 0
         var thisFretVal = 0
