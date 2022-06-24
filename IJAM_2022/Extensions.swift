@@ -42,34 +42,29 @@ extension IjamModel {
         newTuning.isActive          = false
         newTuning.appState          = appState
         
-        if let path = Bundle.main.path(forResource: chordLibrary, ofType: kPlist),
-           let dict = NSDictionary(contentsOfFile: path) as? [String: String] {
-            
-            let chordSet:NSSet = convertToSetOfChords(dict: dict, parentTuning: newTuning)
-            newTuning.addToChords(chordSet)
-            
-            if let path = Bundle.main.path(forResource: chordGroups, ofType: kPlist),
-                let newChordGroupsDict  = NSDictionary(contentsOfFile: path) as? [String: String] {
-                let chordGroupSet:NSSet = convertToSetOfChordGroups(dict: newChordGroupsDict, parentTuning: newTuning)
-               
-                newTuning.addToChordGroups(chordGroupSet)
-            }
-        }
+        let chordSet:NSSet = convertToSetOfChords(fileName:chordLibrary, parentTuning: newTuning)
+        newTuning.addToChords(chordSet)
         
+        let chordGroupSet:NSSet = convertToSetOfChordGroups(fileName: chordGroups, parentTuning: newTuning)
+        newTuning.addToChordGroups(chordGroupSet)
+    
         return newTuning
     }
     
-    func convertToSetOfChords(dict: Dictionary<String,String>, parentTuning: Tuning) ->NSSet {
+    func convertToSetOfChords(fileName:String, parentTuning: Tuning) ->NSSet {
         // create a NSMutableSet of Chord managed Objects
         let context = coreDataManager.shared.PersistentStoreController.viewContext
         let set     = NSMutableSet()
         
-        for entry in dict{
-            let chord       = Chord(context:context)
-            chord.name      = entry.key
-            chord.fretMap   = entry.value
-            chord.tuning    = parentTuning
-            set.add(chord)
+        if let path = Bundle.main.path(forResource: fileName, ofType: kPlist),
+           let dict = NSDictionary(contentsOfFile: path) as? [String: String] {
+                for entry in dict{
+                    let chord       = Chord(context:context)
+                    chord.name      = entry.key
+                    chord.fretMap   = entry.value
+                    chord.tuning    = parentTuning
+                    set.add(chord)
+                }
         }
     
         try? context.save()
@@ -77,19 +72,23 @@ extension IjamModel {
         return set
     }
 
-    func convertToSetOfChordGroups(dict: Dictionary<String,String>, parentTuning: Tuning) ->NSSet {
+    func convertToSetOfChordGroups(fileName:String, parentTuning: Tuning) ->NSSet {
         // build NSMutableSet of ChordGroups
         let chordGroupsSet = NSMutableSet()
-
-        for entry in dict {
-            // create new group
-            let chordGroup                  = ChordGroup(context: self.context)
-            chordGroup.name                 = entry.key
-            chordGroup.availableChordNames  = entry.value
-            chordGroup.isActive             = false
-            chordGroup.tuning               = parentTuning
+        
+        if let path = Bundle.main.path(forResource: fileName, ofType: kPlist),
+            let newChordGroupsDict  = NSDictionary(contentsOfFile: path) as? [String: String] {
             
-            chordGroupsSet.add(chordGroup)
+            for entry in newChordGroupsDict {
+                // create new group
+                let chordGroup                  = ChordGroup(context: self.context)
+                chordGroup.name                 = entry.key
+                chordGroup.availableChordNames  = entry.value
+                chordGroup.isActive             = false
+                chordGroup.tuning               = parentTuning
+                
+                chordGroupsSet.add(chordGroup)
+            }
         }
         
         // assign one group isActive = true

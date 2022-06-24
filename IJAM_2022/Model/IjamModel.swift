@@ -48,7 +48,7 @@ class IjamModel {
         let openGTuning = buildTuning(appState:appState, name:kOpenG, openNoteIndices:kOpenGTuningIndices,
                                       openNotes:kOpenGTuningNotes, chordLibrary:kOpenGChordLibrary,
                                       chordGroups:kOpenGTuningChordGroups)
-
+        
         appState.addToTunings(openDTuning)
         appState.addToTunings(dropDTuning)
         appState.addToTunings(standardTuning)
