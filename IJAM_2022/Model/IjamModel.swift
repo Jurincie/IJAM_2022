@@ -19,15 +19,16 @@ class IjamModel {
 
         if defaults.bool(forKey: notFirstLaunchKey) == false {
             // ONLY BUILD the dataModel once, on intial launch
+            // Since it is made persistent, the values should be saved
             loadDataModel()
+            
             defaults.set(true, forKey: notFirstLaunchKey)
         }
     }
     
     func loadDataModel() {
         // loads data from property lists and loads them into persistant storage
-        let appState = AppState(context:context)
-        
+        let appState            = AppState(context:context)
         appState.capoPosition   = 0
         appState.volumeLevel    = kDefaultVolumeLevel
         appState.isMuted        = false
@@ -54,7 +55,7 @@ class IjamModel {
         appState.addToTunings(standardTuning)
         appState.addToTunings(openGTuning)
         
-        // make just one of the tunings active
+        // make one of the tunings active
         standardTuning.isActive = true
         
         saveContext()

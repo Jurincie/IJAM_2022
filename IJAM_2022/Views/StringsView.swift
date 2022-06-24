@@ -19,10 +19,10 @@ struct StringsView: View {
     @EnvironmentObject var iJamVM:IjamViewModel
     @State var tapLocation: CGPoint?
     @State var dragLocation: CGPoint?
-    @StateObject private var stringsVM  = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
-    @State private var showingAlert     = false
-    var dragOffset:CGFloat              = 0.0
-    var height:CGFloat                  = 0.0
+    
+    @StateObject private var stringsVM = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
+    var dragOffset:CGFloat  = 0.0
+    var height:CGFloat      = 0.0
     
     var locString : String {
         guard let loc = tapLocation else { return "Tap" }
@@ -33,39 +33,18 @@ struct StringsView: View {
         let tap  = TapGesture().onEnded { tapLocation = dragLocation }
         let drag = DragGesture(minimumDistance: 0).onChanged { value in
             dragLocation = value.location
-        
-            // assign zone to location
-            let zone = stringsVM.zone(loc: dragLocation!)
-            
-            if (stringsVM.formerZone != -1) {
-                if zone != stringsVM.formerZone && iJamVM.isMuted == false {
+
+            if iJamVM.isMuted == false {
+                if stringsVM.dragsNewPositionTriggersPlay(loc: dragLocation!){
                     
-                    if(AVAudioSession.sharedInstance().outputVolume == 0.0) {
-                        // Alert user that their volume is off
-                        showingAlert = true
-                    }
-                    
-                    // play correct note for this string
-                    let stringToPlay            = (stringsVM.formerZone + zone) / 2
-                    let thisStringsFretPosition = self.iJamVM.fretIndexMap[6 - stringToPlay]
-                    
-                    if thisStringsFretPosition > -1 {
-                        let openNoteArray:[String]  = self.iJamVM.activeTuning!.openNoteIndices!.components(separatedBy:["-"])
-                        let thisStringsOpenIndex    = Int(openNoteArray[6 - stringToPlay])
-                        let index                   = thisStringsFretPosition + thisStringsOpenIndex! + self.iJamVM.capoPosition
-                        let noteToPlayName          = stringsVM.noteNamesArray[index]
-                                                
-                        stringsVM.playWaveFile(noteName:noteToPlayName, stringNumber: stringToPlay, volume: iJamVM.volumeLevel * kDefaultVolumeMagnification)
-                    }
+                    self.stringsVM.pickString(fretIndexMap: self.iJamVM.fretIndexMap, openNoteIndices: (self.iJamVM.activeTuning?.openNoteIndices)!, capoPosition: self.iJamVM.capoPosition, volumeLevel: self.iJamVM.volumeLevel)
                 }
             }
-            
-            stringsVM.formerZone = zone
         }.sequenced(before: tap)
             .onEnded { _ in self.stringsVM.formerZone = -1
                 
                 #if DEBUG
-                print("---> Drag Ended formerZone reset to -1")
+                debugPrint("---> Drag ended: formerZone reset to -1")
                 #endif
             }
         
@@ -76,51 +55,40 @@ struct StringsView: View {
                 Spacer()
                 Spacer()
             }
+            
             HStack(spacing:0) {
                 StringView(height:height, stringNumber: 6, fretNumber:self.iJamVM.fretIndexMap[0]) .readFrame { newFrame in
-                    if(stringsVM.zoneBreaks.count <= 6 ) {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
-                        stringsVM.zoneBreaks.append(stringsVM.xPosition)
-                        stringsVM.zoneBreaks.sort()
-                    }
+                    stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                    stringsVM.zoneBreaks.append(stringsVM.xPosition)
+                    stringsVM.zoneBreaks.sort()
                 }
                 StringView(height:height, stringNumber: 5, fretNumber:self.iJamVM.fretIndexMap[1]) .readFrame { newFrame in
-                    if(stringsVM.zoneBreaks.count <= 6 ) {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
-                        stringsVM.zoneBreaks.append(stringsVM.xPosition)
-                        stringsVM.zoneBreaks.sort()
-                    }
+                    stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                    stringsVM.zoneBreaks.append(stringsVM.xPosition)
+                    stringsVM.zoneBreaks.sort()
                 }
                 StringView(height:height, stringNumber: 4, fretNumber:self.iJamVM.fretIndexMap[2]) .readFrame { newFrame in
-                    if(stringsVM.zoneBreaks.count <= 6 ) {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
-                        stringsVM.zoneBreaks.append(stringsVM.xPosition)
-                        stringsVM.zoneBreaks.sort()
-                    }
+                    stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                    stringsVM.zoneBreaks.append(stringsVM.xPosition)
+                    stringsVM.zoneBreaks.sort()
                 }
             }
             HStack(spacing:0) {
                 StringView(height:height, stringNumber: 3, fretNumber:self.iJamVM.fretIndexMap[3]) .readFrame { newFrame in
-                    if(stringsVM.zoneBreaks.count <= 6 ) {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
-                        stringsVM.zoneBreaks.append(stringsVM.xPosition)
-                        stringsVM.zoneBreaks.sort()
-                    }
+                    stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                    stringsVM.zoneBreaks.append(stringsVM.xPosition)
+                    stringsVM.zoneBreaks.sort()
                 }
               
                 StringView(height:height, stringNumber: 2, fretNumber:self.iJamVM.fretIndexMap[4]) .readFrame { newFrame in
-                    if(stringsVM.zoneBreaks.count <= 6 ) {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
-                        stringsVM.zoneBreaks.append(stringsVM.xPosition)
-                        stringsVM.zoneBreaks.sort()
-                    }
+                    stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                    stringsVM.zoneBreaks.append(stringsVM.xPosition)
+                    stringsVM.zoneBreaks.sort()
                 }
                 StringView(height:height, stringNumber: 1, fretNumber:self.iJamVM.fretIndexMap[5]).readFrame { newFrame in
-                    if(stringsVM.zoneBreaks.count <= 6 ) {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
-                        stringsVM.zoneBreaks.append(stringsVM.xPosition)
-                        stringsVM.zoneBreaks.sort()
-                    }
+                    stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                    stringsVM.zoneBreaks.append(stringsVM.xPosition)
+                    stringsVM.zoneBreaks.sort()
                 }
             }
             HStack(spacing:0) {
@@ -132,7 +100,7 @@ struct StringsView: View {
             }
         }
         .gesture(drag)
-        .alert("System Volume is OFF", isPresented: $showingAlert, actions: {})
+        .alert("System Volume is OFF", isPresented: $stringsVM.showingAlert, actions: {})
     }
 }
 

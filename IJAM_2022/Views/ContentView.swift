@@ -13,12 +13,11 @@ struct ContentView: View {
      
     var body: some View {
         GeometryReader { geo in
-            let height  = min(geo.size.height, 1100.0)
-            let width   = min(geo.size.width, 500.0)
-            let xOffset = max( 0.0, geo.size.width - width)
-            let yOffset = max( 0,0, geo.size.height - height)
-            
-            let centered = CGPoint(x:(width + xOffset) / 2, y:(height + yOffset) / 2)
+            let height      = min(geo.size.height, 1100.0)
+            let width       = min(geo.size.width, 500.0)
+            let xOffset     = max( 0.0, geo.size.width - width)
+            let yOffset     = max( 0,0, geo.size.height - height)
+            let centered    = CGPoint(x:(width + xOffset) / 2, y:(height + yOffset) / 2)
 
             VStack(spacing: 0) {
                 HeaderView(width: width, height: height * 0.10 )
