@@ -97,37 +97,33 @@ class StringsViewModel: ObservableObject {
             if thisZone != formerZone {
                 pickString = true
             }
-            
-            formerZone = thisZone
-
-            return pickString
         }
+        
+        formerZone = thisZone
+        
+        return pickString
     }
     
     func pickString(fretIndexMap:[Int], openNoteIndices:String, capoPosition: Int, volumeLevel: CGFloat) {
-                
-                if(AVAudioSession.sharedInstance().outputVolume == 0.0) {
-                    // Alert user that their volume is off
-                    showingAlert = true
-                }
-                
-                // play correct note for this string
-                let stringToPlay = (formerZone + thisZone) / 2
-                let thisStringsFretPosition = fretIndexMap[6 - stringToPlay]
-
-                
-                if thisStringsFretPosition > -1 {
-                    let openNoteArray:[String]  = openNoteIndices.components(separatedBy:["-"])
-                    let thisStringsOpenIndex    = Int(openNoteArray[6 - stringToPlay])
-                    let index                   = thisStringsFretPosition + thisStringsOpenIndex! + capoPosition
-                    let noteToPlayName          = noteNamesArray[index]
-                                            
-                    playWaveFile(noteName:noteToPlayName, stringNumber: stringToPlay, volume: volumeLevel * kDefaultVolumeMagnification)
-                }
-            }
+        if(AVAudioSession.sharedInstance().outputVolume == 0.0) {
+            // Alert user that their volume is off
+            showingAlert = true
+        }
         
+        // play correct note for this string
+        let stringToPlay            = (formerZone + thisZone) / 2
+        let thisStringsFretPosition = fretIndexMap[6 - stringToPlay]
+
+        if thisStringsFretPosition > -1 {
+            let openNoteArray:[String]  = openNoteIndices.components(separatedBy:["-"])
+            let thisStringsOpenIndex    = Int(openNoteArray[6 - stringToPlay])
+            let index                   = thisStringsFretPosition + thisStringsOpenIndex! + capoPosition
+            let noteToPlayName          = noteNamesArray[index]
+                                    
+            playWaveFile(noteName:noteToPlayName, stringNumber: stringToPlay, volume: volumeLevel * kDefaultVolumeMagnification)
+        }
     }
-    
+        
     func currentZone(loc:CGPoint) -> Int
     {
         // returns current position
