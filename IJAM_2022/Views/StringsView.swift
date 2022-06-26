@@ -9,8 +9,7 @@
 // And obtaining the bounds of each of the strings via their Anchor Preferences
 
 // StringsView moitors a DragGesture's position to track when a string is encountered
-//      A: setting StringImage to ActiveStringImage while drag is over any string
-//      B: upon leaving the stringArea causing that string to play the appropriate note on its AudioPlayer
+// Upon leaving the stringArea causing that string to play the appropriate note on its AudioPlayer
 
 import AVFoundation
 import SwiftUI
@@ -35,9 +34,9 @@ struct StringsView: View {
             dragLocation = value.location
 
             if iJamVM.isMuted == false {
-                if stringsVM.dragsNewPositionTriggersPlay(loc: dragLocation!){
-                    
-                    self.stringsVM.pickString(fretIndexMap: self.iJamVM.fretIndexMap, openNoteIndices: (self.iJamVM.activeTuning?.openNoteIndices)!, capoPosition: self.iJamVM.capoPosition, volumeLevel: self.iJamVM.volumeLevel)
+                if stringsVM.dragsNewPositionTriggersPlay(loc: dragLocation!) {
+                    self.stringsVM.pickString(fretIndexMap: self.iJamVM.fretIndexMap, openNoteIndices: (self.iJamVM.activeTuning?.openNoteIndices)!,
+                                              capoPosition: self.iJamVM.capoPosition, volumeLevel: self.iJamVM.volumeLevel)
                 }
             }
         }.sequenced(before: tap)
@@ -91,6 +90,7 @@ struct StringsView: View {
                     stringsVM.zoneBreaks.sort()
                 }
             }
+            
             HStack(spacing:0) {
                 Spacer()
                 Spacer()

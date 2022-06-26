@@ -23,7 +23,7 @@ struct FramePreferenceKey: PreferenceKey {
 
 class StringsViewModel: ObservableObject {
     private (set) var context:NSManagedObjectContext
-    @Published var audioPlayerArray = [AVAudioPlayer?]()     // contains 1 audioPlayer for each guitar string  6-1
+    @Published var audioPlayerArray: [AVAudioPlayer?] = []
     
     func playWaveFile(noteName: String, stringNumber: Int, volume: Double) {
         let newLength   = noteName.count - 4 // trims ".wav" from end
@@ -62,9 +62,9 @@ class StringsViewModel: ObservableObject {
             do {
                 let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
                 audioPlayerArray.append(thisAudioPlayer)
-            } catch InitializeErrors.AVAudioSessionError{
+            } catch {
                 exit(1)
-            } catch { }
+            }
         }
     }
 

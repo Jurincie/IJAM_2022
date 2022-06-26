@@ -187,7 +187,7 @@ extension IjamViewModel
         return thisChord!
     }
     
-    func getAvailableChordNames() -> [String] {
+    func getGroupsChordNames() -> [String] {
         return self.activeChordGroup!.availableChordNames!.components(separatedBy: ["-"])
     }
     
@@ -303,7 +303,7 @@ extension IjamViewModel
         var index = 0
         let activeChordName = self.activeChord!.name
         
-        let chordNames = getAvailableChordNames()
+        let chordNames = getGroupsChordNames()
        
         for name in chordNames {
             if name == activeChordName {

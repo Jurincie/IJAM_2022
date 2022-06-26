@@ -39,7 +39,7 @@ struct ChordButtonsView: View {
                            GridItem(.flexible())]
         
     var body: some View {
-        let chordNames:[String] = self.iJamVM.getAvailableChordNames()
+        let chordNames:[String] = self.iJamVM.getGroupsChordNames()
         
         let boxes = [Box(id: 0, title: chordNames[0], image:Image(kBlankPick)),
                       Box(id: 1, title: chordNames[1], image:Image(kBlankPick)),
@@ -93,7 +93,6 @@ struct ChordButtonsView: View {
                             debugPrint("Data not saved")
                             #endif
                         }
-                        
                     }
                 }){
                     Image(iJamVM.selectedChordBtn == self.box.id ? kActivePick : self.box.title == kNoChord || self.box.title == "" ? kUndefinedPick : kBlankPick)
