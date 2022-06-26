@@ -37,8 +37,7 @@ class StringsViewControllerXCTests: XCTestCase {
         }
     }
     
-    func test_StringsViewModel_thisZone_shouldInitializeToNegativeOne ()
-    {
+    func test_StringsViewModel_thisZone_shouldInitializeToNegativeOne () {
         // Given
         let stringsVM = StringsViewModel(context: coreDataManager.shared.PersistentStoreController.viewContext)
         
@@ -49,8 +48,7 @@ class StringsViewControllerXCTests: XCTestCase {
         XCTAssertEqual(zone, -1)
     }
     
-    func test_StringsViewModel_formerZone_shouldInitializeToNegativeOne ()
-    {
+    func test_StringsViewModel_formerZone_shouldInitializeToNegativeOne () {
         // Given
         let stringsVM = StringsViewModel(context: coreDataManager.shared.PersistentStoreController.viewContext)
         
@@ -61,5 +59,13 @@ class StringsViewControllerXCTests: XCTestCase {
         XCTAssertEqual(zone, -1)
     }
     
-    
+    func test_StringsViewModel_noteNamesArray_shouldHaveFortyThreeElements () {
+        // Given
+        let stringsVM = StringsViewModel(context: coreDataManager.shared.PersistentStoreController.viewContext)
+
+        // When
+        
+        // Then
+        XCTAssertEqual(stringsVM.noteNamesArray.count, 43)
+    }
 }

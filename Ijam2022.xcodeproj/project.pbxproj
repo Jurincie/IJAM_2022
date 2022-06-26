@@ -43,6 +43,7 @@
 		7ADCC7AE284A79070065BBF8 /* CreateNewChordGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCC7AD284A79070065BBF8 /* CreateNewChordGroupView.swift */; };
 		7AE8155E283FF274007CD93E /* StringsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8155D283FF274007CD93E /* StringsViewModel.swift */; };
 		7AF592C02868ECFF00166B7E /* StringsViewControllerXCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF592BF2868ECFF00166B7E /* StringsViewControllerXCTests.swift */; };
+		7AF592C2286907DE00166B7E /* IjamViewModelXCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF592C1286907DE00166B7E /* IjamViewModelXCTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		7ADCC7AD284A79070065BBF8 /* CreateNewChordGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewChordGroupView.swift; sourceTree = "<group>"; };
 		7AE8155D283FF274007CD93E /* StringsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsViewModel.swift; sourceTree = "<group>"; };
 		7AF592BF2868ECFF00166B7E /* StringsViewControllerXCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsViewControllerXCTests.swift; sourceTree = "<group>"; };
+		7AF592C1286907DE00166B7E /* IjamViewModelXCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IjamViewModelXCTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 			children = (
 				7A98376A28660F550050DD15 /* Ijam2022Tests.swift */,
 				7AF592BF2868ECFF00166B7E /* StringsViewControllerXCTests.swift */,
+				7AF592C1286907DE00166B7E /* IjamViewModelXCTests.swift */,
 			);
 			path = Ijam2022Tests;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			files = (
 				7AF592C02868ECFF00166B7E /* StringsViewControllerXCTests.swift in Sources */,
 				7A98376B28660F550050DD15 /* Ijam2022Tests.swift in Sources */,
+				7AF592C2286907DE00166B7E /* IjamViewModelXCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

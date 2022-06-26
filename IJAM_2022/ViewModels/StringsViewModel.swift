@@ -10,7 +10,7 @@ import SwiftUI
 import AVFoundation
 import CoreData
 
-enum InitializeErrors: Error {
+enum InitializeErrors: LocalizedError {
     case InitializeSoundsError
     case MissingResourseError
     case AVAudioSessionError
@@ -23,7 +23,7 @@ struct FramePreferenceKey: PreferenceKey {
 
 class StringsViewModel: ObservableObject {
     private (set) var context:NSManagedObjectContext
-    @Published var audioPlayerArray: [AVAudioPlayer?] = []
+    private var audioPlayerArray: [AVAudioPlayer?] = []
     
     func playWaveFile(noteName: String, stringNumber: Int, volume: Double) {
         let newLength   = noteName.count - 4 // trims ".wav" from end
@@ -38,13 +38,13 @@ class StringsViewModel: ObservableObject {
                 thisAudioPlayer.volume              = Float(volume)
 
                 thisAudioPlayer.play()
-            } catch InitializeErrors.AVAudioSessionError{
-                exit(1)
-            } catch { }
+            } catch {
+                fatalError()
+            }
         }
     }
     
-    func initializeAVAudioSession() {
+    func initializeAVAudioSession() throws {
         do {
             // Attempts to activate session so you can play audio,
             // if other sessions have priority this will fail
@@ -54,23 +54,29 @@ class StringsViewModel: ObservableObject {
             #if DEBUG
             debugPrint (error)
             #endif
+            
+            throw InitializeErrors.InitializeSoundsError
         }
     }
     
-    func prepareAudioPlayer(stringNumber:Int) {
+    func prepareAudioPlayer(stringNumber:Int) throws {
         if let asset = NSDataAsset(name:kNoNoteWaveFile){
             do {
                 let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
                 audioPlayerArray.append(thisAudioPlayer)
             } catch {
-                exit(1)
+                throw InitializeErrors.AVAudioSessionError
             }
         }
     }
 
     func loadWaveFilesIntoAudioPlayers() {
-        for stringNumber in 0...5 {
-            prepareAudioPlayer(stringNumber:stringNumber)
+        for stringNumber in 0..<6 {
+            do {
+                try prepareAudioPlayer(stringNumber:stringNumber)
+            } catch {
+                fatalError()
+            }
         }
     }
    
@@ -85,7 +91,12 @@ class StringsViewModel: ObservableObject {
 
     init(context:NSManagedObjectContext) {
         self.context = context
-        initializeAVAudioSession()
+        do {
+            try initializeAVAudioSession()
+        } catch {
+            fatalError()
+        }
+        
         loadWaveFilesIntoAudioPlayers()
     }
     

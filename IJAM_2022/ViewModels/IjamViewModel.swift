@@ -133,7 +133,7 @@ final class IjamViewModel: ObservableObject {
         // setting activeChordGroupName's' didSet sets self.activeChordGroup
         self.activeChordGroupName = getActiveChordGroupName(tuning: self.activeTuning!)
         
-        precondition(self.activeChordGroupName.count > 0, "There must be a avtiveChordGroupView.")
+        precondition(self.activeChordGroupName.count > 0, "There must be an avtiveChordGroupView.")
 
         saveContext()
     }
