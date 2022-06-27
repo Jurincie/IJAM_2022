@@ -49,6 +49,7 @@ final class IjamViewModel: ObservableObject {
     }
     @Published var volumeLevel:Double = 0.0 {
         didSet {
+            self.savedVolumeLevel = self.appState!.volumeLevel
             self.appState?.volumeLevel = volumeLevel
             saveContext()
         }

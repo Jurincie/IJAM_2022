@@ -19,7 +19,6 @@ struct VolumeView: View {
             HStack {
                 Spacer()
                 
-                // FIX: set button size and slider size dynamically
                 Button(action: {
                     self.iJamVM.isMuted.toggle()
                     if (self.iJamVM.isMuted) {
@@ -48,9 +47,9 @@ struct VolumeView: View {
                                 iJamVM.isMuted  = false
                                 isEditing       = editing
                             }
-                            saveContext()
                         }
                     })
+
                 Spacer()
             }
             Spacer()

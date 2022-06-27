@@ -71,48 +71,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3F4F7884-BCCB-41C6-A37C-6036D724A929"
-            shouldBeEnabled = "Yes"
+            uuid = "051AF3B7-88EF-46AA-BC50-85528818FCDB"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "IJAM_2022/Extensions.swift"
+            filePath = "IJAM_2022/ViewModels/StringsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "convertToSetOfChordGroups(fileName:parentTuning:)"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "pickString(fretIndexMap:openNoteIndices:capoPosition:volumeLevel:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "32A63979-98F8-4712-86D1-124A452C2DA7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IJAM_2022/Views/StringsView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4C9B3975-94D8-471C-883D-6E56CC4E9EC0"
+            uuid = "B71F63FF-159F-4406-9B06-6D02E3C91F8C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IJAM_2022/ViewModels/StringsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "playWaveFile(noteName:stringNumber:volume:)"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "pickString(fretIndexMap:openNoteIndices:capoPosition:volumeLevel:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -104,13 +104,14 @@ class StringsViewModel: ObservableObject {
         thisZone = currentZone(loc:loc)
         var pickString = false
         
-        if (formerZone != -1) {
-            if thisZone != formerZone {
+        if thisZone != formerZone {
+            if formerZone == -1 {
+                formerZone = thisZone
+                
+            } else {
                 pickString = true
             }
         }
-        
-        formerZone = thisZone
         
         return pickString
     }
@@ -122,7 +123,9 @@ class StringsViewModel: ObservableObject {
         }
         
         // play correct note for this string
-        let stringToPlay            = (formerZone + thisZone) / 2
+        let stringToPlay = (formerZone + thisZone) / 2
+        debugPrint("---> thisZone: \(thisZone) : formerZone \(formerZone) : stringToplay: \(stringToPlay)")
+        
         let thisStringsFretPosition = fretIndexMap[6 - stringToPlay]
 
         if thisStringsFretPosition > -1 {
@@ -132,6 +135,8 @@ class StringsViewModel: ObservableObject {
             let noteToPlayName          = noteNamesArray[index]
                                     
             playWaveFile(noteName:noteToPlayName, stringNumber: stringToPlay, volume: volumeLevel * kDefaultVolumeMagnification)
+            
+            formerZone = thisZone
         }
     }
         
