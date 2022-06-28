@@ -87,10 +87,16 @@ struct StringView: View {
 
         var body: some View {
             let minFret = iJamVM.getMinDisplayedFret(from:self.iJamVM.activeChord!.fretMap!)
+            
+            // When fret is tapped:
+            //  if that fret was already pressed -> remove press to show open string active
+            //  if open fret tapped -> make string inactive (-1)
+            //  if string is inactive and open string is tapped -> show open string
+            //  if fret is tapped that is NOT active, make it active and make old fret inactive
 
             ZStack() {
                 Button(action:{
-                    if(self.iJamVM.fretIndexMap[6 - stringNumber] == 0 && self.fretBox.id == 0){
+                    if(self.iJamVM.fretIndexMap[6 - stringNumber] == 0 && self.fretBox.id == 0) {
                         self.iJamVM.fretIndexMap[6 - stringNumber] = -1
                     } else if(self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id + minFret && self.fretBox.id > 0) {
                         self.iJamVM.fretIndexMap[6 - stringNumber] = 0

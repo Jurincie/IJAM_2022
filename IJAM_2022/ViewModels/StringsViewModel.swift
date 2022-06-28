@@ -23,7 +23,7 @@ struct FramePreferenceKey: PreferenceKey {
 
 class StringsViewModel: ObservableObject {
     private (set) var context:NSManagedObjectContext
-    private var audioPlayerArray: [AVAudioPlayer?] = []
+    var audioPlayerArray: [AVAudioPlayer?] = []
     
     func playWaveFile(noteName: String, stringNumber: Int, volume: Double) {
         let newLength   = noteName.count - 4 // trims ".wav" from end
@@ -34,9 +34,9 @@ class StringsViewModel: ObservableObject {
                 let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
                 
                 // load a NEW audio player every time string is picked
-                audioPlayerArray[6 - stringNumber]  = thisAudioPlayer
-                thisAudioPlayer.volume              = Float(volume)
-
+                audioPlayerArray[6 - stringNumber] = thisAudioPlayer
+                
+                thisAudioPlayer.volume = Float(volume)
                 thisAudioPlayer.play()
             } catch {
                 fatalError()
@@ -101,13 +101,12 @@ class StringsViewModel: ObservableObject {
     }
     
     func dragsNewPositionTriggersPlay(loc:CGPoint) -> Bool {
-        thisZone = currentZone(loc:loc)
-        var pickString = false
+        thisZone        = currentZone(loc:loc)
+        var pickString  = false
         
         if thisZone != formerZone {
             if formerZone == -1 {
                 formerZone = thisZone
-                
             } else {
                 pickString = true
             }
@@ -122,7 +121,7 @@ class StringsViewModel: ObservableObject {
             showingAlert = true
         }
         
-        // play correct note for this string
+        // algebra is cool
         let stringToPlay = (formerZone + thisZone) / 2
         debugPrint("---> thisZone: \(thisZone) : formerZone \(formerZone) : stringToplay: \(stringToPlay)")
         

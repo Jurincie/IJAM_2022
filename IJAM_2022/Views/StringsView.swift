@@ -15,32 +15,26 @@ import AVFoundation
 import SwiftUI
 
 struct StringsView: View {
+    @StateObject private var stringsVM = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
     @EnvironmentObject var iJamVM:IjamViewModel
     @State var tapLocation: CGPoint?
     @State var dragLocation: CGPoint?
-    
-    @StateObject private var stringsVM = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
     var dragOffset:CGFloat  = 0.0
     var height:CGFloat      = 0.0
     
-    var locString : String {
-        guard let loc = tapLocation else { return "Tap" }
-        return "\(Int(loc.x)), \(Int(loc.y))"
-    }
-    
     var body: some View {
-        let tap  = TapGesture().onEnded { tapLocation = dragLocation }
+        let tap  = TapGesture()
         let drag = DragGesture(minimumDistance: 0).onChanged { value in
             dragLocation = value.location
 
             if iJamVM.isMuted == false {
                 if stringsVM.dragsNewPositionTriggersPlay(loc: dragLocation!) {
-                    self.stringsVM.pickString(fretIndexMap: self.iJamVM.fretIndexMap, openNoteIndices: (self.iJamVM.activeTuning?.openNoteIndices)!,
-                                              capoPosition: self.iJamVM.capoPosition, volumeLevel: self.iJamVM.volumeLevel)
+                    self.stringsVM.pickString(fretIndexMap: self.iJamVM.fretIndexMap, openNoteIndices: (self.iJamVM.activeTuning?.openNoteIndices)!, capoPosition: self.iJamVM.capoPosition, volumeLevel: self.iJamVM.volumeLevel)
                 }
             }
         }.sequenced(before: tap)
-            .onEnded { _ in self.stringsVM.formerZone = -1
+            .onEnded { _ in
+                self.stringsVM.formerZone = -1
                 
                 #if DEBUG
                 debugPrint("---> Drag ended: formerZone reset to -1")

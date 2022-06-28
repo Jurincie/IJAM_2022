@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleIcons</key>
 	<dict/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>UIApplicationSceneManifest</key>

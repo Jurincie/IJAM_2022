@@ -68,7 +68,6 @@ struct ChordButtonsView: View {
     struct BoxView: View {
         var box: Box
         @EnvironmentObject var iJamVM:IjamViewModel
-        @Environment(\.managedObjectContext) private var viewContext
 
         var body: some View {
             ZStack() {
@@ -83,19 +82,10 @@ struct ChordButtonsView: View {
                         let newActiveChord = self.iJamVM.getChordWithName(newActiveChordName, tuning: self.iJamVM.activeTuning!)
                         self.iJamVM.activeChord! = newActiveChord
                         self.iJamVM.fretIndexMap = self.iJamVM.getFretIndexMap()
-                      
-                        do {
-                            try viewContext.save()
-                        } catch {
-                            viewContext.rollback()
-                            
-                            #if DEBUG
-                            debugPrint("Data not saved")
-                            #endif
-                        }
                     }
                 }){
-                    Image(iJamVM.selectedChordBtn == self.box.id ? kActivePick : self.box.title == kNoChord || self.box.title == "" ? kUndefinedPick : kBlankPick)
+                    Image(iJamVM.selectedChordBtn == self.box.id ? kActivePick : self.box.title == kNoChord ||
+                          self.box.title == "" ? kUndefinedPick : kBlankPick)
                         .resizable()
                         .shadow(radius: 10)
                         .padding(10)

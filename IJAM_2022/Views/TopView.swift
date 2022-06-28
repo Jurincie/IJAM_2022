@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TopView: View {
 
-     var width:CGFloat = 0.0
+     var width:CGFloat  = 0.0
      var height:CGFloat = 0.0
     
     var body: some View {

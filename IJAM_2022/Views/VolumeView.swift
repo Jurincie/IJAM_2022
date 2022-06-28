@@ -5,11 +5,12 @@
 //  Created by Ron Jurincie on 4/29/22.
 //
 
+import Foundation
 import SwiftUI
 
 struct VolumeView: View {
     @EnvironmentObject var iJamVM:IjamViewModel
-    @StateObject private var stringsVM  = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
+    @StateObject private var stringsVM = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
     @State private var isEditing = false
     
     var body: some View {
@@ -19,15 +20,17 @@ struct VolumeView: View {
             HStack {
                 Spacer()
                 
+                // Mute Button
                 Button(action: {
-                    self.iJamVM.isMuted.toggle()
-                    if (self.iJamVM.isMuted) {
-                        self.iJamVM.savedVolumeLevel = self.iJamVM.volumeLevel
-                        self.iJamVM.volumeLevel = 0.0
-                    } else {
-                        self.iJamVM.volumeLevel = self.iJamVM.savedVolumeLevel
-                    }
-                }) {
+                        self.iJamVM.isMuted.toggle()
+                    
+                        if (self.iJamVM.isMuted) {
+                            self.iJamVM.savedVolumeLevel = self.iJamVM.volumeLevel
+                            self.iJamVM.volumeLevel = 0.0
+                        } else {
+                            self.iJamVM.volumeLevel = self.iJamVM.savedVolumeLevel
+                        }
+                    }) {
                     Image(systemName: self.iJamVM.isMuted ? "speaker.slash.fill" : "speaker.wave.1")
                         .resizable()
                         .frame(width: 30, height: 30)
@@ -36,9 +39,7 @@ struct VolumeView: View {
                         .padding(10)
                 }
                 
-                Slider(
-                    value: $iJamVM.volumeLevel,
-                    in: 0...100,
+                Slider(value:$iJamVM.volumeLevel, in: 0...100, step: 1,
                     onEditingChanged: { editing in
                         // notify stringsView to change volume on all 6 AudioPlayers
                         
@@ -48,8 +49,7 @@ struct VolumeView: View {
                                 isEditing       = editing
                             }
                         }
-                    })
-
+                })
                 Spacer()
             }
             Spacer()

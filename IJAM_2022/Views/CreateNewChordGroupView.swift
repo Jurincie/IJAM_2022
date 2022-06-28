@@ -74,7 +74,6 @@ struct CreateNewChordGroupView: View {
     init() {
         for i in 0...9 {
             picks.append(Pick(id:i, title:newChordNames[0], image: Image(kBlankPick)))
-            
         }
     }
     
@@ -86,8 +85,8 @@ struct CreateNewChordGroupView: View {
     func duplicateChordsFound() -> Bool {
         var answer = false
         
-        let actualChordsNameArray = newChordNames.filter { $0 != kNoChord }
-        let dups = Dictionary(grouping: actualChordsNameArray, by: {$0}).filter { $1.count > 1 }.keys
+        let actualChordsNameArray   = newChordNames.filter { $0 != kNoChord }
+        let dups                    = Dictionary(grouping: actualChordsNameArray, by: {$0}).filter { $1.count > 1 }.keys
         
         if dups.count > 0 {
             answer = true
