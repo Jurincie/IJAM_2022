@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FretNumbersView: View {
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     var width:CGFloat = 0.0
     var height:CGFloat = 0.0
      
@@ -23,29 +23,29 @@ struct FretNumbersView: View {
             
             // next 5 span the chord
             // from minfret to minFret + 4)
-            let minFret = iJamVM.getMinDisplayedFret(from: self.iJamVM.activeChord!.fretMap!)
+            let minFret = contentVM.getMinDisplayedFret(from: self.contentVM.activeChord!.fretMap!)
             
-            Text(String(iJamVM.capoPosition + minFret + 1))
+            Text(String(contentVM.capoPosition + minFret + 1))
                 .frame(width: width, height: height / 6, alignment: .center)
                 .foregroundColor(Color.white)
                 .cornerRadius(5)
                 .background(RadialGradient(gradient: Gradient(colors: [.black, .gray]), center: .center, startRadius: 2, endRadius: 100))
-            Text(String(iJamVM.capoPosition + minFret + 2))
+            Text(String(contentVM.capoPosition + minFret + 2))
                 .frame(width: width, height: height / 6, alignment: .center)
                 .foregroundColor(Color.white)
                 .cornerRadius(5)
                 .background(RadialGradient(gradient: Gradient(colors: [.black, .gray]), center: .center, startRadius: 2, endRadius: 100))
-            Text(String(iJamVM.capoPosition + minFret + 3))
+            Text(String(contentVM.capoPosition + minFret + 3))
                 .frame(width: width, height: height / 6, alignment: .center)
                 .foregroundColor(Color.white)
                 .cornerRadius(5)
                 .background(RadialGradient(gradient: Gradient(colors: [.black, .gray]), center: .center, startRadius: 2, endRadius: 100))
-            Text(String(iJamVM.capoPosition + minFret + 4))
+            Text(String(contentVM.capoPosition + minFret + 4))
                 .frame(width: width, height: height / 6, alignment: .center)
                 .foregroundColor(Color.white)
                 .cornerRadius(5)
                 .background(RadialGradient(gradient: Gradient(colors: [.black, .gray]), center: .center, startRadius: 2, endRadius: 100))
-            Text(String(iJamVM.capoPosition + minFret + 5))
+            Text(String(contentVM.capoPosition + minFret + 5))
                 .frame(width: width, height: height / 6, alignment: .center)
                 .foregroundColor(Color.white)
                 .cornerRadius(5)

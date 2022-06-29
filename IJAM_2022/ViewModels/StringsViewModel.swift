@@ -59,6 +59,20 @@ class StringsViewModel: ObservableObject {
         }
     }
     
+    func muteAllAudio () {
+      // play NoNote file on all 6 AudioPlayers
+        let numberStrings   = 6
+        let noteToPlayName  = "NoNote.wav"
+        
+        for index in 0..<6 {
+            let stringToPlay = numberStrings - index
+
+            debugPrint("===> stringToplay: \(stringToPlay) noteName: \(noteToPlayName)")
+            
+           playWaveFile(noteName:noteToPlayName, stringNumber:stringToPlay, volume: 0.0)
+        }
+    }
+    
     func prepareAudioPlayer(stringNumber:Int) throws {
         if let asset = NSDataAsset(name:kNoNoteWaveFile){
             do {
@@ -84,7 +98,7 @@ class StringsViewModel: ObservableObject {
     
     @Published var stringNumber:Int     = 0
     @Published var xPosition:Double     = 0.0
-    @Published var formerZone           = -1
+    @Published var formerZone:Int       = -1
     @Published var zoneBreaks:[Double]  = []
     @Published var showingAlert         = false
     var thisZone = -1
@@ -98,6 +112,25 @@ class StringsViewModel: ObservableObject {
         }
         
         loadWaveFilesIntoAudioPlayers()
+    }
+    
+    func getNoteToPlay(fretIndexMap:[Int], openNoteIndices:String, stringToPlay: Int, capoPosition:Int) -> String {
+        let thisStringsFretPosition = fretIndexMap[6 - stringToPlay]
+        var noteToPlayName = ""
+        
+        if thisStringsFretPosition > -1 {
+            let openNoteArray:[String]  = openNoteIndices.components(separatedBy:["-"])
+            let thisStringsOpenIndex    = Int(openNoteArray[6 - stringToPlay])
+            let index                   = thisStringsFretPosition + thisStringsOpenIndex! + capoPosition
+            
+            noteToPlayName = noteNamesArray[index]
+        }
+        
+        return noteToPlayName
+    }
+    
+    func getStringToPlay() -> Int {
+        return (formerZone + thisZone) / 2
     }
     
     func dragsNewPositionTriggersPlay(loc:CGPoint) -> Bool {
@@ -115,28 +148,15 @@ class StringsViewModel: ObservableObject {
         return pickString
     }
     
-    func pickString(fretIndexMap:[Int], openNoteIndices:String, capoPosition: Int, volumeLevel: CGFloat) {
+    func playGuitar(stringNumber:Int, noteToPlay:String, volume: CGFloat) {
         if(AVAudioSession.sharedInstance().outputVolume == 0.0) {
             // Alert user that their volume is off
             showingAlert = true
         }
         
-        // algebra is cool
-        let stringToPlay = (formerZone + thisZone) / 2
-        debugPrint("---> thisZone: \(thisZone) : formerZone \(formerZone) : stringToplay: \(stringToPlay)")
+        playWaveFile(noteName:noteToPlay, stringNumber: stringNumber, volume: volume * kDefaultVolumeMagnification)
         
-        let thisStringsFretPosition = fretIndexMap[6 - stringToPlay]
-
-        if thisStringsFretPosition > -1 {
-            let openNoteArray:[String]  = openNoteIndices.components(separatedBy:["-"])
-            let thisStringsOpenIndex    = Int(openNoteArray[6 - stringToPlay])
-            let index                   = thisStringsFretPosition + thisStringsOpenIndex! + capoPosition
-            let noteToPlayName          = noteNamesArray[index]
-                                    
-            playWaveFile(noteName:noteToPlayName, stringNumber: stringToPlay, volume: volumeLevel * kDefaultVolumeMagnification)
-            
-            formerZone = thisZone
-        }
+        formerZone = thisZone
     }
         
     func currentZone(loc:CGPoint) -> Int

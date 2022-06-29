@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @StateObject var iJamVM = IjamViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
+    @StateObject var contentVM = ContentViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
      
     var body: some View {
         GeometryReader { geo in
@@ -39,7 +39,7 @@ struct ContentView: View {
             .frame(width:width, height:height)
             .position(centered)
         }
-        .environmentObject(iJamVM)
+        .environmentObject(contentVM)
         .background(Color.black)
     }
 }
@@ -49,6 +49,6 @@ struct ContentView_Previews: PreviewProvider {
         let viewContext = coreDataManager.shared.PersistentStoreController.viewContext
         
         ContentView()
-            .environmentObject(IjamViewModel(context: viewContext))
+            .environmentObject(ContentViewModel(context: viewContext))
     }
 }

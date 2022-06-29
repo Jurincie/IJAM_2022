@@ -16,7 +16,7 @@ struct Pick: Identifiable  {
 
 struct PickView: View {
     var pick: Pick
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     @Binding var selectedChordButtonIndex:Int
     @Binding var newChordNames:[String]
     @Binding var tempChordName:String
@@ -60,7 +60,7 @@ struct PickView: View {
 struct CreateNewChordGroupView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     
     @State private var showingDuplicateChordsAlert  = false
     @State private var showingNotEnoughChordsAlert  = false
@@ -134,7 +134,7 @@ struct CreateNewChordGroupView: View {
                 Spacer()
                 Button("Cancel") {
                     // chordGroupName was set to "CREATE NEW GROUP"
-                    iJamVM.activeChordGroupName = iJamVM.activeChordGroup!.name!
+                    contentVM.activeChordGroupName = contentVM.activeChordGroup!.name!
                     dismiss()
                 }
                 .font(.body)
@@ -190,13 +190,13 @@ struct CreateNewChordGroupView: View {
         group.availableChordNames   = chordNamesAsDashDelimitedString(chords: newChordNames)
         
         // mark former activeGroup as INACTIVE
-        iJamVM.activeChordGroup?.isActive = false
+        contentVM.activeChordGroup?.isActive = false
         
-        iJamVM.activeTuning!.addToChordGroups(group)
-        group.tuning = iJamVM.activeTuning
+        contentVM.activeTuning!.addToChordGroups(group)
+        group.tuning = contentVM.activeTuning
         
         // setting ChordGroupName BELOW sets activeChordGroup and activeChord in its didSet
-        iJamVM.activeChordGroupName = group.name!
+        contentVM.activeChordGroupName = group.name!
         do {
             try viewContext.save()
         } catch {
@@ -222,7 +222,7 @@ struct CreateNewChordGroupView: View {
     func groupNameAlreadyExists(name:String) -> Bool {
         var answer = false
         
-        for chordGroup in iJamVM.activeTuning!.chordGroups! {
+        for chordGroup in contentVM.activeTuning!.chordGroups! {
             let thisChordGroup = chordGroup as? ChordGroup
             if thisChordGroup!.name == name {
                 answer = true
@@ -248,10 +248,10 @@ struct CreateNewChordGroupView: View {
 
 struct ChordScrollerView: View {
     @Binding var tempChordName:String
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     
     var body: some View {
-        let chords = iJamVM.getActiveTuningsChordNames()
+        let chords = contentVM.getActiveTuningsChordNames()
         
         Picker("Chords", selection: $tempChordName) {
             ForEach(chords, id: \.self) {
@@ -264,9 +264,8 @@ struct ChordScrollerView: View {
         .pickerStyle(.wheel)
         .labelsHidden()
         .clipped()
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(.white, lineWidth: 4)
+        .overlay(RoundedRectangle(cornerRadius: 16)
+        .stroke(.white, lineWidth: 4)
         )
     }
 }
@@ -276,6 +275,6 @@ struct CreateNewChordGroupView_Previews: PreviewProvider {
         let viewContext = coreDataManager.shared.PersistentStoreController.viewContext
         
         CreateNewChordGroupView()
-            .environmentObject(IjamViewModel(context: viewContext))
+            .environmentObject(ContentViewModel(context: viewContext))
     }
 }

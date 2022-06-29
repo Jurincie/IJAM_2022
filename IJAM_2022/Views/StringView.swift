@@ -14,7 +14,7 @@ import SwiftUI
 
 
 struct StringView: View {
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     @State private var stringVibrating = false
     var height:CGFloat
     var stringImageName:String
@@ -29,13 +29,13 @@ struct StringView: View {
     }
         
     var body: some View {
-        let openNotesString     = (iJamVM.activeTuning?.openNoteNames!)!
+        let openNotesString     = (contentVM.activeTuning?.openNoteNames!)!
         let openNotes:[String]  = openNotesString.components(separatedBy: ["-"])
         let openStringNote      = openNotes[6 - stringNumber]
-        let minFret             = iJamVM.getMinDisplayedFret(from: iJamVM.activeChord!.fretMap!)
+        let minFret             = contentVM.getMinDisplayedFret(from: contentVM.activeChord!.fretMap!)
         
         let fretBoxes:[FretBox] = [
-            FretBox(id: 0, title: self.iJamVM.fretIndexMap[6 - stringNumber] == -1 ? "X" : getFretNoteTitle(openNote: openStringNote, offset: 0)),
+            FretBox(id: 0, title: self.contentVM.fretIndexMap[6 - stringNumber] == -1 ? "X" : getFretNoteTitle(openNote: openStringNote, offset: 0)),
             FretBox(id: minFret + 1, title: getFretNoteTitle(openNote: openStringNote, offset: 1 + minFret)),
             FretBox(id: minFret + 2, title: getFretNoteTitle(openNote: openStringNote, offset: 2 + minFret)),
             FretBox(id: minFret + 3, title: getFretNoteTitle(openNote: openStringNote, offset: 3 + minFret)),
@@ -50,7 +50,7 @@ struct StringView: View {
             Image(imageName)
                 .resizable()
                 .frame(width:20, height:height, alignment:.topLeading)
-                .opacity(self.iJamVM.fretIndexMap[6 - stringNumber] == -1 ? 0.3 : 1.0)
+                .opacity(self.contentVM.fretIndexMap[6 - stringNumber] == -1 ? 0.3 : 1.0)
                                 
             // 2ND layer //
             // 1x6 grid of Buttons with noteName in text on top of the possible image
@@ -82,11 +82,11 @@ struct StringView: View {
     struct FretBoxView: View {
         var fretBox: FretBox
         var stringNumber:Int
-        @EnvironmentObject var iJamVM:IjamViewModel
+        @EnvironmentObject var contentVM:ContentViewModel
         @Environment(\.managedObjectContext) private var viewContext
 
         var body: some View {
-            let minFret = iJamVM.getMinDisplayedFret(from:self.iJamVM.activeChord!.fretMap!)
+            let minFret = contentVM.getMinDisplayedFret(from:self.contentVM.activeChord!.fretMap!)
             
             // When fret is tapped:
             //  if that fret was already pressed -> remove press to show open string active
@@ -96,12 +96,12 @@ struct StringView: View {
 
             ZStack() {
                 Button(action:{
-                    if(self.iJamVM.fretIndexMap[6 - stringNumber] == 0 && self.fretBox.id == 0) {
-                        self.iJamVM.fretIndexMap[6 - stringNumber] = -1
-                    } else if(self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id + minFret && self.fretBox.id > 0) {
-                        self.iJamVM.fretIndexMap[6 - stringNumber] = 0
+                    if(self.contentVM.fretIndexMap[6 - stringNumber] == 0 && self.fretBox.id == 0) {
+                        self.contentVM.fretIndexMap[6 - stringNumber] = -1
+                    } else if(self.contentVM.fretIndexMap[6 - stringNumber] == self.fretBox.id + minFret && self.fretBox.id > 0) {
+                        self.contentVM.fretIndexMap[6 - stringNumber] = 0
                     } else {
-                        self.iJamVM.fretIndexMap[6 - stringNumber] = self.fretBox.id
+                        self.contentVM.fretIndexMap[6 - stringNumber] = self.fretBox.id
                     }
                     do {
                         try viewContext.save()
@@ -122,11 +122,11 @@ struct StringView: View {
                     } else {
                         Image("Redball")
                             .resizable()
-                            .opacity(self.iJamVM.fretIndexMap[6 - stringNumber] == self.fretBox.id ? 1.0 : 0.0)
+                            .opacity(self.contentVM.fretIndexMap[6 - stringNumber] == self.fretBox.id ? 1.0 : 0.0)
                     }
                 }
                 // show fretZero note names AND a possibly fretted fretBox
-                self.fretBox.id == self.iJamVM.fretIndexMap[6 - stringNumber] || self.fretBox.id == 0 ? Text(self.fretBox.title).foregroundColor(Color.white)  : Text("").foregroundColor(Color.white) 
+                self.fretBox.id == self.contentVM.fretIndexMap[6 - stringNumber] || self.fretBox.id == 0 ? Text(self.fretBox.title).foregroundColor(Color.white)  : Text("").foregroundColor(Color.white) 
                     .font(.custom("Futura Bold", size: 18.0))
             }
         }

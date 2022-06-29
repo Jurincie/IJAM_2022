@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct TuningPickerView: View {
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
 
    var body: some View {
-       let tuningNames:[String] = iJamVM.getTuningNames()
+       let tuningNames:[String] = contentVM.getTuningNames()
       
        VStack {
            Menu {
-               Picker("Tunings", selection: $iJamVM.activeTuningName) {
+               Picker("Tunings", selection: $contentVM.activeTuningName) {
                    ForEach(tuningNames, id: \.self) {
                        Text($0)
                    }
@@ -23,7 +23,7 @@ struct TuningPickerView: View {
                .labelsHidden()
                .pickerStyle(.menu)
            } label: {
-               Text(iJamVM.activeTuning!.name!)
+               Text(contentVM.activeTuning!.name!)
                    .foregroundColor(Color.white)
                    .font(.body)
                    .padding(5.0)

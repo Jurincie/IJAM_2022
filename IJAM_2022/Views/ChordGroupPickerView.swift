@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ChordGroupPickerView: View {
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     @State private var showingNewGroupSheet = false
     @State private var newChordGroupName:String?
 
    var body: some View {
        Menu {
-           Picker(kChordGroups, selection: $iJamVM.activeChordGroupName) {
-               ForEach(iJamVM.getChordGroupNames(), id: \.self) {
+           Picker(kChordGroups, selection: $contentVM.activeChordGroupName) {
+               ForEach(contentVM.getChordGroupNames(), id: \.self) {
                    Text($0)
                }
            }
@@ -23,9 +23,9 @@ struct ChordGroupPickerView: View {
            .labelsHidden()
            .pickerStyle(.menu)
        } label: {
-           Text("\(iJamVM.activeChordGroup!.name!)")
-               .onChange(of: iJamVM.activeChordGroupName) { newValue in
-                   if iJamVM.activeChordGroupName == kCreateNewGroup {
+           Text("\(contentVM.activeChordGroup!.name!)")
+               .onChange(of: contentVM.activeChordGroupName) { newValue in
+                   if contentVM.activeChordGroupName == kCreateNewGroup {
                        // set this to launch NewChordGroupView
                        showingNewGroupSheet = true
                     }

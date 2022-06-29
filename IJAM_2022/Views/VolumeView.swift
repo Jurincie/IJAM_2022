@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct VolumeView: View {
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     @StateObject private var stringsVM = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
     @State private var isEditing = false
     
@@ -22,16 +22,19 @@ struct VolumeView: View {
                 
                 // Mute Button
                 Button(action: {
-                        self.iJamVM.isMuted.toggle()
+                        self.contentVM.isMuted.toggle()
                     
-                        if (self.iJamVM.isMuted) {
-                            self.iJamVM.savedVolumeLevel = self.iJamVM.volumeLevel
-                            self.iJamVM.volumeLevel = 0.0
+                        if (self.contentVM.isMuted) {
+                            self.contentVM.savedVolumeLevel = self.contentVM.volumeLevel
+                            self.contentVM.volumeLevel = 0.0
+                            
+                            // strings muted by playing "NoNote.wav on all string's AudioPlayers
+                            stringsVM.muteAllAudio()
                         } else {
-                            self.iJamVM.volumeLevel = self.iJamVM.savedVolumeLevel
+                            self.contentVM.volumeLevel = self.contentVM.savedVolumeLevel
                         }
                     }) {
-                    Image(systemName: self.iJamVM.isMuted ? "speaker.slash.fill" : "speaker.wave.1")
+                    Image(systemName: self.contentVM.isMuted ? "speaker.slash.fill" : "speaker.wave.1")
                         .resizable()
                         .frame(width: 30, height: 30)
                         .shadow(radius: 10)
@@ -39,13 +42,13 @@ struct VolumeView: View {
                         .padding(10)
                 }
                 
-                Slider(value:$iJamVM.volumeLevel, in: 0...100, step: 1,
+                Slider(value:$contentVM.volumeLevel, in: 0...100, step: 1,
                     onEditingChanged: { editing in
                         // notify stringsView to change volume on all 6 AudioPlayers
                         
                         if isEditing == false {
-                            if iJamVM.isMuted && iJamVM.volumeLevel > 0.0 {
-                                iJamVM.isMuted  = false
+                            if contentVM.isMuted && contentVM.volumeLevel > 0.0 {
+                                contentVM.isMuted  = false
                                 isEditing       = editing
                             }
                         }

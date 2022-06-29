@@ -16,7 +16,7 @@ import SwiftUI
 
 struct StringsView: View {
     @StateObject private var stringsVM = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     @State var tapLocation: CGPoint?
     @State var dragLocation: CGPoint?
     var dragOffset:CGFloat  = 0.0
@@ -27,13 +27,19 @@ struct StringsView: View {
         let drag = DragGesture(minimumDistance: 0).onChanged { value in
             dragLocation = value.location
 
-            if iJamVM.isMuted == false {
+            if contentVM.isMuted == false {
                 if stringsVM.dragsNewPositionTriggersPlay(loc: dragLocation!) {
-                    self.stringsVM.pickString(fretIndexMap: self.iJamVM.fretIndexMap, openNoteIndices: (self.iJamVM.activeTuning?.openNoteIndices)!, capoPosition: self.iJamVM.capoPosition, volumeLevel: self.iJamVM.volumeLevel)
+                    let stringToPlay:Int = self.stringsVM.getStringToPlay()
+
+                    let noteToPlay = self.stringsVM.getNoteToPlay(fretIndexMap: self.contentVM.fretIndexMap, openNoteIndices: (self.contentVM.activeTuning?.openNoteIndices)!, stringToPlay:stringToPlay, capoPosition: self.contentVM.capoPosition)
+    
+                    self.stringsVM.playGuitar(stringNumber:stringToPlay, noteToPlay:noteToPlay, volume:self.contentVM.volumeLevel)
                 }
             }
         }.sequenced(before: tap)
             .onEnded { _ in
+                
+                // resetting formerZone to -1 prevents string from being picked on next tap for a drag
                 self.stringsVM.formerZone = -1
                 
                 #if DEBUG
@@ -50,35 +56,35 @@ struct StringsView: View {
             }
             
             HStack(spacing:0) {
-                StringView(height:height, stringNumber: 6, fretNumber:self.iJamVM.fretIndexMap[0]) .readFrame { newFrame in
+                StringView(height:height, stringNumber: 6, fretNumber:self.contentVM.fretIndexMap[0]) .readFrame { newFrame in
                     stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
                     stringsVM.zoneBreaks.append(stringsVM.xPosition)
                     stringsVM.zoneBreaks.sort()
                 }
-                StringView(height:height, stringNumber: 5, fretNumber:self.iJamVM.fretIndexMap[1]) .readFrame { newFrame in
+                StringView(height:height, stringNumber: 5, fretNumber:self.contentVM.fretIndexMap[1]) .readFrame { newFrame in
                     stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
                     stringsVM.zoneBreaks.append(stringsVM.xPosition)
                     stringsVM.zoneBreaks.sort()
                 }
-                StringView(height:height, stringNumber: 4, fretNumber:self.iJamVM.fretIndexMap[2]) .readFrame { newFrame in
+                StringView(height:height, stringNumber: 4, fretNumber:self.contentVM.fretIndexMap[2]) .readFrame { newFrame in
                     stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
                     stringsVM.zoneBreaks.append(stringsVM.xPosition)
                     stringsVM.zoneBreaks.sort()
                 }
             }
             HStack(spacing:0) {
-                StringView(height:height, stringNumber: 3, fretNumber:self.iJamVM.fretIndexMap[3]) .readFrame { newFrame in
+                StringView(height:height, stringNumber: 3, fretNumber:self.contentVM.fretIndexMap[3]) .readFrame { newFrame in
                     stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
                     stringsVM.zoneBreaks.append(stringsVM.xPosition)
                     stringsVM.zoneBreaks.sort()
                 }
               
-                StringView(height:height, stringNumber: 2, fretNumber:self.iJamVM.fretIndexMap[4]) .readFrame { newFrame in
+                StringView(height:height, stringNumber: 2, fretNumber:self.contentVM.fretIndexMap[4]) .readFrame { newFrame in
                     stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
                     stringsVM.zoneBreaks.append(stringsVM.xPosition)
                     stringsVM.zoneBreaks.sort()
                 }
-                StringView(height:height, stringNumber: 1, fretNumber:self.iJamVM.fretIndexMap[5]).readFrame { newFrame in
+                StringView(height:height, stringNumber: 1, fretNumber:self.contentVM.fretIndexMap[5]).readFrame { newFrame in
                     stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
                     stringsVM.zoneBreaks.append(stringsVM.xPosition)
                     stringsVM.zoneBreaks.sort()

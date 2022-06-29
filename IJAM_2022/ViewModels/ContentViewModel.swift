@@ -1,5 +1,5 @@
 //
-//  IjamViewModel.swift
+//  ContentViewModel.swift
 //  iJam 2022
 //
 //  Created by Ron Jurincie on 4/24/22.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class IjamViewModel: ObservableObject {
+final class ContentViewModel: ObservableObject {
     private (set) var context:NSManagedObjectContext
     
     @Published var appState:AppState?{
@@ -113,27 +113,23 @@ final class IjamViewModel: ObservableObject {
     }
        
     init(context:NSManagedObjectContext) {
-        self.context    = context
-        self.appState   = getAppState()
-        precondition(self.appState!.tunings!.count > 0, "There must be at least one tuning.")
-        
-        self.capoPosition = Int(self.appState!.capoPosition)
-        precondition(self.appState!.capoPosition > -3 && self.appState!.capoPosition < 6, "capo range: -2...5.")
-
+        self.context            = context
+        self.appState           = getAppState()
+        self.capoPosition       = Int(self.appState!.capoPosition)
         self.isMuted            = self.appState!.isMuted
         self.volumeLevel        = self.appState!.volumeLevel
         self.savedVolumeLevel   = self.appState!.savedVolumeLevel
         self.activeTuning       = getActiveTuning()
-        
-        precondition(self.activeTuning!.chords!.count > 0, "There must be at least one chord for this tuning.")
-        precondition(self.activeTuning!.chordGroups!.count > 0, "There must be at least one ChordGroup.")
-
         self.activeTuningName   = self.activeTuning!.name!
         self.tuningJustChanged  = false
         
         // setting activeChordGroupName's' didSet sets self.activeChordGroup
         self.activeChordGroupName = getActiveChordGroupName(tuning: self.activeTuning!)
         
+        precondition(self.appState!.tunings!.count > 0, "There must be at least one tuning.")
+        precondition(self.appState!.capoPosition >= -2 && self.appState!.capoPosition <= 5, "capo range: -2...5.")
+        precondition(self.activeTuning!.chords!.count > 0, "There must be at least one chord for this tuning.")
+        precondition(self.activeTuning!.chordGroups!.count > 0, "There must be at least one ChordGroup.")
         precondition(self.activeChordGroupName.count > 0, "There must be an avtiveChordGroupView.")
 
         saveContext()

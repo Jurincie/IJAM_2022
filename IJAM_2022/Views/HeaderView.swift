@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct HeaderView: View {
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     var width:CGFloat = 0.0
     var height:CGFloat = 0.0
     @State private var selection:String = ""

@@ -133,7 +133,7 @@ extension StringView {
     func getFretNoteTitle(openNote:String, offset:Int) -> String {
         let notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
         let index = notes.firstIndex(of:openNote)
-        var finalIndex = index! + offset + iJamVM.capoPosition
+        var finalIndex = index! + offset + contentVM.capoPosition
         
         if finalIndex < 0 {
             finalIndex += 12
@@ -146,7 +146,7 @@ extension StringView {
     }
 }
 
-extension IjamViewModel
+extension ContentViewModel
 {
     func getNewActiveChordFrom(group:ChordGroup, tuning:Tuning) -> Chord {
         var newActiveChord:Chord?

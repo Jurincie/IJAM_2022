@@ -26,7 +26,7 @@ func getFontSize(targetString:String) -> Double {
 }
 
 struct ChordButtonsView: View {
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     var width:CGFloat   = 0.0
     var height:CGFloat  = 0.0
 
@@ -39,7 +39,7 @@ struct ChordButtonsView: View {
                            GridItem(.flexible())]
         
     var body: some View {
-        let chordNames:[String] = self.iJamVM.getGroupsChordNames()
+        let chordNames:[String] = self.contentVM.getGroupsChordNames()
         
         let boxes = [Box(id: 0, title: chordNames[0], image:Image(kBlankPick)),
                       Box(id: 1, title: chordNames[1], image:Image(kBlankPick)),
@@ -67,24 +67,24 @@ struct ChordButtonsView: View {
     
     struct BoxView: View {
         var box: Box
-        @EnvironmentObject var iJamVM:IjamViewModel
+        @EnvironmentObject var contentVM:ContentViewModel
 
         var body: some View {
             ZStack() {
                 Button(action: {
                     // automatically reload picks in ChordButtonsView updating the one selected
                     if self.box.title != kNoChord && self.box.title != "" {
-                        self.iJamVM.selectedChordBtn = self.box.id
+                        self.contentVM.selectedChordBtn = self.box.id
                         
                         // set activeTuning.activeChord and fretMapIndex
-                        let chordNames = self.iJamVM.activeChordGroup?.availableChordNames?.components(separatedBy: ["-"])
+                        let chordNames = self.contentVM.activeChordGroup?.availableChordNames?.components(separatedBy: ["-"])
                         let newActiveChordName = chordNames![self.box.id]
-                        let newActiveChord = self.iJamVM.getChordWithName(newActiveChordName, tuning: self.iJamVM.activeTuning!)
-                        self.iJamVM.activeChord! = newActiveChord
-                        self.iJamVM.fretIndexMap = self.iJamVM.getFretIndexMap()
+                        let newActiveChord = self.contentVM.getChordWithName(newActiveChordName, tuning: self.contentVM.activeTuning!)
+                        self.contentVM.activeChord! = newActiveChord
+                        self.contentVM.fretIndexMap = self.contentVM.getFretIndexMap()
                     }
                 }){
-                    Image(iJamVM.selectedChordBtn == self.box.id ? kActivePick : self.box.title == kNoChord ||
+                    Image(contentVM.selectedChordBtn == self.box.id ? kActivePick : self.box.title == kNoChord ||
                           self.box.title == "" ? kUndefinedPick : kBlankPick)
                         .resizable()
                         .shadow(radius: 10)

@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct CapoPositionPickerView: View {
-    @EnvironmentObject var iJamVM:IjamViewModel
+    @EnvironmentObject var contentVM:ContentViewModel
     
     let frets = [-2,-1,0,1,2,3,4,5]
 
    var body: some View {
        Menu {
-           Picker("Capo Position", selection: $iJamVM.capoPosition) {
+           Picker("Capo Position", selection: $contentVM.capoPosition) {
                ForEach(frets, id: \.self) {
                    Text(String($0))
                }
@@ -22,7 +22,7 @@ struct CapoPositionPickerView: View {
            .labelsHidden()
            .pickerStyle(.menu)
        } label: {
-           Text("\(iJamVM.capoPosition)")
+           Text("\(contentVM.capoPosition)")
                .fontWeight(.bold)
                .font(.title3)
                .foregroundColor(Color.white)
