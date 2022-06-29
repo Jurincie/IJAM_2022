@@ -31,12 +31,14 @@ class StringsViewModel: ObservableObject {
         
         if let asset = NSDataAsset(name:prefix) {
             do {
-                let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
+                audioPlayerArray[6 - stringNumber]!.stop() // FIX: ?
                 
                 // load a NEW audio player every time string is picked
+                let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
                 audioPlayerArray[6 - stringNumber] = thisAudioPlayer
                 
                 thisAudioPlayer.volume = Float(volume)
+                thisAudioPlayer.currentTime = 0.0
                 thisAudioPlayer.play()
             } catch {
                 fatalError()
@@ -51,25 +53,16 @@ class StringsViewModel: ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let error {
-            #if DEBUG
             debugPrint (error)
-            #endif
-            
             throw InitializeErrors.InitializeSoundsError
         }
     }
     
     func muteAllAudio () {
-      // play NoNote file on all 6 AudioPlayers
-        let numberStrings   = 6
-        let noteToPlayName  = "NoNote.wav"
-        
+        // FIX:
         for index in 0..<6 {
-            let stringToPlay = numberStrings - index
-
-            debugPrint("===> stringToplay: \(stringToPlay) noteName: \(noteToPlayName)")
-            
-           playWaveFile(noteName:noteToPlayName, stringNumber:stringToPlay, volume: 0.0)
+            audioPlayerArray[index]?.stop()
+            audioPlayerArray[index]?.currentTime = 0.0
         }
     }
     
@@ -93,15 +86,17 @@ class StringsViewModel: ObservableObject {
             }
         }
     }
-   
-    @Published var noteNamesArray = ["DoubleLow_C.wav", "DoubleLow_C#.wav", "DoubleLow_D.wav", "DoubleLow_D#.wav", "Low_E.wav", "Low_F.wav", "Low_F#.wav", "Low_G.wav", "Low_G#.wav", "Low_A.wav", "Low_A#.wav", "Low_B.wav", "Low_C.wav", "Low_C#.wav", "Low_D.wav", "Low_D#.wav", "E.wav", "F.wav", "F#.wav", "G.wav", "G#.wav", "A.wav", "A#.wav", "B.wav", "C.wav", "C#.wav", "D.wav", "D#.wav", "High_E.wav", "High_F.wav", "High_F#.wav", "High_G.wav", "High_G#.wav", "High_A.wav", "High_A#.wav", "High_B.wav", "High_C.wav", "High_C#.wav", "High_D.wav", "High_D#.wav", "DoubleHigh_E.wav", "DoubleHigh_F.wav", "DoubleHigh_F#.wav"]
+    
+    var thisZone = -1
     
     @Published var stringNumber:Int     = 0
     @Published var xPosition:Double     = 0.0
     @Published var formerZone:Int       = -1
     @Published var zoneBreaks:[Double]  = []
-    @Published var showingAlert         = false
-    var thisZone = -1
+    @Published var showingAlert:Bool    = false
+    
+    @Published var noteNamesArray = ["DoubleLow_C.wav", "DoubleLow_C#.wav", "DoubleLow_D.wav", "DoubleLow_D#.wav", "Low_E.wav", "Low_F.wav", "Low_F#.wav", "Low_G.wav", "Low_G#.wav", "Low_A.wav", "Low_A#.wav", "Low_B.wav", "Low_C.wav", "Low_C#.wav", "Low_D.wav", "Low_D#.wav", "E.wav", "F.wav", "F#.wav", "G.wav", "G#.wav", "A.wav", "A#.wav", "B.wav", "C.wav", "C#.wav", "D.wav", "D#.wav", "High_E.wav", "High_F.wav", "High_F#.wav", "High_G.wav", "High_G#.wav", "High_A.wav", "High_A#.wav", "High_B.wav", "High_C.wav", "High_C#.wav", "High_D.wav", "High_D#.wav", "DoubleHigh_E.wav", "DoubleHigh_F.wav", "DoubleHigh_F#.wav"]
+    
 
     init(context:NSManagedObjectContext) {
         self.context = context
@@ -114,7 +109,7 @@ class StringsViewModel: ObservableObject {
         loadWaveFilesIntoAudioPlayers()
     }
     
-    func getNoteToPlay(fretIndexMap:[Int], openNoteIndices:String, stringToPlay: Int, capoPosition:Int) -> String {
+    func noteToPlay(_ fretIndexMap:[Int],_ openNoteIndices:String,_ stringToPlay: Int,_ capoPosition:Int) -> String {
         let thisStringsFretPosition = fretIndexMap[6 - stringToPlay]
         var noteToPlayName = ""
         
@@ -129,26 +124,34 @@ class StringsViewModel: ObservableObject {
         return noteToPlayName
     }
     
-    func getStringToPlay() -> Int {
-        return (formerZone + thisZone) / 2
-    }
-    
-    func dragsNewPositionTriggersPlay(loc:CGPoint) -> Bool {
-        thisZone        = currentZone(loc:loc)
-        var pickString  = false
+    func dragTriggersStringToPlay(loc:CGPoint) -> Int {
+        thisZone            = currentZone(loc:loc)
+        var pickString      = false
+        var stringToPlay    = -1
+        
         
         if thisZone != formerZone {
+            debugPrint("----> thisZone: \(thisZone)   formerZone: \(formerZone)")
+
             if formerZone == -1 {
                 formerZone = thisZone
             } else {
+                
+                // if 
                 pickString = true
             }
+            
+            if pickString {
+                stringToPlay = (formerZone + thisZone) / 2
+            }
+        } else {
+            debugPrint("----> Same Zone \(thisZone)")
         }
         
-        return pickString
+        return stringToPlay
     }
     
-    func playGuitar(stringNumber:Int, noteToPlay:String, volume: CGFloat) {
+    func playGuitar(_ stringNumber:Int,_ noteToPlay:String,_ volume: CGFloat) {
         if(AVAudioSession.sharedInstance().outputVolume == 0.0) {
             // Alert user that their volume is off
             showingAlert = true

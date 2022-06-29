@@ -26,9 +26,8 @@ struct VolumeView: View {
                     
                         if (self.contentVM.isMuted) {
                             self.contentVM.savedVolumeLevel = self.contentVM.volumeLevel
-                            self.contentVM.volumeLevel = 0.0
+                            self.contentVM.volumeLevel      = 0.0
                             
-                            // strings muted by playing "NoNote.wav on all string's AudioPlayers
                             stringsVM.muteAllAudio()
                         } else {
                             self.contentVM.volumeLevel = self.contentVM.savedVolumeLevel

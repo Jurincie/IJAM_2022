@@ -108,14 +108,11 @@ struct StringView: View {
                     } catch {
                         viewContext.rollback()
                         
-                        #if DEBUG
                         debugPrint( "Data not saved")
-                        #endif
                     }
                 }){
                     // show a white peg on zeroFret and redBall on freted fretBox
-                    if(self.fretBox.id == 0)
-                    {
+                    if(self.fretBox.id == 0) {
                         Image("Peg")
                             .resizable()
                             .colorInvert()
@@ -125,7 +122,7 @@ struct StringView: View {
                             .opacity(self.contentVM.fretIndexMap[6 - stringNumber] == self.fretBox.id ? 1.0 : 0.0)
                     }
                 }
-                // show fretZero note names AND a possibly fretted fretBox
+                // show fretZero note names AND a POSSIVLE fretted fretBox
                 self.fretBox.id == self.contentVM.fretIndexMap[6 - stringNumber] || self.fretBox.id == 0 ? Text(self.fretBox.title).foregroundColor(Color.white)  : Text("").foregroundColor(Color.white) 
                     .font(.custom("Futura Bold", size: 18.0))
             }

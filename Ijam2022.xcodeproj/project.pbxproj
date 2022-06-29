@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A4C0100286C80A8008A1D39 /* Ijam2022UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C00FF286C80A8008A1D39 /* Ijam2022UITests.swift */; };
+		7A4C0102286C80A8008A1D39 /* Ijam2022UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C0101286C80A8008A1D39 /* Ijam2022UITestsLaunchTests.swift */; };
 		7A6669B928356561007EA254 /* TuningPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6669B828356561007EA254 /* TuningPickerView.swift */; };
 		7A6CF9562834637200128175 /* ChordGroupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6CF9552834637200128175 /* ChordGroupPickerView.swift */; };
 		7A6EC63828329D1F00A24222 /* Ijam_2022Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A6EC63628329D1F00A24222 /* Ijam_2022Model.xcdatamodeld */; };
@@ -37,16 +39,21 @@
 		7A7B736528319F4900760207 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B736428319F4900760207 /* CoreDataManager.swift */; };
 		7A7B736728319F8800760207 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B736628319F8800760207 /* Extensions.swift */; };
 		7A7B736B2831A20300760207 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B736A2831A20300760207 /* ContentViewModel.swift */; };
-		7A98376B28660F550050DD15 /* Ijam2022Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A98376A28660F550050DD15 /* Ijam2022Tests.swift */; };
 		7ABC310A283420E7000ECF87 /* CapoPositionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC3109283420E7000ECF87 /* CapoPositionPickerView.swift */; };
 		7AC90ECB285E58E3002482A5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC90ECA285E58E3002482A5 /* Constants.swift */; };
 		7ADCC7AE284A79070065BBF8 /* CreateNewChordGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCC7AD284A79070065BBF8 /* CreateNewChordGroupView.swift */; };
 		7AE8155E283FF274007CD93E /* StringsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8155D283FF274007CD93E /* StringsViewModel.swift */; };
 		7AF592C02868ECFF00166B7E /* StringsViewControllerXCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF592BF2868ECFF00166B7E /* StringsViewControllerXCTests.swift */; };
-		7AF592C2286907DE00166B7E /* IjamViewModelXCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF592C1286907DE00166B7E /* IjamViewModelXCTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7A4C0103286C80A8008A1D39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A7B72F3283195AD00760207 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A7B72FA283195AD00760207;
+			remoteInfo = Ijam2022;
+		};
 		7A98376C28660F550050DD15 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A7B72F3283195AD00760207 /* Project object */;
@@ -57,6 +64,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A4C00FD286C80A8008A1D39 /* Ijam2022UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ijam2022UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A4C00FF286C80A8008A1D39 /* Ijam2022UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ijam2022UITests.swift; sourceTree = "<group>"; };
+		7A4C0101286C80A8008A1D39 /* Ijam2022UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ijam2022UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7A5CC0C7284AF317001DE893 /* IJAM-2022-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IJAM-2022-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7A6669B828356561007EA254 /* TuningPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuningPickerView.swift; sourceTree = "<group>"; };
 		7A6CF9552834637200128175 /* ChordGroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordGroupPickerView.swift; sourceTree = "<group>"; };
@@ -90,16 +100,21 @@
 		7A7B736628319F8800760207 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7A7B736A2831A20300760207 /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		7A98376828660F540050DD15 /* Ijam2022Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ijam2022Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A98376A28660F550050DD15 /* Ijam2022Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ijam2022Tests.swift; sourceTree = "<group>"; };
 		7ABC3109283420E7000ECF87 /* CapoPositionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapoPositionPickerView.swift; sourceTree = "<group>"; };
 		7AC90ECA285E58E3002482A5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7ADCC7AD284A79070065BBF8 /* CreateNewChordGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewChordGroupView.swift; sourceTree = "<group>"; };
 		7AE8155D283FF274007CD93E /* StringsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsViewModel.swift; sourceTree = "<group>"; };
 		7AF592BF2868ECFF00166B7E /* StringsViewControllerXCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsViewControllerXCTests.swift; sourceTree = "<group>"; };
-		7AF592C1286907DE00166B7E /* IjamViewModelXCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IjamViewModelXCTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7A4C00FA286C80A8008A1D39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7A7B72F8283195AD00760207 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -117,6 +132,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A4C00FE286C80A8008A1D39 /* Ijam2022UITests */ = {
+			isa = PBXGroup;
+			children = (
+				7A4C00FF286C80A8008A1D39 /* Ijam2022UITests.swift */,
+				7A4C0101286C80A8008A1D39 /* Ijam2022UITestsLaunchTests.swift */,
+			);
+			path = Ijam2022UITests;
+			sourceTree = "<group>";
+		};
 		7A6EC63A2832A0AE00A24222 /* Plists */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +161,7 @@
 			children = (
 				7A7B72FD283195AD00760207 /* IJAM_2022 */,
 				7A98376928660F550050DD15 /* Ijam2022Tests */,
+				7A4C00FE286C80A8008A1D39 /* Ijam2022UITests */,
 				7A7B72FC283195AD00760207 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -146,6 +171,7 @@
 			children = (
 				7A7B72FB283195AD00760207 /* Ijam2022.app */,
 				7A98376828660F540050DD15 /* Ijam2022Tests.xctest */,
+				7A4C00FD286C80A8008A1D39 /* Ijam2022UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,9 +238,7 @@
 		7A98376928660F550050DD15 /* Ijam2022Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7A98376A28660F550050DD15 /* Ijam2022Tests.swift */,
 				7AF592BF2868ECFF00166B7E /* StringsViewControllerXCTests.swift */,
-				7AF592C1286907DE00166B7E /* IjamViewModelXCTests.swift */,
 			);
 			path = Ijam2022Tests;
 			sourceTree = "<group>";
@@ -222,6 +246,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7A4C00FC286C80A8008A1D39 /* Ijam2022UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A4C0105286C80A8008A1D39 /* Build configuration list for PBXNativeTarget "Ijam2022UITests" */;
+			buildPhases = (
+				7A4C00F9286C80A8008A1D39 /* Sources */,
+				7A4C00FA286C80A8008A1D39 /* Frameworks */,
+				7A4C00FB286C80A8008A1D39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A4C0104286C80A8008A1D39 /* PBXTargetDependency */,
+			);
+			name = Ijam2022UITests;
+			productName = Ijam2022UITests;
+			productReference = 7A4C00FD286C80A8008A1D39 /* Ijam2022UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		7A7B72FA283195AD00760207 /* Ijam2022 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7A7B7324283195AE00760207 /* Build configuration list for PBXNativeTarget "Ijam2022" */;
@@ -269,6 +311,10 @@
 				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
+					7A4C00FC286C80A8008A1D39 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 7A7B72FA283195AD00760207;
+					};
 					7A7B72FA283195AD00760207 = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
@@ -296,11 +342,19 @@
 			targets = (
 				7A7B72FA283195AD00760207 /* Ijam2022 */,
 				7A98376728660F540050DD15 /* Ijam2022Tests */,
+				7A4C00FC286C80A8008A1D39 /* Ijam2022UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7A4C00FB286C80A8008A1D39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7A7B72F9283195AD00760207 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -328,6 +382,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7A4C00F9286C80A8008A1D39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A4C0102286C80A8008A1D39 /* Ijam2022UITestsLaunchTests.swift in Sources */,
+				7A4C0100286C80A8008A1D39 /* Ijam2022UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7A7B72F7283195AD00760207 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -364,14 +427,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AF592C02868ECFF00166B7E /* StringsViewControllerXCTests.swift in Sources */,
-				7A98376B28660F550050DD15 /* Ijam2022Tests.swift in Sources */,
-				7AF592C2286907DE00166B7E /* IjamViewModelXCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7A4C0104286C80A8008A1D39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A7B72FA283195AD00760207 /* Ijam2022 */;
+			targetProxy = 7A4C0103286C80A8008A1D39 /* PBXContainerItemProxy */;
+		};
 		7A98376D28660F550050DD15 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7A7B72FA283195AD00760207 /* Ijam2022 */;
@@ -380,6 +446,40 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		7A4C0106286C80A8008A1D39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J5T6Z5N38H;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PixleyConsulting.Ijam2022UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Ijam2022;
+			};
+			name = Debug;
+		};
+		7A4C0107286C80A8008A1D39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J5T6Z5N38H;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PixleyConsulting.Ijam2022UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Ijam2022;
+			};
+			name = Release;
+		};
 		7A7B7322283195AE00760207 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -609,6 +709,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7A4C0105286C80A8008A1D39 /* Build configuration list for PBXNativeTarget "Ijam2022UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A4C0106286C80A8008A1D39 /* Debug */,
+				7A4C0107286C80A8008A1D39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7A7B72F6283195AD00760207 /* Build configuration list for PBXProject "Ijam2022" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

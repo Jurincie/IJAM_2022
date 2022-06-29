@@ -156,12 +156,8 @@ struct CreateNewChordGroupView: View {
                     } else if duplicateChordsFound() {
                         showingDuplicateChordsAlert = true
                     } else {
-                        saveChordGroup()
-                        
-                        #if DEBUG
                         debugPrint("All conditions met")
-                        #endif
-                        
+                        saveChordGroup()
                         dismiss()
                     }
                 }
@@ -201,10 +197,7 @@ struct CreateNewChordGroupView: View {
             try viewContext.save()
         } catch {
             viewContext.rollback()
-            
-            #if DEBUG
             debugPrint( "Data not saved")
-            #endif
         }
     }
     

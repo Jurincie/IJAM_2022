@@ -39,8 +39,9 @@ struct ContentView: View {
             .frame(width:width, height:height)
             .position(centered)
         }
-        .environmentObject(contentVM)
+        .environmentObject(contentVM)   // this injects the contentVM into the environment for all to use
         .background(Color.black)
+        .ignoresSafeArea()
     }
 }
 

@@ -16,22 +16,15 @@ struct HeaderView: View {
 
     var body: some View {
         VStack() {
-            Spacer()
             HStack() {
-                Spacer()
-            
                 TuningPickerView()
-                    .frame(minWidth: width / 4, idealWidth: width / 3, maxWidth: width / 2.5, minHeight: 40.0, idealHeight: 45.0, maxHeight: 50.0, alignment: .topLeading)
-                
-                ChordGroupPickerView()
-                    .frame(minWidth: width / 4, idealWidth: width / 3, maxWidth: width / 2.5, minHeight: 40.0, idealHeight: 45.0, maxHeight: 50.0, alignment: .topLeading)
-               
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 Spacer()
+                ChordGroupPickerView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            Spacer()
         }
-        .frame(width: width, height: 80.0, alignment:.topLeading)
-        .background(RadialGradient(gradient: Gradient(colors: [.black, .gray]), center: .center, startRadius: 2, endRadius: 650))
+        .background(RadialGradient(gradient: Gradient(colors: [.black, .blue]), center: .center, startRadius: 2, endRadius: 650))
         
     }
 }
