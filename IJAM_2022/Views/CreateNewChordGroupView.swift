@@ -36,14 +36,15 @@ struct PickView: View {
             
             let fontSize = getFontSize(targetString: self.pick.title)
             
-            Text(self.pick.id == selectedChordButtonIndex ? tempChordName :
-                    newChordNames[self.pick.id] == kNoChord ? "" : newChordNames[self.pick.id])
+            Text(self.pick.id == selectedChordButtonIndex ?
+                 tempChordName : newChordNames[self.pick.id] == kNoChord ?
+                 "" : newChordNames[self.pick.id])
                 .foregroundColor(Color.white)
                 .font(.custom("Arial Rounded MT Bold", size: fontSize))
                 .onChange(of: tempChordName) { newValue in
                     // reset newChordNames[selectedChordButtonIndex]
                     newChordNames[selectedChordButtonIndex] = tempChordName
-                }
+            }
         }
     }
 }
@@ -95,13 +96,7 @@ struct CreateNewChordGroupView: View {
         return answer
     }
     
-    let mySpacing:CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 36.0 : 12.0
-    
-    private let columns = [GridItem(.flexible()),
-                           GridItem(.flexible()),
-                           GridItem(.flexible()),
-                           GridItem(.flexible()),
-                           GridItem(.flexible())]
+    private let columns = Array(repeating: GridItem(.flexible()), count: 5)
     
     var body: some View {
         VStack() {
@@ -120,13 +115,15 @@ struct CreateNewChordGroupView: View {
                 Spacer()
             }
             
+            let mySpacing:CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 36.0 : 12.0
+            
             LazyVGrid(columns: columns, spacing:mySpacing) {
                 ForEach(picks, id: \.id) { pick in
-                    PickView(pick: pick, selectedChordButtonIndex: $selectedChordButtonIndex, newChordNames:$newChordNames, tempChordName:$tempChordName)
+                    PickView(pick:pick, selectedChordButtonIndex:$selectedChordButtonIndex, newChordNames:$newChordNames, tempChordName:$tempChordName)
                 }
             }
             Spacer()
-            Text("SELECT CHORDS").foregroundColor(Color.white)
+            Text(kSelectChords).foregroundColor(Color.white)
                 .font(.custom("Arial Rounded MT Bold", size: 20.0))
             ChordScrollerView(tempChordName: $tempChordName)
             Spacer()
@@ -170,9 +167,9 @@ struct CreateNewChordGroupView: View {
             Spacer()
         }
         .background(RadialGradient(gradient: Gradient(colors: [.blue, .black]), center: .center, startRadius: 2, endRadius: 650))
-        .alert("At least 3 chords are required.", isPresented: $showingNotEnoughChordsAlert, actions: {})
+        .alert("Minimum of 3 chord required.", isPresented: $showingNotEnoughChordsAlert, actions: {})
         .alert("Enter unique chord group name.", isPresented: $showingUniqueGroupNameAlert, actions: {})
-        .alert("You have duplicate chords selectd.", isPresented: $showingDuplicateChordsAlert, actions: {})
+        .alert("Remove dulicate chords", isPresented: $showingDuplicateChordsAlert, actions: {})
     }
         
     func saveChordGroup() {
@@ -202,11 +199,8 @@ struct CreateNewChordGroupView: View {
     }
     
     func chordNamesAsDashDelimitedString(chords:[String]) -> String {
-        var chordsString = ""
         
-        for chordName in chords {
-            chordsString += "\(chordName)-"
-        }
+        let chordsString = chords.reduce("") { $0 + $1 + "-" }
         
         return chordsString
     }
@@ -227,15 +221,7 @@ struct CreateNewChordGroupView: View {
     }
     
     func nuberNewDefinedChords() ->Int {
-        var numberChords = 0
-        
-        for name in newChordNames {
-            if name != kNoChord && name.count > 0 {
-                numberChords += 1
-            }
-        }
-        
-        return numberChords
+        return newChordNames.filter { $0 != kNoChord }.count
     }
 }
 
@@ -258,8 +244,7 @@ struct ChordScrollerView: View {
         .labelsHidden()
         .clipped()
         .overlay(RoundedRectangle(cornerRadius: 16)
-        .stroke(.white, lineWidth: 4)
-        )
+            .stroke(.white, lineWidth: 4))
     }
 }
 

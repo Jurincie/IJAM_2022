@@ -36,7 +36,7 @@ class StringsViewModel: ObservableObject {
                 // load a NEW audio player every time string is picked
                 let thisAudioPlayer = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
                 audioPlayerArray[6 - stringNumber] = thisAudioPlayer
-                
+
                 thisAudioPlayer.volume = Float(volume)
                 thisAudioPlayer.currentTime = 0.0
                 thisAudioPlayer.play()
@@ -129,21 +129,20 @@ class StringsViewModel: ObservableObject {
         var pickString      = false
         var stringToPlay    = -1
         
-        
         if thisZone != formerZone {
             debugPrint("----> thisZone: \(thisZone)   formerZone: \(formerZone)")
 
             if formerZone == -1 {
                 formerZone = thisZone
             } else {
-                
-                // if 
                 pickString = true
             }
             
             if pickString {
                 stringToPlay = (formerZone + thisZone) / 2
             }
+            
+            formerZone = thisZone
         } else {
             debugPrint("----> Same Zone \(thisZone)")
         }
@@ -158,8 +157,6 @@ class StringsViewModel: ObservableObject {
         }
         
         playWaveFile(noteName:noteToPlay, stringNumber: stringNumber, volume: volume * kDefaultVolumeMagnification)
-        
-        formerZone = thisZone
     }
         
     func currentZone(loc:CGPoint) -> Int
@@ -169,22 +166,22 @@ class StringsViewModel: ObservableObject {
         
         var zone = -1
         
-        if loc.x <= zoneBreaks[0] {
-            zone = 7  // left of 6th string
-        } else if loc.x > zoneBreaks[0]  && loc.x <= zoneBreaks[1] {
-            zone = 6 // between 6th and 5th strings
-        } else if loc.x > zoneBreaks[1]  && loc.x <= zoneBreaks[2] {
-            zone = 5 // between 5th and 4th strings
-        } else if loc.x > zoneBreaks[2]  && loc.x <= zoneBreaks[3] {
-            zone = 4 // between 4th and 3rd strings
-        } else if loc.x > zoneBreaks[3]  && loc.x <= zoneBreaks[4] {
-            zone = 3 // between 3rd and 2nd strings
-        } else if loc.x > zoneBreaks[4]  && loc.x <= zoneBreaks[5] {
-            zone = 2 // between 2nd and 1st strings
-        } else {
-            zone = 1 // right of 1st string
+        switch loc.x {
+        case ..<zoneBreaks[0]:
+            zone = 7
+            case zoneBreaks[0]..<zoneBreaks[1]:
+                zone = 6
+            case zoneBreaks[1]..<zoneBreaks[2]:
+                zone = 5
+            case zoneBreaks[2]..<zoneBreaks[3]:
+                zone = 4
+            case zoneBreaks[3]..<zoneBreaks[4]:
+                zone = 3
+            case zoneBreaks[4]..<zoneBreaks[5]:
+                zone = 2
+            default: zone = 1
         }
-            
+
         return zone
     }
 }

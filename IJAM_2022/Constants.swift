@@ -18,6 +18,7 @@ let kBlankPick          = "BlankPick"
 let kActivePick         = "ActivePick"
 let kUndefinedPick      = "UndefinedPick"
 let kChordGroups        = "Chord Groups"
+let kSelectChords       = "SELECT CHORDS"
 
 let kStandard                   = "Standard"
 let kStandardTuningIndices      = "4-9-14-19-23-28"
