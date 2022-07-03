@@ -39,7 +39,8 @@ struct ChordButtonsView: View {
                            GridItem(.flexible())]
         
     var body: some View {
-        let chordNames:[String] = self.contentVM.getGroupsChordNames()
+        let chordNames:[String] = self.contentVM.getActiveGroupsChordNames()
+        
         
         let boxes = [Box(id: 0, title: chordNames[0], image:Image(kBlankPick)),
                       Box(id: 1, title: chordNames[1], image:Image(kBlankPick)),
@@ -78,9 +79,9 @@ struct ChordButtonsView: View {
                         
                         // set activeTuning.activeChord and fretMapIndex
                         let chordNames = self.contentVM.activeChordGroup?.availableChordNames?.components(separatedBy: ["-"])
-                        let newActiveChordName = chordNames![self.box.id]
-                        let newActiveChord = self.contentVM.getChordWithName(newActiveChordName, tuning: self.contentVM.activeTuning!)
-                        self.contentVM.activeChord! = newActiveChord
+                        let newActiveChordName = chordNames![self.box.id]                   
+                        let newActiveChord = Array(self.contentVM.activeTuning!.chords as! Set<Chord>).first { $0.name == newActiveChordName }
+                        self.contentVM.activeChord! = newActiveChord!
                         self.contentVM.fretIndexMap = self.contentVM.getFretIndexMap()
                     }
                 }){

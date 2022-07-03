@@ -86,6 +86,7 @@ struct CreateNewChordGroupView: View {
     func duplicateChordsFound() -> Bool {
         var answer = false
         
+        // remove noChord from array
         let actualChordsNameArray   = newChordNames.filter { $0 != kNoChord }
         let dups                    = Dictionary(grouping: actualChordsNameArray, by: {$0}).filter { $1.count > 1 }.keys
         
@@ -146,6 +147,7 @@ struct CreateNewChordGroupView: View {
                     //  at least 3 chords defined
                     //  new chord group name not empty
                     //  new chord group name unique
+                    
                     if nuberNewDefinedChords() < 3 {
                         showingNotEnoughChordsAlert = true
                     } else if newChordGroupName.count < 1 || groupNameAlreadyExists(name: newChordGroupName) {
@@ -199,25 +201,11 @@ struct CreateNewChordGroupView: View {
     }
     
     func chordNamesAsDashDelimitedString(chords:[String]) -> String {
-        
-        let chordsString = chords.reduce("") { $0 + $1 + "-" }
-        
-        return chordsString
+        return chords.reduce("") { $0 + $1 + "-" }
     }
     
-    
     func groupNameAlreadyExists(name:String) -> Bool {
-        var answer = false
-        
-        for chordGroup in contentVM.activeTuning!.chordGroups! {
-            let thisChordGroup = chordGroup as? ChordGroup
-            if thisChordGroup!.name == name {
-                answer = true
-                break
-            }
-        }
-        
-        return answer
+        return contentVM.activeTuning!.chordGroups!.first{($0 as AnyObject).name == name} == nil ? false : true
     }
     
     func nuberNewDefinedChords() ->Int {

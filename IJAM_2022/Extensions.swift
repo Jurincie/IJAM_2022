@@ -101,28 +101,12 @@ extension IjamModel {
     }
     
     func getFirstRealChordName(chordNames:[String]) ->String {
-        var firstRealChordName = ""
-        for chordName in chordNames {
-            if chordName != kNoChord {
-                firstRealChordName = chordName
-                break
-            }
-        }
-        
-        return firstRealChordName
+        return chordNames.first{$0 != kNoChord} ?? ""
     }
     
     func selectActiveChord(chordNames:[String], tuning: Tuning) -> Chord {
-        var activeChord:Chord?
-        let firstRealChordName = getFirstRealChordName(chordNames:chordNames)
-        
-        for chord in tuning.chords! {
-            let thisChord = chord as! Chord
-            if thisChord.name == firstRealChordName {
-                activeChord = thisChord
-                break
-            }
-        }
+        let firstRealChordName  = getFirstRealChordName(chordNames:chordNames)
+        let activeChord         =  tuning.chords?.first{$0 as! String == firstRealChordName} as? Chord
         
         return activeChord!
     }
@@ -139,8 +123,7 @@ extension StringView {
             finalIndex += 12
         }
         
-        // mods are cool
-        finalIndex %= 12
+        finalIndex %= 12 // moding forces to fit in range 0...11
         
         return notes[finalIndex]
     }
@@ -149,128 +132,62 @@ extension StringView {
 extension ContentViewModel
 {
     func getNewActiveChordFrom(group:ChordGroup, tuning:Tuning) -> Chord {
-        var newActiveChord:Chord?
-        let chordNames = group.availableChordNames?.components(separatedBy: ["-"])
-        var newActiveChordName = ""
+        let chordNames          = group.availableChordNames?.components(separatedBy: ["-"])
+        let newActiveChordName  = chordNames?.first{$0 != kNoChord}
+        let newActiveChord      = tuning.chords!.first{($0 as! Chord).name == newActiveChordName}
         
-        // get first real chordName
-        for name in chordNames! {
-            if name != kNoChord {
-                newActiveChordName = name
-                break
-            }
-        }
-        
-        for chord in tuning.chords! {
-            let thisChord = chord as? Chord
-                    
-            if newActiveChordName == thisChord!.name {
-                newActiveChord = thisChord
-                break
-            }
-        }
-        
-        return newActiveChord!
+        return newActiveChord as! Chord
     }
-    
-    func getChordWithName( _ name:String, tuning: Tuning) -> Chord {
-        var thisChord:Chord?
-        
-        for chord in tuning.chords! {
-            let testChord = chord as? Chord
-            if testChord!.name! == name {
-                thisChord = testChord
-                break
-            }
-        }
-        
-        return thisChord!
-    }
-    
-    func getGroupsChordNames() -> [String] {
+
+    func getActiveGroupsChordNames() -> [String] {
         return self.activeChordGroup!.availableChordNames!.components(separatedBy: ["-"])
     }
     
     func getActiveTuningFromName(_ name: String) ->Tuning {
-        var activeTuning:Tuning?
-        
-        for tuning in self.appState!.tunings! {
-            let thisTuning = tuning as! Tuning
-            
-            if thisTuning.name == name {
-                activeTuning = thisTuning   
-                break
-            }
-        }
-        
-        return activeTuning!
+        return (self.appState?.tunings!.first{($0 as? Tuning)!.name == name} as? Tuning)!
     }
     
-    func getActiveChordGroupFromName(_ name: String) ->ChordGroup {
-        var thisChordGroup:ChordGroup?
-        
-        for chordGroup in self.activeTuning!.chordGroups! {
-            let cg = chordGroup as! ChordGroup
-            
-            if cg.name == name {
-                thisChordGroup = cg
-                break
-            }
-        }
-        
-        return thisChordGroup!
+    func getActiveChordGroupFromName(_ name: String) -> ChordGroup {
+        return self.activeTuning!.chordGroups!.first{ name == ($0 as! ChordGroup).name!} as! ChordGroup
     }
     
     func getTuningNames() -> [String] {
-        var namesArray:[String] = []
-
-        for tunings in self.appState!.tunings! {
-            let tuning = tunings as! Tuning
-            namesArray.append(tuning.name!)
-        }
+        // returns an unsorted array of tuning names
+        let unorderedTuningNamesArray = Array(self.appState?.tunings as! Set<Tuning>)
+        let namesArray: [String] = unorderedTuningNamesArray.map { $0.name! }
         
         return namesArray
     }
     
     func getActiveTuningsChordNames() -> [String]{
-        var chordNames:[String] = []
-        
-        for chord in self.activeTuning!.chords! {
-            let thisChord = chord as! Chord
-            chordNames.append(thisChord.name!)
-        }
-        
-        chordNames.sort()
-        
-        return chordNames
+        // returns sorted array of chords available in activeTuning
+        var chordNameArray = Array(activeTuning?.chords as! Set<Chord>).map ({ $0.name! })
+        chordNameArray.sort()
+    
+        return chordNameArray
     }
     
     func getChordGroupNames() -> [String] {
-        // we append "NEW CHORD GROUP" to end of array
-        var namesArray:[String] = []
+        // get chord group names from adtiveTuning's chordGroups
+        // then append "NEW CHORD GROUP" to end of array
+        let chordGroupdNameArray: [ChordGroup] = Array(activeTuning?.chordGroups as! Set<ChordGroup>).map ({ $0 })
 
-        for chordGroup in self.activeTuning!.chordGroups! {
-            let cg = chordGroup as! ChordGroup
-            namesArray.append(cg.name!)
-        }
-        
+        var namesArray = chordGroupdNameArray.map{$0.name!}
         namesArray.append("CREATE NEW GROUP")
         
         return namesArray
     }
     
     func getMinDisplayedFret(from fretString:String) -> Int {
-        var lowest      = 0
-        var highest     = 0
-        var thisFretVal = 0
+        var lowest  = 0
+        var highest = 0
+        var thisFretVal = -1
 
         for char in fretString {
             switch char {
                 // span does NOT include open string nor muted strings
-            case "x":
-                break
-            case "0":
-                break
+            case "x": thisFretVal = -1
+            case "0": thisFretVal = 0
             case "A":
                 thisFretVal = 11
             case "B":
@@ -300,36 +217,24 @@ extension ContentViewModel
     }
   
     func getSelectedButtonIndex() ->Int {
-        var index = 0
-        let activeChordName = self.activeChord!.name
         
-        let chordNames = getGroupsChordNames()
-       
-        for name in chordNames {
-            if name == activeChordName {
-                break
-            }
-            
-            index += 1
-        }
+        let chordNames = getActiveGroupsChordNames()
         
-        return index
+        return chordNames.firstIndex(of: self.activeChord!.name!) ?? 0
     }
     
     // Must acccept both: "xx0212" "9ABCAA" and "320003"
     func getFretFromString(_ string:String) -> Int {
-        var returnInt = -1
+        var returnInt: Int
         
-        if string == "x" {
-            returnInt = -1
-        } else if string == "A" {
-            returnInt = 10
-        } else if string == "B" {
-            returnInt = 11
-        } else if string == "C" {
-            returnInt = 12
-        } else {
-            returnInt = Int(string)!
+        switch(string) {
+            case "x": returnInt = -1
+            case "A": returnInt = 10
+            case "B": returnInt = 11
+            case "C": returnInt = 12
+            case "D": returnInt = 13
+            case "E": returnInt = 14
+            default: returnInt = Int(string)!
         }
         
         return returnInt
@@ -337,7 +242,7 @@ extension ContentViewModel
     
     func getFretIndexMap() -> [Int] {
         var fretIndexMap:[Int] = []
-                
+                        
         for index in 0...5 {
             let fretSymbol:String = self.activeChord!.fretMap![index]
             let index = getFretFromString(fretSymbol)
@@ -348,16 +253,11 @@ extension ContentViewModel
         return fretIndexMap
     }
     
-    func getOpenStringIndicesFrom(tuningString:String) -> [Int] {
-        var openStringIndices   = [Int]()
-        let splitName           = tuningString.components(separatedBy:"-")
+    func getOpenStringIndicesFrom(tuningsString:String) -> [Int] {
+        let splitName = tuningsString.components(separatedBy:"-")
+        let openStringindices: [Int] = splitName.map({Int($0)!})
 
-        for component in splitName{
-            let index = Int(component)
-            openStringIndices.append(index!)
-        }
-
-        return openStringIndices
+        return openStringindices
     }
 
     func getAppState() -> AppState {
@@ -381,46 +281,16 @@ extension ContentViewModel
 
     
     func getActiveChordGroupName(tuning:Tuning) -> String {
-        // return the first group we find
-        // ONLY run at setup
-        var activeChordGroupName = ""
-        let chordGroupSet = tuning.chordGroups!
-        let chordGroupArray = Array(chordGroupSet) as! [ChordGroup]
+        // return the first group we find (ONLY called on intial setup)
+        let chordGroupArray = Array(tuning.chordGroups!) as! [ChordGroup]
+        let chordGroup      = chordGroupArray.first { $0.isActive == true }
         
-        for chordGroup in chordGroupArray {
-            let thisChordGroup = chordGroup as ChordGroup
-            
-            if thisChordGroup.isActive == true {
-                activeChordGroupName = thisChordGroup.name!
-                break
-            }
-        }
-        
-        return activeChordGroupName
+        return (chordGroup?.name)!
     }
     
     func getActiveTuning() ->Tuning? {
-        let moc     = coreDataManager.shared.PersistentStoreController.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppState")
-        
-        var activeTuning: Tuning?
-
-        do {
-            let results:NSArray =  try moc.fetch(request) as NSArray
-            
-            for appState in results as! [AppState] {
-                
-                for tuning in appState.tunings! {
-                    let thisTuning = tuning as? Tuning
-                    if thisTuning!.isActive {
-                        activeTuning = thisTuning
-                        break
-                    }
-                }
-            }
-        } catch {
-          fatalError("Failed to fetch Tuning: \(error)")
-        }
+        let appState = getAppState()
+        activeTuning = appState.tunings?.first{ (($0) as! Tuning).isActive == true } as? Tuning
         
         return activeTuning
     }

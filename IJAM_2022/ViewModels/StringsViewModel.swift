@@ -21,11 +21,18 @@ struct FramePreferenceKey: PreferenceKey {
     static func reduce(value: inout CGRect, nextValue: () -> CGRect) {}
 }
 
-class StringsViewModel: ObservableObject {
+final class StringsViewModel: ObservableObject {
     private (set) var context:NSManagedObjectContext
     var audioPlayerArray: [AVAudioPlayer?] = []
     
     func playWaveFile(noteName: String, stringNumber: Int, volume: Double) {
+        // creates a NEW AVAudioPlayer and loads the .wav file for the noteName fils
+        // assigns that player to the AudioPlayerArray
+        // then plays sound at volume level
+        
+        guard stringNumber < 6 && stringNumber >= 0 else {return}
+        guard noteName.count > 0 else {return}
+        
         let newLength   = noteName.count - 4 // trims ".wav" from end
         let prefix      = String(noteName.prefix(newLength))
         
@@ -59,7 +66,8 @@ class StringsViewModel: ObservableObject {
     }
     
     func muteAllAudio () {
-        // FIX:
+        // does NOT work on simulator
+        // test on adtual device
         for index in 0..<6 {
             audioPlayerArray[index]?.stop()
             audioPlayerArray[index]?.currentTime = 0.0
@@ -142,6 +150,7 @@ class StringsViewModel: ObservableObject {
                 stringToPlay = (formerZone + thisZone) / 2
             }
             
+            // reset here regardless of whether string was played or not
             formerZone = thisZone
         } else {
             debugPrint("----> Same Zone \(thisZone)")

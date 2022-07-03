@@ -83,7 +83,7 @@ final class ContentViewModel: ObservableObject {
                         self.activeChordGroup?.isActive = false
                     }
                     
-                    self.activeChordGroup           = getActiveChordGroupFromName(activeChordGroupName)
+                    self.activeChordGroup           = getActiveChordGroupFromName(self.activeChordGroupName)
                     self.activeChordGroup?.isActive = true
                     self.activeChord                = getNewActiveChordFrom(group:activeChordGroup!, tuning:activeTuning!)
                     self.fretIndexMap               = getFretIndexMap()
