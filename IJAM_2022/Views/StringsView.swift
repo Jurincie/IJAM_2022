@@ -29,7 +29,6 @@ struct StringsView: View {
 
             if contentVM.isMuted == false {
                 let stringToPlay =  stringsVM.dragTriggersStringToPlay(loc: dragLocation!)
-                
             
                 if stringToPlay != -1  && contentVM.fretIndexMap[6 - stringToPlay] != -1 {
                     let noteToPlay = self.stringsVM.noteToPlay(self.contentVM.fretIndexMap, (self.contentVM.activeTuning?.openNoteIndices)!, stringToPlay, self.contentVM.capoPosition)

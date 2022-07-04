@@ -9,6 +9,8 @@ import Foundation
 import CoreData
 import SwiftUI
 
+//postfix func ++(x: inout Int) {x += 1}
+
 extension String {
     subscript(i: Int) -> String {
         return String(self[index(startIndex, offsetBy: i)])
@@ -101,6 +103,7 @@ extension IjamModel {
     }
     
     func getFirstRealChordName(chordNames:[String]) ->String {
+        // returns first real chord name 0r "" if none exist
         return chordNames.first{$0 != kNoChord} ?? ""
     }
     

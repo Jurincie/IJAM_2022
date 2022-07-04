@@ -30,7 +30,7 @@ final class StringsViewModel: ObservableObject {
         // assigns that player to the AudioPlayerArray
         // then plays sound at volume level
         
-        guard stringNumber < 6 && stringNumber >= 0 else {return}
+        guard stringNumber <= 6 && stringNumber > 0 else {return}
         guard noteName.count > 0 else {return}
         
         let newLength   = noteName.count - 4 // trims ".wav" from end
@@ -173,22 +173,17 @@ final class StringsViewModel: ObservableObject {
         // returns current position
         // zone breaks derived from GeometryReader
         
-        var zone = -1
+        var zone:Int
         
         switch loc.x {
-        case ..<zoneBreaks[0]:
-            zone = 7
-            case zoneBreaks[0]..<zoneBreaks[1]:
-                zone = 6
-            case zoneBreaks[1]..<zoneBreaks[2]:
-                zone = 5
-            case zoneBreaks[2]..<zoneBreaks[3]:
-                zone = 4
-            case zoneBreaks[3]..<zoneBreaks[4]:
-                zone = 3
-            case zoneBreaks[4]..<zoneBreaks[5]:
-                zone = 2
-            default: zone = 1
+            case 0..<zoneBreaks[0]:             zone = 7
+            case zoneBreaks[0]..<zoneBreaks[1]: zone = 6
+            case zoneBreaks[1]..<zoneBreaks[2]: zone = 5
+            case zoneBreaks[2]..<zoneBreaks[3]: zone = 4
+            case zoneBreaks[3]..<zoneBreaks[4]: zone = 3
+            case zoneBreaks[4]..<zoneBreaks[5]: zone = 2
+            case zoneBreaks[5]...:              zone = 1
+            default:                            zone = -1
         }
 
         return zone
