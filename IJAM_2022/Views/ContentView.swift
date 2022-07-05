@@ -20,10 +20,10 @@ struct ContentView: View {
             let centered    = CGPoint(x:(width + xOffset) / 2, y:(height + yOffset) / 2)
 
             VStack(spacing: 0) {
-                HeaderView(width: width, height: height * 0.10 )
+                HeaderView(width: width, height: height * 0.15 )
                     .aspectRatio(contentMode: .fit)
                 
-                TopView(width:width, height:height * 0.25)
+                TopView(width:width, height:height * 0.20)
                     .aspectRatio(contentMode: .fit)
                 
                 StringsAndFretsAreaView(width:width, height:height * 0.50, dragOffset:xOffset / 2)

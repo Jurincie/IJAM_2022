@@ -5,7 +5,6 @@
 //  Created by Ron Jurincie on 4/24/22.
 //
 
-import Foundation
 import CoreData
 
 final class ContentViewModel: ObservableObject {

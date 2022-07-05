@@ -5,7 +5,6 @@
 //  Created by Ron Jurincie on 5/4/22.
 //
 
-import Foundation
 import CoreData
 
 class coreDataManager {

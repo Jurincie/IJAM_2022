@@ -5,8 +5,6 @@
 //  Created by Ron Jurincie on 6/18/22.
 //
 
-import Foundation
-
             // Strings //
 
 let kNotInitialRunKey   = "notFirstLaunchKey"
@@ -47,4 +45,6 @@ let kOpenGTuningChordGroups = "OpenGTuningChordGroups"
 // numbers
 let kDefaultVolumeLevel = 0.24
 let kDefaultVolumeMagnification = 0.02
+
+
 

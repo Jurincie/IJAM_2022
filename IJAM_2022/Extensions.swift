@@ -5,13 +5,10 @@
 //  Created by Ron Jurincie on 5/8/22.
 //
 
-import Foundation
 import CoreData
 import SwiftUI
 
-//postfix func ++(x: inout Int) {x += 1}
-
-extension String {
+extension StringProtocol {
     subscript(i: Int) -> String {
         return String(self[index(startIndex, offsetBy: i)])
     }
@@ -231,13 +228,13 @@ extension ContentViewModel
         var returnInt: Int
         
         switch(string) {
-            case "x": returnInt = -1
             case "A": returnInt = 10
             case "B": returnInt = 11
             case "C": returnInt = 12
             case "D": returnInt = 13
             case "E": returnInt = 14
-            default: returnInt = Int(string)!
+            case "0","1","2","3","4","5","6","7","8", "9": returnInt = Int(string)!
+            default: return -1
         }
         
         return returnInt

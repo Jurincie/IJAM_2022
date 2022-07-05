@@ -11,7 +11,6 @@
 // StringsView moitors a DragGesture's position to track when a string is encountered
 // Upon leaving the stringArea causing that string to play the appropriate note on its AudioPlayer
 
-import AVFoundation
 import SwiftUI
 
 struct StringsView: View {
