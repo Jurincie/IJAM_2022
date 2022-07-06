@@ -24,7 +24,7 @@ struct HeaderView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .background(RadialGradient(gradient: Gradient(colors: [.black, .blue]), center: .center, startRadius: 2, endRadius: 650))
+        .background(RadialGradient(gradient: Gradient(colors: [.black, .cyan]), center: .center, startRadius: 2, endRadius: 650))
         
     }
 }

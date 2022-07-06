@@ -137,7 +137,7 @@ final class StringsViewModel: ObservableObject {
         var stringToPlay    = -1
         
         if thisZone != formerZone {
-            debugPrint("----> thisZone: \(thisZone)   formerZone: \(formerZone)")
+//            debugPrint("----> thisZone: \(thisZone)   formerZone: \(formerZone)")
 
             if formerZone == -1 {
                 formerZone = thisZone
@@ -151,8 +151,6 @@ final class StringsViewModel: ObservableObject {
             
             // reset here regardless of whether string was played or not
             formerZone = thisZone
-        } else {
-            debugPrint("----> Same Zone \(thisZone)")
         }
         
         return stringToPlay

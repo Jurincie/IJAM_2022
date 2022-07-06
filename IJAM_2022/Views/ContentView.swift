@@ -20,28 +20,30 @@ struct ContentView: View {
             let centered    = CGPoint(x:(width + xOffset) / 2, y:(height + yOffset) / 2)
 
             VStack(spacing: 0) {
-                HeaderView(width: width, height: height * 0.15 )
+                HeaderView(width: width, height: height * 0.20 )
+                    .aspectRatio(contentMode: .fit)
+                    .background(Color.black)
+                
+                TopView(width:width, height:height * 0.25)
                     .aspectRatio(contentMode: .fit)
                 
-                TopView(width:width, height:height * 0.20)
-                    .aspectRatio(contentMode: .fit)
-                
-                StringsAndFretsAreaView(width:width, height:height * 0.50, dragOffset:xOffset / 2)
+                StringsAndFretsAreaView(width:width, height:height * 0.40, dragOffset:xOffset / 2)
                     .aspectRatio(contentMode: .fit)
 
                 BottomView(width: width, height:height * 0.15)
                     .aspectRatio(contentMode: .fit)
+                    .background(Color.black)
             }
             .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(.white, lineWidth: 4))
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.white, lineWidth: 10))
     
             .frame(width:width, height:height)
             .position(centered)
         }
         .environmentObject(contentVM)   // this injects the contentVM into the environment for all to use
         .background(Color.black)
-        .ignoresSafeArea()
+
     }
 }
 

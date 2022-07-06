@@ -32,7 +32,7 @@ struct StringsView: View {
                 if stringToPlay != -1  && contentVM.fretIndexMap[6 - stringToPlay] != -1 {
                     let noteToPlay = self.stringsVM.noteToPlay(self.contentVM.fretIndexMap, (self.contentVM.activeTuning?.openNoteIndices)!, stringToPlay, self.contentVM.capoPosition)
                     
-                    debugPrint("----> string: \(stringToPlay)  plays: \(noteToPlay)")
+//                    debugPrint("----> string: \(stringToPlay)  plays: \(noteToPlay)")
     
                     self.stringsVM.playGuitar(stringToPlay, noteToPlay, self.contentVM.volumeLevel)
                 }

@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleIcons</key>
 	<dict/>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>UIApplicationSceneManifest</key>
@@ -15,5 +13,7 @@
 	</dict>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDarkContent</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
