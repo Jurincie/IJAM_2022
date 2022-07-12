@@ -58,46 +58,51 @@ struct StringsView: View {
             HStack(spacing:0) {
                 StringView(height:height, stringNumber: 6, fretNumber:self.contentVM.fretIndexMap[0]) .readFrame { newFrame in
                     if stringsVM.zoneBreaks.count < 6 {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - dragOffset
                         stringsVM.zoneBreaks.append(stringsVM.xPosition)
                         stringsVM.zoneBreaks.sort()
                     }
                    
                 }
-                StringView(height:height, stringNumber: 5, fretNumber:self.contentVM.fretIndexMap[1]) .readFrame { newFrame in
+                StringView(height:height, stringNumber: 5, fretNumber:self.contentVM.fretIndexMap[1]).readFrame {
+                    newFrame in
                     if stringsVM.zoneBreaks.count < 5 {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - dragOffset
                         stringsVM.zoneBreaks.append(stringsVM.xPosition)
                         stringsVM.zoneBreaks.sort()
                     }
                 }
-                StringView(height:height, stringNumber: 4, fretNumber:self.contentVM.fretIndexMap[2]) .readFrame { newFrame in
+                StringView(height:height, stringNumber: 4, fretNumber:self.contentVM.fretIndexMap[2]).readFrame {
+                    newFrame in
                     if stringsVM.zoneBreaks.count < 4 {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - dragOffset
                         stringsVM.zoneBreaks.append(stringsVM.xPosition)
                         stringsVM.zoneBreaks.sort()
                     }
                 }
             }
             HStack(spacing:0) {
-                StringView(height:height, stringNumber: 3, fretNumber:self.contentVM.fretIndexMap[3]) .readFrame { newFrame in
+                StringView(height:height, stringNumber: 3, fretNumber:self.contentVM.fretIndexMap[3]).readFrame {
+                    newFrame in
                     if stringsVM.zoneBreaks.count < 3 {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - dragOffset
                         stringsVM.zoneBreaks.append(stringsVM.xPosition)
                         stringsVM.zoneBreaks.sort()
                     }
                 }
               
-                StringView(height:height, stringNumber: 2, fretNumber:self.contentVM.fretIndexMap[4]) .readFrame { newFrame in
+                StringView(height:height, stringNumber: 2, fretNumber:self.contentVM.fretIndexMap[4]).readFrame {
+                    newFrame in
                     if stringsVM.zoneBreaks.count < 2 {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - dragOffset
                         stringsVM.zoneBreaks.append(stringsVM.xPosition)
                         stringsVM.zoneBreaks.sort()
                     }
                 }
-                StringView(height:height, stringNumber: 1, fretNumber:self.contentVM.fretIndexMap[5]).readFrame { newFrame in
+                StringView(height:height, stringNumber: 1, fretNumber:self.contentVM.fretIndexMap[5]).readFrame {
+                    newFrame in
                     if stringsVM.zoneBreaks.count < 1 {
-                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - 5 - dragOffset
+                        stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - dragOffset
                         stringsVM.zoneBreaks.append(stringsVM.xPosition)
                         stringsVM.zoneBreaks.sort()
                     }

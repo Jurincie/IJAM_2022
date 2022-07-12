@@ -49,7 +49,7 @@ struct StringView: View {
             Image(imageName)
                 .resizable()
                 .frame(width:20, height:height, alignment:.topLeading)
-                .opacity(self.contentVM.fretIndexMap[6 - stringNumber] == -1 ? 0.3 : 1.0)
+                .opacity(self.contentVM.fretIndexMap[6 - stringNumber] == -1 ? 0.5 : 1.0)
                                 
             // 2ND layer //
             // 1x6 grid of Buttons with noteName in text on top of the possible image

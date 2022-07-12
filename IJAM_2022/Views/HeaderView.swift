@@ -13,13 +13,13 @@ struct HeaderView: View {
     var width:CGFloat = 0.0
     var height:CGFloat = 0.0
     @State private var selection:String = ""
-
+    
     var body: some View {
         VStack() {
             HStack() {
-                TuningPickerView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 Spacer()
+                TuningPickerView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 ChordGroupPickerView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }

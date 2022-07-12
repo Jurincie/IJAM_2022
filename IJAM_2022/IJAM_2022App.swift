@@ -10,10 +10,6 @@ import CoreData
 
 @main
 struct iJam_2022App: App {
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        saveContext()
-    }
-    
     let persistenceController = PersistenceController.shared
     var dataModel:IjamModel = IjamModel()
     

@@ -34,13 +34,13 @@ struct PickView: View {
                     .padding(10)
             }
             
-            let fontSize = getFontSize(targetString: self.pick.title)
             
             Text(self.pick.id == selectedChordButtonIndex ?
                  tempChordName : newChordNames[self.pick.id] == kNoChord ?
                  "" : newChordNames[self.pick.id])
                 .foregroundColor(Color.white)
-                .font(.custom("Arial Rounded MT Bold", size: fontSize))
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
                 .onChange(of: tempChordName) { newValue in
                     // reset newChordNames[selectedChordButtonIndex]
                     newChordNames[selectedChordButtonIndex] = tempChordName
@@ -180,9 +180,12 @@ struct CreateNewChordGroupView: View {
         // create new ChordGroup Entity
         let group = ChordGroup(context: viewContext)
         
-        group.name                  = newChordGroupName
-        group.isActive              = true
-        group.availableChordNames   = chordNamesAsDashDelimitedString(chords: newChordNames)
+        group.name      = newChordGroupName
+        group.isActive  = true
+        
+        // reduce array of names into dash delimited string of those names
+        //group.availableChordNames = newChordNames.reduce("") { $0 + $1 + "-" }
+        group.availableChordNames = newChordNames.joined(separator: "-")
         
         // mark former activeGroup as INACTIVE
         contentVM.activeChordGroup?.isActive = false
@@ -199,10 +202,7 @@ struct CreateNewChordGroupView: View {
             debugPrint( "Data not saved")
         }
     }
-    
-    func chordNamesAsDashDelimitedString(chords:[String]) -> String {
-        return chords.reduce("") { $0 + $1 + "-" }
-    }
+
     
     func groupNameAlreadyExists(name:String) -> Bool {
         return contentVM.activeTuning!.chordGroups!.first{($0 as AnyObject).name == name} == nil ? false : true
