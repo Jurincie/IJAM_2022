@@ -25,26 +25,23 @@ struct StringsView: View {
         let tap  = TapGesture()
         let drag = DragGesture(minimumDistance: 0).onChanged { value in
             dragLocation = value.location
-
+            
             if contentVM.isMuted == false {
                 let stringToPlay =  stringsVM.dragTriggersStringToPlay(loc: dragLocation!)
-            
+                
                 if stringToPlay != -1  && contentVM.fretIndexMap[6 - stringToPlay] != -1 {
-                    let noteToPlay = self.stringsVM.noteToPlay(self.contentVM.fretIndexMap, (self.contentVM.activeTuning?.openNoteIndices)!, stringToPlay, self.contentVM.capoPosition)
-                    
-//                    debugPrint("----> string: \(stringToPlay)  plays: \(noteToPlay)")
-    
+                    let noteToPlay = self.stringsVM.noteToPlay(self.contentVM.fretIndexMap, (self.contentVM.activeTuning?.openNoteIndices)!,
+                                                               stringToPlay, self.contentVM.capoPosition)
+                                        
                     self.stringsVM.playGuitar(stringToPlay, noteToPlay, self.contentVM.volumeLevel)
                 }
-        
+                
             }
         }.sequenced(before: tap)
             .onEnded { _ in
                 
                 // resetting formerZone to -1 prevents string from being picked on next tap for a drag
                 self.stringsVM.formerZone = -1
-                
-                //debugPrint("---> Drag ended: formerZone reset to -1")
             }
         
         HStack(spacing:0) {
@@ -56,13 +53,13 @@ struct StringsView: View {
             }
             
             HStack(spacing:0) {
-                StringView(height:height, stringNumber: 6, fretNumber:self.contentVM.fretIndexMap[0]) .readFrame { newFrame in
+                StringView(height:height, stringNumber: 6, fretNumber:self.contentVM.fretIndexMap[0]) .readFrame {
+                    newFrame in
                     if stringsVM.zoneBreaks.count < 6 {
                         stringsVM.xPosition = (newFrame.maxX + newFrame.minX) / 2 - dragOffset
                         stringsVM.zoneBreaks.append(stringsVM.xPosition)
                         stringsVM.zoneBreaks.sort()
                     }
-                   
                 }
                 StringView(height:height, stringNumber: 5, fretNumber:self.contentVM.fretIndexMap[1]).readFrame {
                     newFrame in
@@ -90,7 +87,6 @@ struct StringsView: View {
                         stringsVM.zoneBreaks.sort()
                     }
                 }
-              
                 StringView(height:height, stringNumber: 2, fretNumber:self.contentVM.fretIndexMap[4]).readFrame {
                     newFrame in
                     if stringsVM.zoneBreaks.count < 2 {

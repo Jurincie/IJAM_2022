@@ -54,10 +54,10 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            print("ContentView appeared!")
+//            print("ContentView appeared!")
         }
         .onDisappear {
-            print("ContentView disappeared!")
+//            print("ContentView disappeared!")
         }
     }
 }

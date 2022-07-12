@@ -105,10 +105,10 @@ extension IjamModel {
     }
     
     func selectActiveChord(chordNames:[String], tuning: Tuning) -> Chord {
-        let firstRealChordName  = getFirstRealChordName(chordNames:chordNames)
-        let activeChord         =  tuning.chords?.first{$0 as! String == firstRealChordName} as? Chord
+        let firstRealChordName = getFirstRealChordName(chordNames:chordNames)
+        let activeChord =  tuning.chords?.first{$0 as! String == firstRealChordName} as! Chord
         
-        return activeChord!
+        return activeChord
     }
 }
 
@@ -179,7 +179,6 @@ extension ContentViewModel
     }
     
     func getMinDisplayedFret(from fretString:String) -> Int {
-        var lowest  = 0
         var highest = 0
         var thisFretVal = -1
 
@@ -188,14 +187,10 @@ extension ContentViewModel
                 // span does NOT include open string nor muted strings
             case "x": thisFretVal = -1
             case "0": thisFretVal = 0
-            case "A":
-                thisFretVal = 11
-            case "B":
-                thisFretVal = 12
-            case "C":
-                thisFretVal = 13
-            case "D":
-                thisFretVal = 14
+            case "A": thisFretVal = 11
+            case "B": thisFretVal = 12
+            case "C": thisFretVal = 13
+            case "D": thisFretVal = 14
             default:
                 if let intValue = char.wholeNumberValue {
                     thisFretVal = intValue
@@ -207,13 +202,7 @@ extension ContentViewModel
             }
         }
 
-        if highest <= 4 {
-            lowest = 0
-        } else {
-            lowest = highest - 5
-        }
-
-        return lowest
+        return highest < 5 ? 0 : highest - 5
     }
   
     func getSelectedButtonIndex() ->Int {
@@ -233,7 +222,7 @@ extension ContentViewModel
             case "C": returnInt = 12
             case "D": returnInt = 13
             case "E": returnInt = 14
-            case "0","1","2","3","4","5","6","7","8", "9": returnInt = Int(string)!
+            case "0"..."9": returnInt = Int(string)!
             default: return -1
         }
         
