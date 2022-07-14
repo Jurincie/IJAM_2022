@@ -13,7 +13,7 @@ import SwiftUI
 
 
 struct StringView: View {
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     @State private var stringVibrating = false
     var height:CGFloat
     var stringImageName:String
@@ -81,7 +81,7 @@ struct StringView: View {
     struct FretBoxView: View {
         var fretBox: FretBox
         var stringNumber:Int
-        @EnvironmentObject var contentVM:ContentViewModel
+        @EnvironmentObject var contentVM:MainViewModel
         @Environment(\.managedObjectContext) private var viewContext
 
         var body: some View {

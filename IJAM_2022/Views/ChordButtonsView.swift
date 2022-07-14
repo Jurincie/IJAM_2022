@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChordButtonsView: View {
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     var width:CGFloat   = 0.0
     var height:CGFloat  = 0.0
     
@@ -50,7 +50,7 @@ struct ChordButtonsView: View {
     
     struct BoxView: View {
         var box: Box
-        @EnvironmentObject var contentVM:ContentViewModel
+        @EnvironmentObject var contentVM:MainViewModel
         
         var body: some View {
             ZStack() {

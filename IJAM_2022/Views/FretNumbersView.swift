@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FretNumbersView: View {
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     var width:CGFloat = 0.0
     var height:CGFloat = 0.0
      

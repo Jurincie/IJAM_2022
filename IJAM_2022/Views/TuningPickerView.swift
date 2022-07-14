@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TuningPickerView: View {
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
 
    var body: some View {
        let tuningNames:[String] = contentVM.getTuningNames()

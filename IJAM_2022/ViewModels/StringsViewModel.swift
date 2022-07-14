@@ -173,7 +173,7 @@ final class StringsViewModel: ObservableObject {
         var zone:Int
         
         switch loc.x {
-            case 0..<zoneBreaks[0]:             zone = 7
+        case ..<zoneBreaks[0]:                 zone = 7
             case zoneBreaks[0]..<zoneBreaks[1]: zone = 6
             case zoneBreaks[1]..<zoneBreaks[2]: zone = 5
             case zoneBreaks[2]..<zoneBreaks[3]: zone = 4

@@ -119,17 +119,20 @@ extension StringView {
         let index = notes.firstIndex(of:openNote)
         var finalIndex = index! + offset + contentVM.capoPosition
         
+        // final Index may be less than zero when capo is set below zero
         if finalIndex < 0 {
             finalIndex += 12
         }
         
-        finalIndex %= 12 // moding forces to fit in range 0...11
+        // finalIndex may be as high as 20, but notes repeat every 12
+        // moding forces to fit in range 0...11
+        finalIndex %= 12
         
         return notes[finalIndex]
     }
 }
 
-extension ContentViewModel
+extension MainViewModel
 {
     func getNewActiveChordFrom(group:ChordGroup, tuning:Tuning) -> Chord {
         let chordNames          = group.availableChordNames?.components(separatedBy: ["-"])

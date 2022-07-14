@@ -36,7 +36,7 @@ class IjamModel {
         
         let standardTuning = buildTuning(appState:appState, name:kStandard, openNoteIndices:kStandardTuningIndices,
                                          openNotes:kStandardTuningNotes, chordLibrary:kStandardTuningChordLibrary,
-                                         chordGroups:kStandardTuningChordGroups)
+                                            chordGroups:kStandardTuningChordGroups)
         
         let dropDTuning = buildTuning(appState: appState, name:kDropD, openNoteIndices:kDropDTuningIndices,
                                       openNotes: kDropDTuningNotes, chordLibrary:kDropDChordLibrary,

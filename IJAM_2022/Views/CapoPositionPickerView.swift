@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CapoPositionPickerView: View {
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     
     let frets = [-2,-1,0,1,2,3,4,5]
 

@@ -16,7 +16,7 @@ struct Pick: Identifiable  {
 
 struct PickView: View {
     var pick: Pick
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     @Binding var selectedChordButtonIndex:Int
     @Binding var newChordNames:[String]
     @Binding var tempChordName:String
@@ -61,7 +61,7 @@ struct PickView: View {
 struct CreateNewChordGroupView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     
     @State private var showingDuplicateChordsAlert  = false
     @State private var showingNotEnoughChordsAlert  = false
@@ -215,7 +215,7 @@ struct CreateNewChordGroupView: View {
 
 struct ChordScrollerView: View {
     @Binding var tempChordName:String
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     
     var body: some View {
         let chords = contentVM.getActiveTuningsChordNames()
@@ -241,6 +241,6 @@ struct CreateNewChordGroupView_Previews: PreviewProvider {
         let viewContext = coreDataManager.shared.PersistentStoreController.viewContext
         
         CreateNewChordGroupView()
-            .environmentObject(ContentViewModel(context: viewContext))
+            .environmentObject(MainViewModel(context: viewContext))
     }
 }

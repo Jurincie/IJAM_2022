@@ -18,7 +18,7 @@ struct iJam_2022App: App {
             // inject the view context into the ContentView and all its offspring
             let viewContext = coreDataManager.shared.PersistentStoreController.viewContext
                     
-            ContentView()
+            MainView()
                 .environment(\.managedObjectContext, viewContext)
         }
     }

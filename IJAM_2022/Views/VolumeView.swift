@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VolumeView: View {
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     @StateObject private var stringsVM = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
     @State private var isEditing = false
     

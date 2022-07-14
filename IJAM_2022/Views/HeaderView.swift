@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct HeaderView: View {
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     var width:CGFloat = 0.0
     var height:CGFloat = 0.0
     @State private var selection:String = ""
@@ -19,7 +19,7 @@ struct HeaderView: View {
             HStack() {
                 Spacer()
                 TuningPickerView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 ChordGroupPickerView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }

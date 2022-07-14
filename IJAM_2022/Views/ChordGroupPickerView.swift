@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChordGroupPickerView: View {
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     @State private var showingNewGroupSheet = false
     @State private var newChordGroupName:String?
 

@@ -7,8 +7,21 @@
 
 import CoreData
 
-final class ContentViewModel: ObservableObject {
+final class MainViewModel: ObservableObject {
     private (set) var context:NSManagedObjectContext
+    
+    private func setActiveChordOptions() {
+        if activeChordGroupName != kCreateNewGroup {
+            if activeChordGroupName != self.activeChordGroup?.name {
+                
+                self.activeChordGroup           = getActiveChordGroupFromName(self.activeChordGroupName)
+                self.activeChordGroup?.isActive = true
+                self.activeChord                = getNewActiveChordFrom(group:activeChordGroup!, tuning:activeTuning!)
+                self.fretIndexMap               = getFretIndexMap()
+                self.selectedChordBtn           = getSelectedButtonIndex()
+            }
+        }
+    }
     
     @Published var appState:AppState?{
         didSet {
@@ -21,11 +34,6 @@ final class ContentViewModel: ObservableObject {
         }
     }
     @Published var activeChordGroup:ChordGroup?{
-        didSet {
-            saveContext()
-        }
-    }
-    @Published var tuningJustChanged:Bool = false {
         didSet {
             saveContext()
         }
@@ -74,21 +82,7 @@ final class ContentViewModel: ObservableObject {
         didSet {
             // set the activeChordGroup based on name
             // then set: tuning.activeChord, fretMapIndex, selectedButton so chordButttons and Strings display properly]
-            
-            if activeChordGroupName != kCreateNewGroup {
-                if activeChordGroupName != self.activeChordGroup?.name {
-                    // only set old chordGroup's isActive to false if it this is the same tuning
-                    if self.tuningJustChanged == false {
-                        self.activeChordGroup?.isActive = false
-                    }
-                    
-                    self.activeChordGroup           = getActiveChordGroupFromName(self.activeChordGroupName)
-                    self.activeChordGroup?.isActive = true
-                    self.activeChord                = getNewActiveChordFrom(group:activeChordGroup!, tuning:activeTuning!)
-                    self.fretIndexMap               = getFretIndexMap()
-                    self.selectedChordBtn           = getSelectedButtonIndex()
-                }
-            }
+            setActiveChordOptions()
         }
     }
     
@@ -104,9 +98,7 @@ final class ContentViewModel: ObservableObject {
                 self.activeTuning?.isActive = true
                 
                 // setting activeChordGroupName sets activeChord, fretIndexMap, selectedChordBtn, in it's didSet function
-                self.tuningJustChanged      = true
-                self.activeChordGroupName   = getActiveChordGroupName(tuning: activeTuning!)
-                self.tuningJustChanged      = false
+                self.activeChordGroupName = getActiveChordGroupName(tuning: activeTuning!)
             }
         }
     }
@@ -120,7 +112,6 @@ final class ContentViewModel: ObservableObject {
         self.savedVolumeLevel   = self.appState!.savedVolumeLevel
         self.activeTuning       = getActiveTuning()
         self.activeTuningName   = self.activeTuning!.name!
-        self.tuningJustChanged  = false
         
         // setting activeChordGroupName's' didSet sets self.activeChordGroup
         self.activeChordGroupName = getActiveChordGroupName(tuning: self.activeTuning!)

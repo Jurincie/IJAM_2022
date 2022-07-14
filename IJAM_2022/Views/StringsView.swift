@@ -15,7 +15,7 @@ import SwiftUI
 
 struct StringsView: View {
     @StateObject private var stringsVM = StringsViewModel(context:coreDataManager.shared.PersistentStoreController.viewContext)
-    @EnvironmentObject var contentVM:ContentViewModel
+    @EnvironmentObject var contentVM:MainViewModel
     @State var tapLocation: CGPoint?
     @State var dragLocation: CGPoint?
     var dragOffset:CGFloat  = 0.0
